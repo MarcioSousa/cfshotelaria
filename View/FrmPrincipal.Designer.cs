@@ -35,7 +35,6 @@
             this.pbxQuarto1.Size = new System.Drawing.Size(73, 64);
             this.pbxQuarto1.TabIndex = 0;
             this.pbxQuarto1.TabStop = false;
-            this.pbxQuarto1.Click += new System.EventHandler(this.pbxQuarto1_Click);
             // 
             // FrmPrincipal
             // 

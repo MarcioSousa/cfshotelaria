@@ -30,9 +30,5 @@ namespace View
             }
         }
 
-        private void pbxQuarto1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("teste");
-        }
     }
 }
