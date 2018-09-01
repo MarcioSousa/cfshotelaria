@@ -29,5 +29,10 @@ namespace View
                 this.Close();
             }
         }
+
+        private void pbxQuarto1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("teste");
+        }
     }
 }
