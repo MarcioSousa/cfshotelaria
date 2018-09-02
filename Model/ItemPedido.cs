@@ -6,28 +6,27 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Entrada
+    public class ItemPedido
     {
         private int codigo;
-        private DateTime dataEntrada;
-        private DateTime dataVencimento;
         private int qtde;
+        private double valor;
         private Produto produto;
+        private Pedido pedido;
 
         public int Codigo { get => codigo; set => codigo = value; }
-        public DateTime DataEntrada { get => dataEntrada; set => dataEntrada = value; }
-        public DateTime DataVencimento { get => dataVencimento; set => dataVencimento = value; }
         public int Qtde { get => qtde; set => qtde = value; }
+        public double Valor { get => valor; set => valor = value; }
         public Produto Produto { get => produto; set => produto = value; }
+        public Pedido Pedido { get => pedido; set => pedido = value; }
 
-        public Entrada(int codigo, DateTime dataEntrada, DateTime dataVencimento, int qtde, Produto produto)
+        public ItemPedido(int codigo, int qtde, double valor, Produto produto, Pedido pedido)
         {
             this.codigo = codigo;
-            this.dataEntrada = dataEntrada;
-            this.dataVencimento = dataVencimento;
             this.qtde = qtde;
+            this.valor = valor;
             this.produto = produto;
+            this.pedido = pedido;
         }
-
     }
 }
