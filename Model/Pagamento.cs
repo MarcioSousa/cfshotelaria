@@ -20,13 +20,29 @@ namespace Model
         public double Valor { get => valor; set => valor = value; }
         public Quarto Quarto { get => quarto; set => quarto = value; }
 
-        public Pagamento(int codigo, string tipo, DateTime dataPagamento, double valor, Quarto quarto)
+        public Pagamento(int codigo, string tipo, DateTime dataPagamento, double valor)
         {
             this.codigo = codigo;
             this.tipo = tipo;
             this.dataPagamento = dataPagamento;
             this.valor = valor;
-            this.quarto = quarto;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var pagamento = obj as Pagamento;
+            return pagamento != null &&
+                   Codigo == pagamento.Codigo;
+        }
+
+        public override int GetHashCode()
+        {
+            return 1745598366 + Codigo.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return "O pagamendo no valor de " + valor + " foi do quarto " + quarto.Numero.ToString();
         }
     }
 }

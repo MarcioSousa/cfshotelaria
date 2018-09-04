@@ -11,8 +11,8 @@ namespace Model
         private int codigo;
         private int numero;
         private double valorDiaria;
-        private DateTime dataOcupacao;
-        private DateTime dataLimpexa;
+        private Nullable<DateTime> dataOcupacao;
+        private Nullable<DateTime> dataLimpexa;
         private List<Pedido> pedidos = new List<Pedido>();
         private List<Cliente> clientes = new List<Cliente>();
         private List<Pagamento> pagamentos = new List<Pagamento>();
@@ -20,21 +20,37 @@ namespace Model
         public int Codigo { get => codigo; set => codigo = value; }
         public int Numero { get => numero; set => numero = value; }
         public double ValorDiaria { get => valorDiaria; set => valorDiaria = value; }
-        public DateTime DataOcupacao { get => dataOcupacao; set => dataOcupacao = value; }
-        public DateTime DataLimpexa { get => dataLimpexa; set => dataLimpexa = value; }
+        public Nullable<DateTime> DataOcupacao { get => dataOcupacao; set => dataOcupacao = value; }
+        public Nullable<DateTime> DataLimpexa { get => dataLimpexa; set => dataLimpexa = value; }
         public List<Pedido> Pedidos { get => pedidos; set => pedidos = value; }
         public List<Cliente> Clientes { get => clientes; set => clientes = value; }
         public List<Pagamento> Pagamentos { get => pagamentos; set => pagamentos = value; }
 
-        public Quarto(int codigo, int numero, double valorDiaria, DateTime dataOcupacao, DateTime dataLimpexa)
+        public Quarto(int codigo, int numero, double valorDiaria)
         {
             this.codigo = codigo;
             this.numero = numero;
             this.valorDiaria = valorDiaria;
-            this.dataOcupacao = dataOcupacao;
-            this.dataLimpexa = dataLimpexa;
         }
 
+        public override bool Equals(object obj)
+        {
+            var quarto = obj as Quarto;
+            return quarto != null &&
+                   Codigo == quarto.Codigo;
+        }
+
+        public override int GetHashCode()
+        {
+            return 1745598366 + Codigo.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return "O quarto " + codigo +
+                " tem " + clientes.Count.ToString() + " clientes " +
+                " e recebeu " + pagamentos.Count.ToString() + " pagamentos.";
+        }
     }
 
 }

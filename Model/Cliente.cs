@@ -22,14 +22,31 @@ namespace Model
         public string Contato { get => contato; set => contato = value; }
         public Quarto Quarto { get => quarto; set => quarto = value; }
 
-        public Cliente(int codigo, string nome, string rg, string cpf, string contato, Quarto quarto)
+        public Cliente(int codigo, string nome, string rg, string cpf, string contato)
         {
             this.codigo = codigo;
             this.nome = nome;
             this.rg = rg;
             this.cpf = cpf;
             this.contato = contato;
-            this.quarto = quarto;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var cliente = obj as Cliente;
+            return cliente != null &&
+                   Codigo == cliente.Codigo;
+        }
+
+        public override int GetHashCode()
+        {
+            return 1745598366 + Codigo.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return "Cliente: " + nome +
+                " está no quarto: " + quarto.Numero.ToString();
         }
     }
 }

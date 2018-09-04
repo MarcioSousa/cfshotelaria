@@ -20,14 +20,33 @@ namespace Model
         public int Qtde { get => qtde; set => qtde = value; }
         public Produto Produto { get => produto; set => produto = value; }
 
-        public Entrada(int codigo, DateTime dataEntrada, DateTime dataVencimento, int qtde, Produto produto)
+        public Entrada(int codigo, DateTime dataEntrada, DateTime dataVencimento, int qtde)
         {
             this.codigo = codigo;
             this.dataEntrada = dataEntrada;
             this.dataVencimento = dataVencimento;
             this.qtde = qtde;
-            this.produto = produto;
         }
 
+        public override bool Equals(object obj)
+        {
+            var entrada = obj as Entrada;
+            return entrada != null &&
+                   Codigo == entrada.Codigo;
+        }
+
+        public override int GetHashCode()
+        {
+            return 1745598366 + Codigo.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return "A entrada de código: " + codigo +
+                "\ncom o produto: " + produto.Nome +
+                "\nA entrada do produto foi em: " + dataEntrada +
+                "\nA data de vencimento é de: " + dataVencimento +
+                "\nA quantidade que foi estocado é de: " + qtde.ToString();
+        }
     }
 }

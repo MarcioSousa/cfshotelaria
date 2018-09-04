@@ -30,5 +30,24 @@ namespace Model
             this.qtdeatual = qtdeatual;
         }
 
+        public override bool Equals(object obj)
+        {
+            var produto = obj as Produto;
+            return produto != null &&
+                   Codigo == produto.Codigo;
+        }
+
+        public override int GetHashCode()
+        {
+            return 1745598366 + Codigo.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return " O codigo do produto é: " + codigo +
+                "\nO nome do produto é: " + nome +
+                "\nO valor do produto é: R$ " + valor +
+                "\nA quantidade atual do produto é: " + qtdeatual.ToString();
+        }
     }
 }
