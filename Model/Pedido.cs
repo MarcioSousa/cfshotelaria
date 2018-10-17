@@ -11,17 +11,18 @@ namespace Model
         private int codigo;
         private DateTime dataPedido;
         private List<ItemPedido> itemPedidos = new List<ItemPedido>();
-        private Quarto quarto;
+        private Aluguel aluguel;
 
         public int Codigo { get => codigo; set => codigo = value; }
         public DateTime DataPedido { get => dataPedido; set => dataPedido = value; }
         public List<ItemPedido> ItemPedidos { get => itemPedidos; set => itemPedidos = value; }
-        public Quarto Quarto { get => quarto; set => quarto = value; }
+        internal Aluguel Aluguel { get => aluguel; set => aluguel = value; }
 
-        public Pedido(int codigo, DateTime dataPedido)
+        public Pedido(int codigo, DateTime dataPedido, Aluguel aluguel)
         {
             this.codigo = codigo;
             this.dataPedido = dataPedido;
+            this.aluguel = aluguel;
         }
 
         public override bool Equals(object obj)
@@ -38,8 +39,10 @@ namespace Model
 
         public override string ToString()
         {
-            return "O pedido de número " + codigo.ToString() + " " +
-                " foi feito no dia: " + dataPedido.ToString();
+            return "\n=== PEDIDO ===" +
+                "\nO pedido de número " + codigo +
+                "\nfoi feito no dia: " + dataPedido +
+                "\nEsse é para o aluguel: " + aluguel;
         }
     }
 }

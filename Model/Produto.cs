@@ -22,12 +22,11 @@ namespace Model
         public List<Entrada> Entradas { get => entradas; set => entradas = value; }
         public List<ItemPedido> ItemPedidos { get => itemPedidos; set => itemPedidos = value; }
 
-        public Produto(int codigo, string nome, double valor, int qtdeatual)
+        public Produto(int codigo, string nome, double valor)
         {
             this.codigo = codigo;
             this.nome = nome;
             this.valor = valor;
-            this.qtdeatual = qtdeatual;
         }
 
         public override bool Equals(object obj)
@@ -44,10 +43,11 @@ namespace Model
 
         public override string ToString()
         {
-            return " O codigo do produto é: " + codigo +
+            return "\n=== PRODUTO ===" +
+                "\nO codigo do produto é: " + codigo +
                 "\nO nome do produto é: " + nome +
                 "\nO valor do produto é: R$ " + valor +
-                "\nA quantidade atual do produto é: " + qtdeatual.ToString();
+                "\nA quantidade atual do produto é: " + qtdeatual;
         }
     }
 }

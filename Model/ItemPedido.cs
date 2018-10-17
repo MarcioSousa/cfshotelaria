@@ -20,11 +20,13 @@ namespace Model
         public Produto Produto { get => produto; set => produto = value; }
         public Pedido Pedido { get => pedido; set => pedido = value; }
 
-        public ItemPedido(int codigo, int qtde, double valor)
+        public ItemPedido(int codigo, int qtde, double valor, Produto produto, Pedido pedido)
         {
             this.codigo = codigo;
             this.qtde = qtde;
             this.valor = valor;
+            this.produto = produto;
+            this.pedido = pedido;
         }
 
         public override bool Equals(object obj)
@@ -38,11 +40,17 @@ namespace Model
         {
             return 1745598366 + Codigo.GetHashCode();
         }
+
         public override string ToString()
         {
-            return "O item de pedido com o código " + codigo +
-                " pediu " + qtde + " quantidades do produto: " + produto.Nome +
-                " no valor de: R$ " + valor.ToString("F2");
+            return "\n=== ITEM PEDIDO ===" +
+                "\nO item de pedido com o código " + codigo +
+                "\nProduto: " + produto +
+                "\npediu " + qtde +
+                "\nquantidades do produto: " + produto +
+                "\nno valor de: R$ " + valor.ToString("F2") +
+                "\ncom o pedido de número: " + pedido +
+                "\n\n";
         }
     }
 }

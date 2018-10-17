@@ -60,6 +60,12 @@
     <Compile Include="FrmPrincipal.Designer.cs">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmQuarto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmQuarto.Designer.cs">
+      <DependentUpon>FrmQuarto.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmSplashScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +80,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmPrincipal.resx">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmQuarto.resx">
+      <DependentUpon>FrmQuarto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmSplashScreen.resx">
       <DependentUpon>FrmSplashScreen.cs</DependentUpon>
@@ -109,6 +118,10 @@
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{93345cdd-48d0-436d-b1da-cccfc3b80904}</Project>
       <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Negocio\Negocio.csproj">
+      <Project>{3b2857ff-4528-4e0b-a848-aff50c41646b}</Project>
+      <Name>Negocio</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
