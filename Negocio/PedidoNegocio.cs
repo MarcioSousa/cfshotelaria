@@ -87,5 +87,30 @@ namespace Negocio
             }
         }
 
+        public void AddItemPedidos(Pedido pedido, List<Produto> produtos)
+        {
+            try
+            {
+                acessoMySql.LimparParametros();
+                acessoMySql.AdicionarParametros("aCodPedido", pedido.Codigo);
+                DataTable dataTablePedidoItensPedidos = acessoMySql.ExecutarConsulta(CommandType.StoredProcedure, "usp_ItensPedidoAluguel", false);
+
+                foreach (DataRow linha in dataTablePedidoItensPedidos.Rows)
+                {
+                    for (int t = 0; t < produtos.Count; t++)
+                    {
+                        if (produtos[t].Codigo == Convert.ToInt32(linha["cod_produto"]))
+                        {
+                            ItemPedido itemPedido = new ItemPedido(Convert.ToInt32(linha["codigo"]), Convert.ToInt32(linha["qtde"]), Convert.ToDouble(linha["valor"]), produtos[t], pedido);
+                            pedido.ItemPedidos.Add(itemPedido);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Não foi possível carregar os ItensPedidos dos Pedidos.\nDetalhes: " + ex.Message);
+            }
+        }
     }
 }

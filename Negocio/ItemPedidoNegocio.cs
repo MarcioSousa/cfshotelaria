@@ -64,27 +64,31 @@ namespace Negocio
             }
         }
 
-        public List<ItemPedido> ItemPedidos(List<Pedido> pedidos, List<Produto> produtos)
+        public List<ItemPedido> ItemPedidos(List<Pedido> pedidos, List<Produto> produtos) 
         {
             try
             {
                 List<ItemPedido> itemPedidos = new List<ItemPedido>();
 
-                DataTable dataTableItemPedido = acessoMySql.ExecutarConsulta(CommandType.StoredProcedure, "usp_ItensPedido", false);
+                DataTable dataTableItemPedido = acessoMySql.ExecutarConsulta(CommandType.StoredProcedure, "usp_ItensPedidoAluguel", false);
 
                 foreach (DataRow linha in dataTableItemPedido.Rows)
                 {
-                    for (int u = 0; u < produtos.Count; u++)
+                    for (int t = 0; t < pedidos.Count; t++)
                     {
-                        for (int t = 0; t < pedidos.Count; t++)
+                        if (Convert.ToInt32(linha["cod_pedido"]) == pedidos[t].Codigo)
                         {
-                            if ((Convert.ToInt32(linha["cod_pedido"]) == pedidos[t].Codigo) || (Convert.ToInt32(linha["cod_produto"]) == produtos[t].Codigo))
+                            for(int u = 0; u < produtos.Count; u++)
                             {
-                                ItemPedido itemPedido = new ItemPedido(Convert.ToInt32(linha["codigo"]), Convert.ToInt32(linha["qtde"]), Convert.ToDouble(linha["valor"]), produtos[u], pedidos[t]);
+                                if(Convert.ToInt32(linha["cod_produto"]) == produtos[u].Codigo)
+                                {
+                                    ItemPedido itemPedido = new ItemPedido(Convert.ToInt32(linha["codigo"]), Convert.ToInt32(linha["qtde"]), Convert.ToDouble(linha["valor"]), produtos[u], pedidos[t]);
 
-                                itemPedidos.Add(itemPedido);
+                                    itemPedidos.Add(itemPedido);
+                                }
                             }
                         }
+
                     }
                 }
                 return itemPedidos;

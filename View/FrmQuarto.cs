@@ -20,7 +20,6 @@ namespace View
         List<Cliente> clientes = new List<Cliente>();
         List<Pagamento> pagamentos = new List<Pagamento>();
         List<Pedido> pedidos = new List<Pedido>();
-        List<ItemPedido> itemPedidos = new List<ItemPedido>();
         List<Produto> produtos = new List<Produto>();
 
         public FrmQuarto()
@@ -36,48 +35,13 @@ namespace View
             CarregaAlugueis();
             CarregaClientes();
             CarregaPagamentos();
-            CarregaPedidos();
             CarregaProdutos();
-            CarregaItemPedidos();
+            CarregaPedidos();
         }
 
-        public void CarregaProdutos()
-        {
-            ProdutoNegocio produtoNegocio = new ProdutoNegocio();
-            produtos = produtoNegocio.Produtos();
-        }
-
-        public void CarregaItemPedidos()
-        {
-            ItemPedidoNegocio itemPedidoNegocio = new ItemPedidoNegocio();
-            itemPedidos = itemPedidoNegocio.ItemPedidos(pedidos, produtos);
-            //Consertar o retorno de ItensPedido.
-            MessageBox.Show("teste");
-        }
-
-        public void CarregaPedidos()
-        {
-            PedidoNegocio pedidoNegocio = new PedidoNegocio();
-            pedidos = pedidoNegocio.Pedidos(alugueis);
-        }
-
-        public void CarregaPagamentos()
-        {
-            PagamentoNegocio pagamentoNegocio = new PagamentoNegocio();
-            pagamentos = pagamentoNegocio.Pagamentos(alugueis);
-        }
-
-        public void CarregaClientes()
-        {
-            ClienteNegocio clienteNegocio = new ClienteNegocio();
-            clientes = clienteNegocio.Clientes(alugueis);
-          
-        }
-
-        public void CarregaQuartos()
+        private void CarregaQuartos()
         {
             QuartoNegocio quartoNegocio = new QuartoNegocio();
-
 
             quartos = quartoNegocio.Quartos();
 
@@ -88,14 +52,26 @@ namespace View
             for (int t = 0; t < quartos.Count; t++)
             {
                 quartoNegocio.AddLimpezas(quartos[t]);
+            }
 
-                //if (aluguelNegocio.AluguelQuarto(quartos[t]).Codigo != 0)
-                //{
-                //    BotaoVermelho(t + 1);
-                //}
+            //TROCANDO CORES DOS BOTÕES PARA MOSTRAR OS QUARTOS QUE ESTÃO OCUPADOS
+            List<Quarto> quartosOcupados = new List<Quarto>();
+            quartosOcupados = quartoNegocio.QuartosOcupados();
+
+            for (int u = 0; u < quartosOcupados.Count; u++)
+            {
+                for (int v = 0; v < quartos.Count; v++)
+                {
+                    if(quartosOcupados[u].Numero == quartos[v].Numero)
+                    {
+                        BotaoVermelho(quartos[v].Numero);
+                        break;
+                    }
+
+                }
             }
         }
-        public void CarregaLimpezas()
+        private void CarregaLimpezas()
         {
             QuartoNegocio quartoNegocio = new QuartoNegocio();
             LimpezaNegocio limpezaNegocio = new LimpezaNegocio();
@@ -103,11 +79,6 @@ namespace View
             limpezas = limpezaNegocio.Limpezas(quartos);
 
             dgvLimpeza.DataSource = limpezas;
-
-            //for (int t = 0; t < quartos.Count; t++)
-            //{
-            //    quartoNegocio.AddLimpezasQuarto(quartos[t]);
-            //}
 
             dgvLimpeza.Refresh();
             dgvLimpeza.Update();
@@ -118,28 +89,40 @@ namespace View
 
             alugueis = aluguelNegocio.Alugueis(quartos);
 
-            //QuartoNegocio quartoNegocio = new QuartoNegocio();
+            for (int t = 0; t < alugueis.Count; t++)
+            {
+                aluguelNegocio.AddClientes(alugueis[t]);
+                aluguelNegocio.AddPagamentos(alugueis[t]);
+                aluguelNegocio.AddPedidos(alugueis[t]);
+            }
 
-
-            //quartos = quartoNegocio.Quartos();
-
-            ////ORGANIZA TODOS OS QUARTOS EM ORDEM CRESCENTE
-            //InsertionSort(quartos);
-
-            ////CARREGA TODAS AS LISTAS DE LIMPEZAS DO OBJETO QUARTO E TAMBÉM O ALUGUEL
-            //for (int t = 0; t < quartos.Count; t++)
-            //{
-            //    quartoNegocio.AddQuartoLimpezas(quartos[t]);
-
-            //    //if (aluguelNegocio.AluguelQuarto(quartos[t]).Codigo != 0)
-            //    //{
-            //    //    BotaoVermelho(t + 1);
-            //    //}
-            //}
         }
+        private void CarregaClientes()
+        {
+            ClienteNegocio clienteNegocio = new ClienteNegocio();
+            clientes = clienteNegocio.Clientes(alugueis);
 
+        }
+        private void CarregaPagamentos()
+        {
+            PagamentoNegocio pagamentoNegocio = new PagamentoNegocio();
+            pagamentos = pagamentoNegocio.Pagamentos(alugueis);
+        }
+        private void CarregaPedidos()
+        {
+            PedidoNegocio pedidoNegocio = new PedidoNegocio();
+            pedidos = pedidoNegocio.Pedidos(alugueis);
 
-
+            for (int t = 0; t < pedidos.Count; t++)
+            {
+                pedidoNegocio.AddItemPedidos(pedidos[t], produtos);
+            }
+        }
+        private void CarregaProdutos()
+        {
+            ProdutoNegocio produtoNegocio = new ProdutoNegocio();
+            produtos = produtoNegocio.Produtos();
+        }
 
         private void BotaoVermelho(int numeroBotao)
         {
@@ -342,8 +325,6 @@ namespace View
             return quartos;
         }
 
-
-
         private void CarregaCampos(int numeroQuarto, int qtdeQuarto)
         {
             for (int t = 0; t < qtdeQuarto; t++)
@@ -383,8 +364,6 @@ namespace View
                 }
             }
         }
-
-
 
 
         /// <summary>

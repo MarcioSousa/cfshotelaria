@@ -85,6 +85,29 @@ namespace Negocio
             }
         }
 
+        public List<Quarto> QuartosOcupados()
+        {
+            try
+            {
+                List<Quarto> quartos = new List<Quarto>();
+
+                DataTable dataTableQuarto = acessoMySql.ExecutarConsulta(CommandType.StoredProcedure, "usp_QuartosOcupados", false);
+
+                foreach (DataRow linha in dataTableQuarto.Rows)
+                {
+                    Quarto quarto = new Quarto(Convert.ToInt32(linha["numero"]), Convert.ToDouble(linha["valorDiaria"]), linha["localidade"].ToString());
+                    quartos.Add(quarto);
+                }
+
+                return quartos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Não foi possível carregar os Quartos Ocupados.\nDetalhes: " + ex.Message);
+            }
+        }
+
+
         public void AddLimpezas(Quarto quarto)
         {
             try

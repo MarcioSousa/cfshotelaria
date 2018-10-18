@@ -90,6 +90,66 @@ namespace Negocio
             }
         }
 
+        public void AddClientes(Aluguel aluguel)
+        {
+            try
+            {
+                acessoMySql.LimparParametros();
+                acessoMySql.AdicionarParametros("aCodAluguel", aluguel.Codigo);
+                DataTable dataTableAluguelClientes = acessoMySql.ExecutarConsulta(CommandType.StoredProcedure, "usp_AluguelClientes", false);
+
+                foreach (DataRow linha in dataTableAluguelClientes.Rows)
+                {
+                    Cliente cliente = new Cliente(Convert.ToInt32(linha["codigo"]), linha["nome"].ToString(), linha["rg"].ToString(), linha["cpf"].ToString(), linha["contato"].ToString(), aluguel);
+                    aluguel.Clientes.Add(cliente);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Não foi possível carregar os Clientes em seus Alugueis.\nDetalhes: " + ex.Message);
+            }
+        }
+
+        public void AddPagamentos(Aluguel aluguel)
+        {
+            try
+            {
+                acessoMySql.LimparParametros();
+                acessoMySql.AdicionarParametros("aCodAluguel", aluguel.Codigo);
+                DataTable dataTableAluguelPagamentos = acessoMySql.ExecutarConsulta(CommandType.StoredProcedure, "usp_AluguelPagamentos", false);
+
+                foreach (DataRow linha in dataTableAluguelPagamentos.Rows)
+                {
+                    Pagamento pagamento = new Pagamento(Convert.ToInt32(linha["codigo"]), linha["tipo"].ToString(), Convert.ToDateTime(linha["dataPagamento"]), Convert.ToDouble(linha["valor"]), aluguel);
+                    aluguel.Pagamentos.Add(pagamento);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Não foi possível carregar os Quartos.\nDetalhes: " + ex.Message);
+            }
+        }
+
+        public void AddPedidos(Aluguel aluguel)
+        {
+            try
+            {
+                acessoMySql.LimparParametros();
+                acessoMySql.AdicionarParametros("aCodAluguel", aluguel.Codigo);
+                DataTable dataTableAluguelPedidos = acessoMySql.ExecutarConsulta(CommandType.StoredProcedure, "usp_AluguelPedidos", false);
+
+                foreach (DataRow linha in dataTableAluguelPedidos.Rows)
+                {
+
+                    Pedido pedido = new Pedido(Convert.ToInt32(linha["codigo"]), Convert.ToDateTime(linha["dataPedido"]), aluguel);
+                    aluguel.Pedidos.Add(pedido);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Não foi possível carregar os Quartos.\nDetalhes: " + ex.Message);
+            }
+        }
     }
 }
 
