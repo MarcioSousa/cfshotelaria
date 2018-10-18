@@ -75,14 +75,14 @@ namespace Negocio
 
                 foreach (DataRow linha in dataTablePagamentos.Rows)
                 {
-                    Pagamento pagamento = new Pagamento();
-                    pagamento.Codigo = Convert.ToInt32(linha["aCodigo"]);
-                    //pagamento.Cliente.Codigo = Convert.ToInt32(linha["aCodCliente"]);
-                    pagamento.Tipo = linha["aTipo"].ToString();
-                    pagamento.DataPagamento = Convert.ToDateTime(linha["aDataPagamento"]);
-                    pagamento.Valor = Convert.ToDouble(linha["aValor"]);
-
-                    pagamentos.Add(pagamento);
+                    for (int t = 0; t < alugueis.Count; t++)
+                    {
+                        if (Convert.ToInt32(linha["cod_aluguel"]) == alugueis[t].Codigo)
+                        {
+                            Pagamento pagamento = new Pagamento(Convert.ToInt32(linha["codigo"]), linha["tipo"].ToString(), Convert.ToDateTime(linha["dataPagamento"]), Convert.ToDouble(linha["valor"]), alugueis[t]);
+                            pagamentos.Add(pagamento);
+                        }
+                    }
                 }
                 return pagamentos;
             }

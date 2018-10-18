@@ -72,7 +72,7 @@ namespace Negocio
             {
                 List<Cliente> clientes = new List<Cliente>();
 
-                DataTable dataTableClientesAluguel = acessoMySql.ExecutarConsulta(CommandType.StoredProcedure, "usp_ClientesAluguel", false);
+                DataTable dataTableClientesAluguel = acessoMySql.ExecutarConsulta(CommandType.StoredProcedure, "usp_Clientes", false);
 
                 foreach (DataRow linha in dataTableClientesAluguel.Rows)
                 {

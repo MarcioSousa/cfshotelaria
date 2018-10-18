@@ -23,11 +23,6 @@ namespace Model
             this.Quarto = quarto;
         }
 
-        public Limpeza()
-        {
-
-        }
-
         public override bool Equals(object obj)
         {
             var limpeza = obj as Limpeza;

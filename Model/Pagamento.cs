@@ -29,10 +29,6 @@ namespace Model
             this.aluguel = aluguel;
         }
 
-        public Pagamento()
-        {
-        }
-
         public override bool Equals(object obj)
         {
             var pagamento = obj as Pagamento;

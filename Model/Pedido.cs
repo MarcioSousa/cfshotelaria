@@ -16,7 +16,7 @@ namespace Model
         public int Codigo { get => codigo; set => codigo = value; }
         public DateTime DataPedido { get => dataPedido; set => dataPedido = value; }
         public List<ItemPedido> ItemPedidos { get => itemPedidos; set => itemPedidos = value; }
-        internal Aluguel Aluguel { get => aluguel; set => aluguel = value; }
+        public Aluguel Aluguel { get => aluguel; set => aluguel = value; }
 
         public Pedido(int codigo, DateTime dataPedido, Aluguel aluguel)
         {

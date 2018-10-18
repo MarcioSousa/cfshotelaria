@@ -89,5 +89,37 @@ namespace Negocio
                 throw new Exception("Não foi possível carregar os Alugueis dos Quartos.\nDetalhes: " + ex.Message);
             }
         }
+
     }
 }
+
+//limpezaNegocio
+//public List<Limpeza> Limpezas(List<Quarto> quartos)
+
+//quartoNegocio
+//public List<Quarto> Quartos()
+
+//AlugelNegocio
+//public List<Aluguel> Alugueis(List<Quarto> quartos)
+
+//ClienteNegocio
+//public List<Cliente> Clientes(List<Aluguel> alugueis)
+
+//PagamentoNegocio
+//public List<Pagamento> Pagamentos(List<Aluguel> alugueis)
+
+//PedidoNegocio
+//public List<Pedido> Pedidos(List<Aluguel> alugueis)
+
+//ItemPedidoNegocio
+//public List<ItemPedido> ItensPedidos(List<Pedido> pedidos)
+
+//ItemPedidoNegocio
+//public List<ItemPedido> ItensPedidos(List<Produto> produtos)
+
+//EntradaNegocio
+//public List<Entrada> Entradas(List<Produto> produtos)
+
+//ProdutoNegocio
+//public List<Produto> Produtos()
+

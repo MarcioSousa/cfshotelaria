@@ -13,3 +13,5 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0017:Simplify object initialization", Justification = "<Pending>", Scope = "member", Target = "~M:Negocio.ClienteNegocio.Clientes~System.Collections.Generic.List{Model.Cliente}")]
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0017:Simplify object initialization", Justification = "<Pending>", Scope = "member", Target = "~M:Negocio.PagamentoNegocio.Pagamentos~System.Collections.Generic.List{Model.Pagamento}")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0017:Simplify object initialization", Justification = "<Pending>", Scope = "member", Target = "~M:Negocio.PagamentoNegocio.Pagamentos(System.Collections.Generic.List{Model.Aluguel})~System.Collections.Generic.List{Model.Pagamento}")]
+

@@ -25,10 +25,6 @@ namespace Model
             this.Localidade = localidade;
         }
 
-        public Quarto()
-        {
-        }
-
         public override bool Equals(object obj)
         {
             var quarto = obj as Quarto;

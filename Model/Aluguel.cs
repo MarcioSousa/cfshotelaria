@@ -34,10 +34,6 @@ namespace Model
             this.quarto = quarto;
         }
 
-        public Aluguel()
-        {
-        }
-
         public override bool Equals(object obj)
         {
             var aluguel = obj as Aluguel;
