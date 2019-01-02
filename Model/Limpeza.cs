@@ -8,15 +8,15 @@ namespace Model
 {
     public class Limpeza
     {
-        private int codigo;
+        private int? codigo;
         private DateTime dataLimpeza;
         private Quarto quarto;
 
-        public int Codigo { get => codigo; set => codigo = value; }
+        public int? Codigo { get => codigo; set => codigo = value; }
         public DateTime DataLimpeza { get => dataLimpeza; set => dataLimpeza = value; }
         public Quarto Quarto { get => quarto; set => quarto = value; }
 
-        public Limpeza(int codigo, DateTime dataLimpeza, Quarto quarto)
+        public Limpeza(int? codigo, DateTime dataLimpeza, Quarto quarto)
         {
             this.Codigo = codigo;
             this.DataLimpeza = dataLimpeza;

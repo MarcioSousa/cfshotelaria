@@ -37,9 +37,10 @@ namespace Control
         }
 
         public object ExecutarManipulacao(CommandType commandType, string nomeStoreProcedureOuTextoSql)
-        {
+        { 
             try
             {
+                int codigo;
                 MySqlConnection mySqlConnection = CriarConexao(false);
                 mySqlConnection.Open();
 
@@ -53,9 +54,11 @@ namespace Control
                 {
                     mySqlCommand.Parameters.Add(new MySqlParameter(mySqlParameter.ParameterName, mySqlParameter.Value));
                 }
-                mySqlCommand.ExecuteScalar();
+
+                codigo = Convert.ToInt32(mySqlCommand.ExecuteScalar());
                 mySqlConnection.Close();
-                return 1;
+
+                return codigo;
             }
             catch (Exception ex)
             {

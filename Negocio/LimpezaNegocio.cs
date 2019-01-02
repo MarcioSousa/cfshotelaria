@@ -20,8 +20,7 @@ namespace Negocio
                 acessoMySql.LimparParametros();
                 acessoMySql.AdicionarParametros("aCodQuarto", limpeza.Quarto.Numero);
                 acessoMySql.AdicionarParametros("aDataLimpeza", limpeza.DataLimpeza);
-                acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_LimpezaNovo");
-                return "Limpeza adicionado com sucesso!";
+                return acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_LimpezaNovo").ToString();
             }
             catch (Exception ex)
             {
@@ -60,25 +59,20 @@ namespace Negocio
             }
         }
 
-        public List<Limpeza> Limpezas(List<Quarto> quartos)
+        public List<Limpeza> Limpezas(Quarto quarto)
         {
             try
             {
                 List<Limpeza> limpezas = new List<Limpeza>();
-
-                DataTable dataTableLimpeza = acessoMySql.ExecutarConsulta(CommandType.StoredProcedure, "usp_Limpezas", false);
+                acessoMySql.LimparParametros();
+                DataTable dataTableLimpeza = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_quarto, datalimpeza FROM limpeza WHERE cod_quarto = " + quarto.Numero + " ORDER BY datalimpeza DESC LIMIT 10", false);
 
                 foreach (DataRow linha in dataTableLimpeza.Rows)
                 {
-                    for (int t = 0; t < quartos.Count; t++)
-                    {
-                        if (Convert.ToInt32(linha["cod_quarto"]) == quartos[t].Numero)
-                        {
-                            Limpeza limpeza = new Limpeza(Convert.ToInt32(linha["codigo"]), Convert.ToDateTime(linha["datalimpeza"]), quartos[t]);
-                            limpezas.Add(limpeza);
-                        }
-                    }
+                    Limpeza limpeza = new Limpeza(Convert.ToInt32(linha["codigo"]), Convert.ToDateTime(linha["datalimpeza"]), quarto);
+                    limpezas.Add(limpeza);
                 }
+
                 return limpezas;
             }
             catch (Exception ex)

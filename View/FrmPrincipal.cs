@@ -223,8 +223,8 @@ namespace View
 
         private void picQuarto_Click(object sender, EventArgs e)
         {
-            FrmQuarto quarto = new FrmQuarto();
-            quarto.ShowDialog();
+            FrmAluguel aluguel = new FrmAluguel();
+            aluguel.ShowDialog();
         }
 
     }

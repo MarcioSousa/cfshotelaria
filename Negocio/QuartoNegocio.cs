@@ -21,8 +21,7 @@ namespace Negocio
                 acessoMySql.AdicionarParametros("aNumero", quarto.Numero);
                 acessoMySql.AdicionarParametros("aValorDiaria", quarto.ValorDiaria);
                 acessoMySql.AdicionarParametros("aLocalidade", quarto.Localidade);
-                acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_QuartoNovo");
-                return "Quarto " + quarto.Numero + " registrado com Sucesso!";
+                return acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_QuartoNovo").ToString();
             }
             catch (Exception ex)
             {
@@ -106,7 +105,6 @@ namespace Negocio
                 throw new Exception("Não foi possível carregar os Quartos Ocupados.\nDetalhes: " + ex.Message);
             }
         }
-
 
         public void AddLimpezas(Quarto quarto)
         {

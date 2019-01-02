@@ -13,16 +13,15 @@ namespace Negocio
     {
         AcessoMySql acessoMySql = new AcessoMySql();
 
-        public string Inserir(Aluguel aluguel)
+        public string Inserir(int codigoQuarto)
         {
             try
             {
                 acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aCodQuarto", aluguel.Quarto.Numero);
-                acessoMySql.AdicionarParametros("aValor", aluguel.Valor);
-                acessoMySql.AdicionarParametros("aDataChegada", aluguel.DataChegada);
-                acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_AluguelNovo");
-                return "Aluguel adicionado com sucesso!";
+                acessoMySql.AdicionarParametros("aCodQuarto", codigoQuarto);
+                acessoMySql.AdicionarParametros("aValor", 0.00);
+                acessoMySql.AdicionarParametros("aDataChegada", DateTime.Now);
+                return acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_AluguelNovo").ToString();
             }
             catch (Exception ex)
             {

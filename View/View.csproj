@@ -54,17 +54,53 @@
     <Compile Include="FrmAcesso.Designer.cs">
       <DependentUpon>FrmAcesso.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmQuarto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmQuarto.Designer.cs">
+      <DependentUpon>FrmQuarto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCliente.Designer.cs">
+      <DependentUpon>FrmCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmEntrada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmEntrada.Designer.cs">
+      <DependentUpon>FrmEntrada.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmLimpeza.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmLimpeza.Designer.cs">
+      <DependentUpon>FrmLimpeza.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPagamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPagamento.Designer.cs">
+      <DependentUpon>FrmPagamento.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmPrincipal.Designer.cs">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmQuarto.cs">
+    <Compile Include="FrmProduto.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmQuarto.Designer.cs">
-      <DependentUpon>FrmQuarto.cs</DependentUpon>
+    <Compile Include="FrmProduto.Designer.cs">
+      <DependentUpon>FrmProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAluguel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAluguel.Designer.cs">
+      <DependentUpon>FrmAluguel.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmSplashScreen.cs">
       <SubType>Form</SubType>
@@ -78,11 +114,29 @@
     <EmbeddedResource Include="FrmAcesso.resx">
       <DependentUpon>FrmAcesso.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmQuarto.resx">
+      <DependentUpon>FrmQuarto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCliente.resx">
+      <DependentUpon>FrmCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmEntrada.resx">
+      <DependentUpon>FrmEntrada.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmLimpeza.resx">
+      <DependentUpon>FrmLimpeza.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPagamento.resx">
+      <DependentUpon>FrmPagamento.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmPrincipal.resx">
       <DependentUpon>FrmPrincipal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmQuarto.resx">
-      <DependentUpon>FrmQuarto.cs</DependentUpon>
+    <EmbeddedResource Include="FrmProduto.resx">
+      <DependentUpon>FrmProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmAluguel.resx">
+      <DependentUpon>FrmAluguel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmSplashScreen.resx">
       <DependentUpon>FrmSplashScreen.cs</DependentUpon>
