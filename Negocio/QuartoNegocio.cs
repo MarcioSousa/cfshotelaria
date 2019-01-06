@@ -68,7 +68,7 @@ namespace Negocio
             {
                 List<Quarto> quartos = new List<Quarto>();
 
-                DataTable dataTableQuarto = acessoMySql.ExecutarConsulta(CommandType.StoredProcedure, "usp_Quartos", false);
+                DataTable dataTableQuarto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT numero, valorDiaria, localidade FROM quarto ORDER BY numero", false);
 
                 foreach (DataRow linha in dataTableQuarto.Rows)
                 {
@@ -90,7 +90,7 @@ namespace Negocio
             {
                 List<Quarto> quartos = new List<Quarto>();
 
-                DataTable dataTableQuarto = acessoMySql.ExecutarConsulta(CommandType.StoredProcedure, "usp_QuartosOcupados", false);
+                DataTable dataTableQuarto = acessoMySql.ExecutarConsulta(CommandType.StoredProcedure, "SELECT Q.numero, Q.valorDiaria, Q.localidade FROM quarto Q INNER JOIN aluguel A ON A.cod_quarto = Q.numero AND A.dataSaida IS NULL ORDER BY Q.numero", false);
 
                 foreach (DataRow linha in dataTableQuarto.Rows)
                 {
@@ -111,8 +111,7 @@ namespace Negocio
             try
             {
                 acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aCodQuarto", quarto.Numero);
-                DataTable dataTableLimpezasQuarto = acessoMySql.ExecutarConsulta(CommandType.StoredProcedure, "usp_QuartoLimpezas", false);
+                DataTable dataTableLimpezasQuarto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_quarto, datalimpeza FROM limpeza WHERE cod_quarto = " + quarto.Numero, false);
 
                 foreach (DataRow linha in dataTableLimpezasQuarto.Rows)
                 {

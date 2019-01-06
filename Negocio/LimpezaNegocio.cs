@@ -59,18 +59,21 @@ namespace Negocio
             }
         }
 
-        public List<Limpeza> Limpezas(Quarto quarto)
+        public List<Limpeza> Limpezas(List<Quarto> quartos)
         {
             try
             {
                 List<Limpeza> limpezas = new List<Limpeza>();
-                acessoMySql.LimparParametros();
-                DataTable dataTableLimpeza = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_quarto, datalimpeza FROM limpeza WHERE cod_quarto = " + quarto.Numero + " ORDER BY datalimpeza DESC LIMIT 10", false);
-
-                foreach (DataRow linha in dataTableLimpeza.Rows)
+                for (int t = 0; t < quartos.Count; t++)
                 {
-                    Limpeza limpeza = new Limpeza(Convert.ToInt32(linha["codigo"]), Convert.ToDateTime(linha["datalimpeza"]), quarto);
-                    limpezas.Add(limpeza);
+                    acessoMySql.LimparParametros();
+                    DataTable dataTableLimpeza = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_quarto, datalimpeza FROM limpeza WHERE cod_quarto = " + quartos[t].Numero + " ORDER BY datalimpeza DESC LIMIT 10", false);
+
+                    foreach (DataRow linha in dataTableLimpeza.Rows)
+                    {
+                        Limpeza limpeza = new Limpeza(Convert.ToInt32(linha["codigo"]), Convert.ToDateTime(linha["datalimpeza"]), quartos[t]);
+                        limpezas.Add(limpeza);
+                    }
                 }
 
                 return limpezas;

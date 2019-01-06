@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BtnExcluir = new System.Windows.Forms.Button();
             this.BtnCancelar = new System.Windows.Forms.Button();
             this.BtnFinalizar = new System.Windows.Forms.Button();
@@ -42,21 +44,27 @@
             this.BtnAdicionar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.TxtCpf = new System.Windows.Forms.TextBox();
-            this.TxtRg = new System.Windows.Forms.TextBox();
+            this.TxtQtdeAtual = new System.Windows.Forms.TextBox();
+            this.TxtValor = new System.Windows.Forms.TextBox();
             this.TxtNome = new System.Windows.Forms.TextBox();
-            this.DgvCliente = new System.Windows.Forms.DataGridView();
+            this.DgvProduto = new System.Windows.Forms.DataGridView();
             this.CODIGO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NOME = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RG = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CPF = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DgvCliente)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvProduto)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // BtnExcluir
             // 
-            this.BtnExcluir.Location = new System.Drawing.Point(12, 394);
+            this.BtnExcluir.Location = new System.Drawing.Point(6, 672);
             this.BtnExcluir.Name = "BtnExcluir";
             this.BtnExcluir.Size = new System.Drawing.Size(75, 23);
             this.BtnExcluir.TabIndex = 9;
@@ -66,7 +74,7 @@
             // BtnCancelar
             // 
             this.BtnCancelar.AutoSize = true;
-            this.BtnCancelar.Location = new System.Drawing.Point(93, 394);
+            this.BtnCancelar.Location = new System.Drawing.Point(87, 672);
             this.BtnCancelar.Name = "BtnCancelar";
             this.BtnCancelar.Size = new System.Drawing.Size(97, 23);
             this.BtnCancelar.TabIndex = 7;
@@ -76,7 +84,7 @@
             // BtnFinalizar
             // 
             this.BtnFinalizar.AutoSize = true;
-            this.BtnFinalizar.Location = new System.Drawing.Point(281, 394);
+            this.BtnFinalizar.Location = new System.Drawing.Point(275, 672);
             this.BtnFinalizar.Name = "BtnFinalizar";
             this.BtnFinalizar.Size = new System.Drawing.Size(93, 23);
             this.BtnFinalizar.TabIndex = 6;
@@ -94,10 +102,10 @@
             this.panel1.Controls.Add(this.BtnAdicionar);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.TxtCpf);
-            this.panel1.Controls.Add(this.TxtRg);
+            this.panel1.Controls.Add(this.TxtQtdeAtual);
+            this.panel1.Controls.Add(this.TxtValor);
             this.panel1.Controls.Add(this.TxtNome);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Location = new System.Drawing.Point(6, 50);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(362, 135);
             this.panel1.TabIndex = 5;
@@ -110,6 +118,7 @@
             this.BtnEditar.TabIndex = 11;
             this.BtnEditar.Text = "Editar";
             this.BtnEditar.UseVisualStyleBackColor = true;
+            this.BtnEditar.Click += new System.EventHandler(this.BtnEditar_Click);
             // 
             // BtnNovo
             // 
@@ -119,6 +128,7 @@
             this.BtnNovo.TabIndex = 10;
             this.BtnNovo.Text = "Novo";
             this.BtnNovo.UseVisualStyleBackColor = true;
+            this.BtnNovo.Click += new System.EventHandler(this.BtnNovo_Click);
             // 
             // label1
             // 
@@ -148,6 +158,7 @@
             this.BtnLimpar.TabIndex = 5;
             this.BtnLimpar.Text = "Limpar";
             this.BtnLimpar.UseVisualStyleBackColor = true;
+            this.BtnLimpar.Click += new System.EventHandler(this.BtnLimpar_Click);
             // 
             // label3
             // 
@@ -167,6 +178,7 @@
             this.BtnAdicionar.TabIndex = 4;
             this.BtnAdicionar.Text = "Adicionar";
             this.BtnAdicionar.UseVisualStyleBackColor = true;
+            this.BtnAdicionar.Click += new System.EventHandler(this.BtnAdicionar_Click);
             // 
             // label4
             // 
@@ -186,23 +198,23 @@
             this.label5.TabIndex = 5;
             this.label5.Text = "Valor";
             // 
-            // TxtCpf
+            // TxtQtdeAtual
             // 
-            this.TxtCpf.Enabled = false;
-            this.TxtCpf.Location = new System.Drawing.Point(258, 70);
-            this.TxtCpf.Name = "TxtCpf";
-            this.TxtCpf.ReadOnly = true;
-            this.TxtCpf.Size = new System.Drawing.Size(89, 20);
-            this.TxtCpf.TabIndex = 9;
+            this.TxtQtdeAtual.Enabled = false;
+            this.TxtQtdeAtual.Location = new System.Drawing.Point(258, 70);
+            this.TxtQtdeAtual.Name = "TxtQtdeAtual";
+            this.TxtQtdeAtual.ReadOnly = true;
+            this.TxtQtdeAtual.Size = new System.Drawing.Size(89, 20);
+            this.TxtQtdeAtual.TabIndex = 9;
             // 
-            // TxtRg
+            // TxtValor
             // 
-            this.TxtRg.Enabled = false;
-            this.TxtRg.Location = new System.Drawing.Point(62, 70);
-            this.TxtRg.Name = "TxtRg";
-            this.TxtRg.ReadOnly = true;
-            this.TxtRg.Size = new System.Drawing.Size(116, 20);
-            this.TxtRg.TabIndex = 2;
+            this.TxtValor.Enabled = false;
+            this.TxtValor.Location = new System.Drawing.Point(62, 70);
+            this.TxtValor.Name = "TxtValor";
+            this.TxtValor.ReadOnly = true;
+            this.TxtValor.Size = new System.Drawing.Size(116, 20);
+            this.TxtValor.TabIndex = 2;
             // 
             // TxtNome
             // 
@@ -213,39 +225,42 @@
             this.TxtNome.Size = new System.Drawing.Size(285, 20);
             this.TxtNome.TabIndex = 1;
             // 
-            // DgvCliente
+            // DgvProduto
             // 
-            this.DgvCliente.AllowUserToAddRows = false;
-            this.DgvCliente.AllowUserToDeleteRows = false;
-            this.DgvCliente.AllowUserToResizeColumns = false;
-            this.DgvCliente.AllowUserToResizeRows = false;
-            this.DgvCliente.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.DgvCliente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DgvCliente.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DgvProduto.AllowUserToAddRows = false;
+            this.DgvProduto.AllowUserToDeleteRows = false;
+            this.DgvProduto.AllowUserToResizeColumns = false;
+            this.DgvProduto.AllowUserToResizeRows = false;
+            this.DgvProduto.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.DgvProduto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvProduto.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CODIGO,
             this.NOME,
             this.RG,
             this.CPF});
-            this.DgvCliente.Location = new System.Drawing.Point(12, 153);
-            this.DgvCliente.MultiSelect = false;
-            this.DgvCliente.Name = "DgvCliente";
-            this.DgvCliente.ReadOnly = true;
-            this.DgvCliente.RowHeadersVisible = false;
-            this.DgvCliente.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvCliente.Size = new System.Drawing.Size(362, 235);
-            this.DgvCliente.TabIndex = 10;
+            this.DgvProduto.Location = new System.Drawing.Point(6, 191);
+            this.DgvProduto.MultiSelect = false;
+            this.DgvProduto.Name = "DgvProduto";
+            this.DgvProduto.ReadOnly = true;
+            this.DgvProduto.RowHeadersVisible = false;
+            this.DgvProduto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DgvProduto.Size = new System.Drawing.Size(362, 475);
+            this.DgvProduto.TabIndex = 10;
+            this.DgvProduto.SelectionChanged += new System.EventHandler(this.DgvProduto_SelectionChanged);
             // 
             // CODIGO
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.CODIGO.DefaultCellStyle = dataGridViewCellStyle2;
+            this.CODIGO.DataPropertyName = "Codigo";
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.CODIGO.DefaultCellStyle = dataGridViewCellStyle22;
             this.CODIGO.HeaderText = "Codigo";
             this.CODIGO.Name = "CODIGO";
             this.CODIGO.ReadOnly = true;
-            this.CODIGO.Width = 70;
+            this.CODIGO.Width = 50;
             // 
             // NOME
             // 
+            this.NOME.DataPropertyName = "Nome";
             this.NOME.HeaderText = "Nome";
             this.NOME.Name = "NOME";
             this.NOME.ReadOnly = true;
@@ -253,37 +268,90 @@
             // 
             // RG
             // 
+            this.RG.DataPropertyName = "Valor";
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle23.Format = "C";
+            this.RG.DefaultCellStyle = dataGridViewCellStyle23;
             this.RG.HeaderText = "Valor";
             this.RG.Name = "RG";
             this.RG.ReadOnly = true;
+            this.RG.Width = 70;
             // 
             // CPF
             // 
-            this.CPF.HeaderText = "Qtde Atual";
+            this.CPF.DataPropertyName = "Qtdeatual";
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.CPF.DefaultCellStyle = dataGridViewCellStyle24;
+            this.CPF.HeaderText = "QtdeAtual";
             this.CPF.Name = "CPF";
             this.CPF.ReadOnly = true;
+            this.CPF.Width = 70;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.panel1);
+            this.groupBox1.Controls.Add(this.BtnExcluir);
+            this.groupBox1.Controls.Add(this.DgvProduto);
+            this.groupBox1.Controls.Add(this.BtnCancelar);
+            this.groupBox1.Controls.Add(this.BtnFinalizar);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(373, 701);
+            this.groupBox1.TabIndex = 11;
+            this.groupBox1.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(123, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(151, 31);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Produto(s)";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Location = new System.Drawing.Point(391, 12);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(373, 701);
+            this.groupBox2.TabIndex = 12;
+            this.groupBox2.TabStop = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(60, 16);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(256, 31);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Entradas Produtos";
             // 
             // FrmProduto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(383, 424);
-            this.Controls.Add(this.BtnExcluir);
-            this.Controls.Add(this.BtnCancelar);
-            this.Controls.Add(this.BtnFinalizar);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.DgvCliente);
+            this.ClientSize = new System.Drawing.Size(1004, 725);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmProduto";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Produto";
+            this.Load += new System.EventHandler(this.FrmProduto_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DgvCliente)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DgvProduto)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -302,13 +370,17 @@
         private System.Windows.Forms.Button BtnAdicionar;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox TxtCpf;
-        private System.Windows.Forms.TextBox TxtRg;
+        private System.Windows.Forms.TextBox TxtQtdeAtual;
+        private System.Windows.Forms.TextBox TxtValor;
         private System.Windows.Forms.TextBox TxtNome;
-        private System.Windows.Forms.DataGridView DgvCliente;
+        private System.Windows.Forms.DataGridView DgvProduto;
         private System.Windows.Forms.DataGridViewTextBoxColumn CODIGO;
         private System.Windows.Forms.DataGridViewTextBoxColumn NOME;
         private System.Windows.Forms.DataGridViewTextBoxColumn RG;
         private System.Windows.Forms.DataGridViewTextBoxColumn CPF;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label6;
     }
 }

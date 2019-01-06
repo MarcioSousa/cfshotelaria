@@ -20,202 +20,233 @@ namespace View
         List<Cliente> clientes = new List<Cliente>();
         List<Pagamento> pagamentos = new List<Pagamento>();
         List<Pedido> pedidos = new List<Pedido>();
+        List<ItemPedido> itemPedidos = new List<ItemPedido>();
         List<Produto> produtos = new List<Produto>();
 
         public FrmAluguel()
         {
             InitializeComponent();
             DgvQuartos.AutoGenerateColumns = false;
+            DgvLimpeza.AutoGenerateColumns = false;
             DgvCliente.AutoGenerateColumns = false;
             DgvPagamento.AutoGenerateColumns = false;
-            dgvLimpeza.AutoGenerateColumns = false;
         }
-
         private void FrmQuarto_Load(object sender, EventArgs e)
         {
-            CarregaQuartos();
-            CarregaLimpezas();
-            CarregaAlugueis();
-            CarregaClientes();
-            CarregaPagamentos();
-            CarregaProdutos();
-            CarregaPedidos();
-
+            CarregaLists();
             Tempo.Start();
 
-            DesativaMarcacao();
-        }
-
-        private void DesativaMarcacao()
-        {
-            int index;
-            if (dgvLimpeza.SelectedRows.Count > 0)
-            {
-                index = dgvLimpeza.SelectedRows[0].Index;
-                if (index >= 0)
-                {
-                    dgvLimpeza.Rows[index].Selected = false;
-                }
-            }
-
-            if (DgvPagamento.SelectedRows.Count > 0)
-            {
-                index = DgvPagamento.SelectedRows[0].Index;
-                if (index >= 0)
-                {
-                    DgvPagamento.Rows[index].Selected = false;
-                }
-            }
-
-            if (DgvPedido.SelectedRows.Count > 0)
-            {
-                index = DgvPedido.SelectedRows[0].Index;
-                if (index >= 0)
-                {
-                    DgvPedido.Rows[index].Selected = false;
-                }
-            }
-
-            if (DgvCliente.SelectedRows.Count > 0)
-            {
-                index = DgvCliente.SelectedRows[0].Index;
-                if (index >= 0)
-                {
-                    DgvCliente.Rows[index].Selected = false;
-                }
-            }
-
-        }
-
-        private void CarregaQuartos()
-        {
-            List<Quarto> quartosOcupados = new List<Quarto>();
-            //var source = new BindingList<MinhaClasse>();
-            //dataGridView1.DataSource = source;
-            //source.Add(new MinhaClasse { Nome = "João", Idade = 32 });
-
-            QuartoNegocio quartoNegocio = new QuartoNegocio();
-
-            quartos = quartoNegocio.Quartos();
-
-            //ORGANIZA TODOS OS QUARTOS EM ORDEM CRESCENTE
-            //InsertionSort(quartos);
-
-            //CARREGA TODAS AS LISTAS DE LIMPEZAS DO OBJETO QUARTO E TAMBÉM O ALUGUEL
-            for (int t = 0; t < quartos.Count; t++)
-            {
-                quartoNegocio.AddLimpezas(quartos[t]);
-            }
-
-
-            //TROCANDO CORES DOS BOTÕES PARA MOSTRAR OS QUARTOS QUE ESTÃO OCUPADOS
-            //List<Quarto> quartosOcupados = new List<Quarto>();
-            //quartosOcupados = quartoNegocio.QuartosOcupados();
-
-            //for (int u = 0; u < quartosOcupados.Count; u++)
-            //{
-            //    for (int v = 0; v < quartos.Count; v++)
-            //    {
-            //        if (quartosOcupados[u].Numero == quartos[v].Numero)
-            //        {
-            //            DgvQuarto.Rows.Add(quartos[u]);
-            //            break;
-            //            //CALL usp_QuartoNovo(20, 80.00,'2º Andar')
-            //        }
-            //    }
-            //}
-
-            //CARREGA DATAGRID QUARTOS
             DgvQuartos.DataSource = null;
             DgvQuartos.DataSource = quartos;
 
             DgvQuartos.Update();
             DgvQuartos.Refresh();
-        }
-        private void CarregaLimpezas()
-        {
-            QuartoNegocio quartoNegocio = new QuartoNegocio();
-            LimpezaNegocio limpezaNegocio = new LimpezaNegocio();
 
-            for (int t = 0; t < quartos.Count; t++)
+            DgvQuartos.ClearSelection();
+        }
+        private void TxtCodigoProduto_Validating(object sender, CancelEventArgs e)
+        {
+            if (TxtCodigoProduto.Text == "")
             {
-                if (quartos[t].Numero == Convert.ToInt32(LblNumeroQuarto.Text))
-                {
-                    limpezas = limpezaNegocio.Limpezas(quartos[t]);
-                    break;
-                }
+                Ep.SetError(TxtCodigoProduto, "Você não digitou o Código!");
+                TxtCodigoProduto.Focus();
+                return;
             }
-
-            dgvLimpeza.DataSource = limpezas;
-
-            dgvLimpeza.Refresh();
-            dgvLimpeza.Update();
+            Ep.Clear();
         }
-        private void CarregaAlugueis()
+        private void Tempo_Tick(object sender, EventArgs e)
         {
-            AluguelNegocio aluguelNegocio = new AluguelNegocio();
-
-            alugueis = aluguelNegocio.Alugueis(quartos);
-
-            for (int t = 0; t < alugueis.Count; t++)
+            if (DateTime.Now.DayOfWeek.ToString() == "Sunday")
             {
-                aluguelNegocio.AddClientes(alugueis[t]);
-                aluguelNegocio.AddPagamentos(alugueis[t]);
-                aluguelNegocio.AddPedidos(alugueis[t]);
+                TxtSemana.Text = "Domingo, " + DateTime.Now.ToString();
             }
-
-        }
-        private void CarregaClientes()
-        {
-            ClienteNegocio clienteNegocio = new ClienteNegocio();
-            clientes = clienteNegocio.Clientes(alugueis);
-        }
-        private void CarregaPagamentos()
-        {
-            PagamentoNegocio pagamentoNegocio = new PagamentoNegocio();
-            pagamentos = pagamentoNegocio.Pagamentos(alugueis);
-        }
-        private void CarregaPedidos()
-        {
-            PedidoNegocio pedidoNegocio = new PedidoNegocio();
-            pedidos = pedidoNegocio.Pedidos(alugueis);
-
-            for (int t = 0; t < pedidos.Count; t++)
+            else if (DateTime.Now.DayOfWeek.ToString() == "Monday")
             {
-                pedidoNegocio.AddItemPedidos(pedidos[t], produtos);
+                TxtSemana.Text = "Segunda-Feira, " + DateTime.Now.ToString();
+            }
+            else if (DateTime.Now.DayOfWeek.ToString() == "Tuesday")
+            {
+                TxtSemana.Text = "Terça-Feira, " + DateTime.Now.ToString();
+            }
+            else if (DateTime.Now.DayOfWeek.ToString() == "Wednesday")
+            {
+                TxtSemana.Text = "Quarta-Feira, " + DateTime.Now.ToString();
+            }
+            else if (DateTime.Now.DayOfWeek.ToString() == "Thursday")
+            {
+                TxtSemana.Text = "Quinta-Feira, " + DateTime.Now.ToString();
+            }
+            else if (DateTime.Now.DayOfWeek.ToString() == "Friday")
+            {
+                TxtSemana.Text = "Sexta-Feira, " + DateTime.Now.ToString();
+            }
+            else if (DateTime.Now.DayOfWeek.ToString() == "Saturday")
+            {
+                TxtSemana.Text = "Sábado, " + DateTime.Now.ToString();
             }
         }
-        private void CarregaProdutos()
+        private void PbxAddCliente_Click(object sender, EventArgs e)
         {
-            ProdutoNegocio produtoNegocio = new ProdutoNegocio();
-            produtos = produtoNegocio.Produtos();
-        }
-        private void CarregaCabecalho()
-        {
-            for (int t = 0; t < quartos.Count; t++)
+            try
             {
-                if (quartos[t].Numero.ToString() == DgvQuartos.Rows[DgvQuartos.CurrentRow.Index].Cells[0].Value.ToString())
-                {
-                    LblNumeroQuarto.Text = quartos[t].Numero.ToString("000");
-                    LblValorQuarto.Text = quartos[t].ValorDiaria.ToString("C");
-                    LblLocalizacao.Text = quartos[t].Localidade;
-                }
+                //List<Cliente> clientesQuarto = new List<Cliente>();
 
-                LblSituacao.Text = "LIVRE";
-                LblDia.Text = "";
-                LblHorario.Text = "";
-
-                for (int u = 0; u < alugueis.Count; u++)
+                if (DgvCliente.Rows.Count != 0)
                 {
-                    if (alugueis[u].Quarto.Numero == quartos[t].Numero)
+                    for (int t = 0; t < clientes.Count; t++)
                     {
-                        LblSituacao.Text = "OCUPADO";
-                        LblDia.Text = alugueis[u].DataChegada.ToString("dd/MM/yyyy");
-                        LblHorario.Text = alugueis[u].DataChegada.ToString("HH:mm:ss");
+                        if (Convert.ToInt32(DgvCliente.Rows[0].Cells[0].Value) == clientes[t].Aluguel.Codigo)
+                        {
+                            //clientesQuarto.Add(clientes[t]);
+                        }
+                    }
+                }
+
+                if (clientes.Count == 0)
+                {
+                    AluguelNegocio aluguelNegocio = new AluguelNegocio();
+                    int retorno = Convert.ToInt32(aluguelNegocio.Inserir(Convert.ToInt32(LblNumeroQuarto.Text)));
+                    MessageBox.Show(retorno.ToString());
+                }
+
+                FrmCliente frmCliente = new FrmCliente(clientes);
+                frmCliente.ShowDialog();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Não foi possível cadastrar o Aluguel.\nDetalhes: " + ex.Message);
+            }
+        }
+        private void PbxNovaLimpeza_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int codigoQuarto;
+
+                codigoQuarto = Convert.ToInt32(LblNumeroQuarto.Text);
+
+                if (codigoQuarto == 0)
+                {
+                    MessageBox.Show("Selecione o quarto para poder fazer o cadastro da limpeza!", "Não selecionado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                else
+                {
+                    for (int t = 0; t < quartos.Count; t++)
+                    {
+                        if (quartos[t].Numero == Convert.ToInt32(LblNumeroQuarto.Text))
+                        {
+                            FrmLimpeza frmLimpeza = new FrmLimpeza(quartos[t], limpezas, 0);
+                            frmLimpeza.ShowDialog();
+
+                            InsertionSort(limpezas);
+
+                            if (limpezas.Count > 10)
+                            {
+                                limpezas.RemoveAt(10);
+                            }
+
+                            DgvLimpeza.DataSource = null;
+                            DgvLimpeza.DataSource = limpezas;
+
+                            DgvLimpeza.Update();
+                            DgvLimpeza.Refresh();
+
+                            break;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Não foi possível adicionar uma nova limpeza!", "Aviso.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        private void PbxEditaLimpeza_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                for (int t = 0; t < quartos.Count; t++)
+                {
+                    if (quartos[t].Numero == Convert.ToInt32(LblNumeroQuarto.Text))
+                    {
+                        FrmLimpeza frmLimpeza = new FrmLimpeza(quartos[t], limpezas, Convert.ToInt32(DgvLimpeza.Rows[DgvLimpeza.CurrentRow.Index].Cells[0].Value));
+                        frmLimpeza.ShowDialog();
+
+                        InsertionSort(limpezas);
+
+                        DgvLimpeza.DataSource = null;
+                        DgvLimpeza.DataSource = limpezas;
+
+                        DgvLimpeza.Update();
+                        DgvLimpeza.Refresh();
+
+                        break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Não foi possível adicionar uma nova limpeza!\nAviso:" + ex.Message, "Aviso.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        private void BtnEditarQuarto_Click(object sender, EventArgs e)
+        {
+            FrmQuarto frmCadQuarto = new FrmQuarto(quartos);
+            frmCadQuarto.ShowDialog();
+        }
+        private void PbxNovoPagamento_Click(object sender, EventArgs e)
+        {
+            FrmPagamento frmPagamento = new FrmPagamento();
+            frmPagamento.ShowDialog();
+        }
+        private void BtnQuarto_Click(object sender, EventArgs e)
+        {
+            FrmQuarto frmCadQuarto = new FrmQuarto(quartos);
+            frmCadQuarto.ShowDialog();
+
+            //InsertionSort(quartos);
+
+            DgvQuartos.DataSource = null;
+            DgvQuartos.DataSource = quartos;
+
+            DgvQuartos.Refresh();
+            DgvQuartos.Update();
+
+        }
+        private void PbxExcluiLimpeza_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Deseja excluir a limpeza selecionada?", "Exclusão de Limpeza", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                LimpezaNegocio limpezaNegocio = new LimpezaNegocio();
+                for (int t = 0; t < limpezas.Count; t++)
+                {
+                    if (Convert.ToInt32(DgvLimpeza.Rows[DgvLimpeza.CurrentRow.Index].Cells[0].Value.ToString()) == limpezas[t].Codigo)
+                    {
+                        limpezaNegocio.Excluir(limpezas[t]);
+                        limpezas.RemoveAt(t);
+
+
+                        DgvLimpeza.DataSource = null;
+                        DgvLimpeza.DataSource = limpezas;
+                        DgvLimpeza.Update();
+                        DgvLimpeza.Refresh();
+
+
+                        MessageBox.Show("Excluído com Sucesso!", "Conclusão", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
                     }
                 }
             }
         }
+        private void DgvQuartos_SelectionChanged(object sender, EventArgs e)
+        {
+            CarregaCabecalho();
+            CarregaGrids();
+        }
+
+
 
         private void CarregaCampos(int numeroQuarto, int qtdeQuarto)
         {
@@ -285,130 +316,114 @@ namespace View
             //        }
             //    }
         }
-
-        private void TxtCodigoProduto_Validating(object sender, CancelEventArgs e)
+        private void CarregaGrids()
         {
-            if (TxtCodigoProduto.Text == "")
-            {
-                Ep.SetError(TxtCodigoProduto, "Você não digitou o Código!");
-                TxtCodigoProduto.Focus();
-                return;
-            }
-            Ep.Clear();
-        }
+            //==== CARREGA LIMPEZA =====
+            DgvCliente.DataSource = null;
+            DgvLimpeza.DataSource = null;
+            DgvPagamento.DataSource = null;
 
-        private void Tempo_Tick(object sender, EventArgs e)
-        {
-            if (DateTime.Now.DayOfWeek.ToString() == "Sunday")
+            for (int t = 0; t < quartos.Count; t++)
             {
-                TxtSemana.Text = "Domingo, " + DateTime.Now.ToString();
-            }
-            else if (DateTime.Now.DayOfWeek.ToString() == "Monday")
-            {
-                TxtSemana.Text = "Segunda-Feira, " + DateTime.Now.ToString();
-            }
-            else if (DateTime.Now.DayOfWeek.ToString() == "Tuesday")
-            {
-                TxtSemana.Text = "Terça-Feira, " + DateTime.Now.ToString();
-            }
-            else if (DateTime.Now.DayOfWeek.ToString() == "Wednesday")
-            {
-                TxtSemana.Text = "Quarta-Feira, " + DateTime.Now.ToString();
-            }
-            else if (DateTime.Now.DayOfWeek.ToString() == "Thursday")
-            {
-                TxtSemana.Text = "Quinta-Feira, " + DateTime.Now.ToString();
-            }
-            else if (DateTime.Now.DayOfWeek.ToString() == "Friday")
-            {
-                TxtSemana.Text = "Sexta-Feira, " + DateTime.Now.ToString();
-            }
-            else if (DateTime.Now.DayOfWeek.ToString() == "Saturday")
-            {
-                TxtSemana.Text = "Sábado, " + DateTime.Now.ToString();
-            }
-        }
-
-        private void PbxAddCliente_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //List<Cliente> clientesQuarto = new List<Cliente>();
-
-                if (DgvCliente.Rows.Count != 0)
+                if (quartos[t].Numero == Convert.ToInt32(DgvQuartos.Rows[DgvQuartos.CurrentRow.Index].Cells[0].Value))
                 {
-                    for (int t = 0; t < clientes.Count; t++)
+                    InsertionSort(quartos[t].Limpezas);
+                    DgvLimpeza.DataSource = quartos[t].Limpezas;
+                    break;
+                }
+            }
+
+            //==== CARREGA CLIENTE E PAGAMENTO ====
+            for (int t = 0; t < alugueis.Count; t++)
+            {
+                if(alugueis[t].Quarto.Numero == Convert.ToInt32(DgvQuartos.Rows[DgvQuartos.CurrentRow.Index].Cells[0].Value))
+                {
+                    DgvCliente.DataSource = alugueis[t].Clientes;
+                    DgvPagamento.DataSource = alugueis[t].Pagamentos;
+                    //Parou aqui
+                }
+            }
+
+
+        }
+        private void CarregaLists()
+        {
+            LimpezaNegocio limpezaNegocio = new LimpezaNegocio();
+            QuartoNegocio quartoNegocio = new QuartoNegocio();
+            AluguelNegocio aluguelNegocio = new AluguelNegocio();
+            PagamentoNegocio pagamentoNegocio = new PagamentoNegocio();
+            ClienteNegocio clienteNegocio = new ClienteNegocio();
+            PedidoNegocio pedidoNegocio = new PedidoNegocio();
+            ItemPedidoNegocio itemPedidoNegocio = new ItemPedidoNegocio();
+            ProdutoNegocio produtoNegocio = new ProdutoNegocio();
+
+            quartos = quartoNegocio.Quartos();
+            limpezas = limpezaNegocio.Limpezas(quartos);
+            produtos = produtoNegocio.Produtos();
+
+            for (int t = 0; t < quartos.Count; t++)
+            {
+                quartoNegocio.AddLimpezas(quartos[t]);
+            }
+
+            alugueis = aluguelNegocio.AlugueisAberto(quartos);
+            clientes = clienteNegocio.ClientesAtivos(alugueis);
+
+            for (int t = 0; t < alugueis.Count; t++)
+            {
+                aluguelNegocio.AddClientes(alugueis[t]);
+            }
+
+            pagamentos = pagamentoNegocio.Pagamentos(alugueis);
+
+            for (int t = 0; t < alugueis.Count; t++)
+            {
+                aluguelNegocio.AddPagamentos(alugueis[t]);
+            }
+
+            pedidos = pedidoNegocio.Pedidos(alugueis);
+
+            for (int t = 0; t < alugueis.Count; t++)
+            {
+                aluguelNegocio.AddPedidos(alugueis[t]);
+            }
+
+            itemPedidos = itemPedidoNegocio.ItemPedidos(pedidos, produtos);
+
+            for (int t = 0; t < pedidos.Count; t++)
+            {
+                for (int u = 0; u < produtos.Count; u++)
+                {
+                    pedidoNegocio.AddItemPedidos(pedidos[t], produtos[u]);
+                }
+            }
+        }
+        private void CarregaCabecalho()
+        {
+            for (int t = 0; t < quartos.Count; t++)
+            {
+                if (quartos[t].Numero.ToString() == DgvQuartos.Rows[DgvQuartos.CurrentRow.Index].Cells[0].Value.ToString())
+                {
+                    LblNumeroQuarto.Text = quartos[t].Numero.ToString("000");
+                    LblValorQuarto.Text = quartos[t].ValorDiaria.ToString("C");
+                    LblLocalizacao.Text = quartos[t].Localidade;
+                }
+
+                LblSituacao.Text = "LIVRE";
+                LblDia.Text = "";
+                LblHorario.Text = "";
+
+                for (int u = 0; u < alugueis.Count; u++)
+                {
+                    if (alugueis[u].Quarto.Numero == quartos[t].Numero)
                     {
-                        if (Convert.ToInt32(DgvCliente.Rows[0].Cells[0].Value) == clientes[t].Aluguel.Codigo)
-                        {
-                            //clientesQuarto.Add(clientes[t]);
-                        }
-                    }
-                }
-
-                if (clientes.Count == 0)
-                {
-                    AluguelNegocio aluguelNegocio = new AluguelNegocio();
-                    int retorno = Convert.ToInt32(aluguelNegocio.Inserir(Convert.ToInt32(LblNumeroQuarto.Text)));
-                    MessageBox.Show(retorno.ToString());
-                }
-
-                FrmCliente frmCliente = new FrmCliente(clientes);
-                frmCliente.ShowDialog();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Não foi possível cadastrar o Aluguel.\nDetalhes: " + ex.Message);
-            }
-        }
-
-        private void PbxNovaLimpeza_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                int codigoQuarto;
-
-                codigoQuarto = Convert.ToInt32(LblNumeroQuarto.Text);
-
-                if (codigoQuarto == 0)
-                {
-                    MessageBox.Show("Selecione o quarto para poder fazer o cadastro da limpeza!", "Não selecionado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-                else
-                {
-                    for (int t = 0; t < quartos.Count; t++)
-                    {
-                        if (quartos[t].Numero == Convert.ToInt32(LblNumeroQuarto.Text))
-                        {
-                            FrmLimpeza frmLimpeza = new FrmLimpeza(quartos[t], limpezas, 0);
-                            frmLimpeza.ShowDialog();
-
-                            InsertionSort(limpezas);
-
-                            if (limpezas.Count > 10)
-                            {
-                                limpezas.RemoveAt(10);
-                            }
-
-                            dgvLimpeza.DataSource = null;
-                            dgvLimpeza.DataSource = limpezas;
-
-                            dgvLimpeza.Update();
-                            dgvLimpeza.Refresh();
-
-                            break;
-                        }
+                        LblSituacao.Text = "OCUPADO";
+                        LblDia.Text = alugueis[u].DataChegada.ToString("dd/MM/yyyy");
+                        LblHorario.Text = alugueis[u].DataChegada.ToString("HH:mm:ss");
                     }
                 }
             }
-            catch (Exception)
-            {
-                MessageBox.Show("Não foi possível adicionar uma nova limpeza!", "Aviso.", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
         }
-
         private void InsertionSort(List<Limpeza> limpezas)
         {
             int i, j;
@@ -430,95 +445,67 @@ namespace View
             }
         }
 
-        private void PbxEditaLimpeza_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                for (int t = 0; t < quartos.Count; t++)
-                {
-                    if (quartos[t].Numero == Convert.ToInt32(LblNumeroQuarto.Text))
-                    {
-                        FrmLimpeza frmLimpeza = new FrmLimpeza(quartos[t], limpezas, Convert.ToInt32(dgvLimpeza.Rows[dgvLimpeza.CurrentRow.Index].Cells[0].Value));
-                        frmLimpeza.ShowDialog();
 
-                        dgvLimpeza.DataSource = null;
-                        dgvLimpeza.DataSource = limpezas;
-
-                        dgvLimpeza.Update();
-                        dgvLimpeza.Refresh();
-
-                        break;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Não foi possível adicionar uma nova limpeza!\nAviso:" + ex.Message, "Aviso.", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void BtnEditarQuarto_Click(object sender, EventArgs e)
-        {
-            FrmQuarto frmCadQuarto = new FrmQuarto(quartos);
-            frmCadQuarto.ShowDialog();
-        }
-
-        private void PbxNovoPagamento_Click(object sender, EventArgs e)
-        {
-            FrmPagamento frmPagamento = new FrmPagamento();
-            frmPagamento.ShowDialog();
-        }
-
-        private void BtnQuarto_Click(object sender, EventArgs e)
-        {
-            FrmQuarto frmCadQuarto = new FrmQuarto(quartos);
-            frmCadQuarto.ShowDialog();
-
-            //InsertionSort(quartos);
-
-            DgvQuartos.DataSource = null;
-            DgvQuartos.DataSource = quartos;
-
-            DgvQuartos.Refresh();
-            DgvQuartos.Update();
-
-        }
-
-        private void DgvQuartos_DoubleClick(object sender, EventArgs e)
-        {
-            CarregaCabecalho();
-            CarregaLimpezas();
-        }
-
-        private void PbxExcluiLimpeza_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Deseja excluir a limpeza selecionada?", "Exclusão de Limpeza", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                LimpezaNegocio limpezaNegocio = new LimpezaNegocio();
-                for (int t = 0; t < limpezas.Count; t++)
-                {
-                    if (Convert.ToInt32(dgvLimpeza.Rows[dgvLimpeza.CurrentRow.Index].Cells[0].Value.ToString()) == limpezas[t].Codigo)
-                    {
-                        limpezaNegocio.Excluir(limpezas[t]);
-                        limpezas.RemoveAt(t);
-                    
-
-                        dgvLimpeza.DataSource = null;
-                        dgvLimpeza.DataSource = limpezas;
-                        dgvLimpeza.Update();
-                        dgvLimpeza.Refresh();
-
-
-                        MessageBox.Show("Excluído com Sucesso!", "Conclusão", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        break;
-                    }
-                }
-            }
-        }
     }
 }
 
 //SELECT codigo, cod_quarto, datalimpeza FROM limpeza WHERE cod_quarto = 30 ORDER BY datalimpeza DESC LIMIT 10
+
+
+
+
+
+
+
+//}
+
+//private void CarregaListAlugueis()
+//{
+//    AluguelNegocio aluguelNegocio = new AluguelNegocio();
+
+//    alugueis = aluguelNegocio.Alugueis(quartos);
+
+//    for (int t = 0; t < alugueis.Count; t++)
+//    {
+//        aluguelNegocio.AddClientes(alugueis[t]);
+//        aluguelNegocio.AddPagamentos(alugueis[t]);
+//        aluguelNegocio.AddPedidos(alugueis[t]);
+//    }
+
+//}
+//private void CarregaListClientes()
+//{
+//    ClienteNegocio clienteNegocio = new ClienteNegocio();
+//    clientes = clienteNegocio.Clientes(alugueis);
+//}
+//private void CarregaListPagamentos()
+//{
+//    PagamentoNegocio pagamentoNegocio = new PagamentoNegocio();
+//    pagamentos = pagamentoNegocio.Pagamentos(alugueis);
+//}
+//private void CarregaListPedidos()
+//{
+//    PedidoNegocio pedidoNegocio = new PedidoNegocio();
+//    pedidos = pedidoNegocio.Pedidos(alugueis);
+
+//    for (int t = 0; t < pedidos.Count; t++)
+//    {
+//        pedidoNegocio.AddItemPedidos(pedidos[t], produtos);
+//    }
+//}
+//private void CarregaListProdutos()
+//{
+//    ProdutoNegocio produtoNegocio = new ProdutoNegocio();
+//    produtos = produtoNegocio.Produtos();
+//}
+
+
+
+
+
+
+
+
 
 //public void VerificarDados()
 //{
@@ -633,4 +620,43 @@ namespace View
 //pedidos[3].ItemPedidos.Add(itemPedidos[5]);
 //pedidos[4].ItemPedidos.Add(itemPedidos[6]);
 
-//}
+      //private void DesativaMarcacao()
+        //{
+        //    int index;
+        //    if (dgvLimpeza.SelectedRows.Count > 0)
+        //    {
+        //        index = dgvLimpeza.SelectedRows[0].Index;
+        //        if (index >= 0)
+        //        {
+        //            dgvLimpeza.Rows[index].Selected = false;
+        //        }
+        //    }
+
+        //    if (DgvPagamento.SelectedRows.Count > 0)
+        //    {
+        //        index = DgvPagamento.SelectedRows[0].Index;
+        //        if (index >= 0)
+        //        {
+        //            DgvPagamento.Rows[index].Selected = false;
+        //        }
+        //    }
+
+        //    if (DgvPedido.SelectedRows.Count > 0)
+        //    {
+        //        index = DgvPedido.SelectedRows[0].Index;
+        //        if (index >= 0)
+        //        {
+        //            DgvPedido.Rows[index].Selected = false;
+        //        }
+        //    }
+
+        //    if (DgvCliente.SelectedRows.Count > 0)
+        //    {
+        //        index = DgvCliente.SelectedRows[0].Index;
+        //        if (index >= 0)
+        //        {
+        //            DgvCliente.Rows[index].Selected = false;
+        //        }
+        //    }
+
+        //}

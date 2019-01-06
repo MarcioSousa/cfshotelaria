@@ -65,20 +65,18 @@ namespace Negocio
             try
             {
                 List<Pedido> pedidos = new List<Pedido>();
-
-                DataTable dataTablePedidos = acessoMySql.ExecutarConsulta(CommandType.StoredProcedure, "usp_Pedidos", false);
-
-                foreach (DataRow linha in dataTablePedidos.Rows)
+                for (int t = 0; t < alugueis.Count; t++)
                 {
-                    for (int t = 0; t < alugueis.Count; t++)
+                    acessoMySql.LimparParametros();
+                    DataTable dataTablePedidos = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_aluguel, datapedido FROM pedido WHERE cod_aluguel = " + alugueis[t].Codigo, false);
+
+                    foreach (DataRow linha in dataTablePedidos.Rows)
                     {
-                        if (Convert.ToInt32(linha["cod_aluguel"]) == alugueis[t].Codigo)
-                        {
-                            Pedido pedido = new Pedido(Convert.ToInt32(linha["codigo"]), Convert.ToDateTime(linha["dataPedido"]), alugueis[t]);
-                            pedidos.Add(pedido);
-                        }
+                        Pedido pedido = new Pedido(Convert.ToInt32(linha["codigo"]), Convert.ToDateTime(linha["dataPedido"]), alugueis[t]);
+                        pedidos.Add(pedido);
                     }
                 }
+
                 return pedidos;
             }
             catch (Exception ex)
@@ -87,24 +85,18 @@ namespace Negocio
             }
         }
 
-        public void AddItemPedidos(Pedido pedido, List<Produto> produtos)
+        public void AddItemPedidos(Pedido pedido, Produto produto)
         {
             try
             {
                 acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aCodPedido", pedido.Codigo);
-                DataTable dataTablePedidoItensPedidos = acessoMySql.ExecutarConsulta(CommandType.StoredProcedure, "usp_ItensPedidoAluguel", false);
+                DataTable dataTablePedidoItensPedidos = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_pedido, cod_produto, qtde, valor FROM itemPedido WHERE cod_pedido = " + pedido.Codigo + " AND cod_produto = " + produto.Codigo, false);
 
                 foreach (DataRow linha in dataTablePedidoItensPedidos.Rows)
                 {
-                    for (int t = 0; t < produtos.Count; t++)
-                    {
-                        if (produtos[t].Codigo == Convert.ToInt32(linha["cod_produto"]))
-                        {
-                            ItemPedido itemPedido = new ItemPedido(Convert.ToInt32(linha["codigo"]), Convert.ToInt32(linha["qtde"]), Convert.ToDouble(linha["valor"]), produtos[t], pedido);
-                            pedido.ItemPedidos.Add(itemPedido);
-                        }
-                    }
+                    ItemPedido itemPedido = new ItemPedido(Convert.ToInt32(linha["codigo"]), Convert.ToInt32(linha["qtde"]), Convert.ToDouble(linha["valor"]), produto, pedido);
+                    pedido.ItemPedidos.Add(itemPedido);
+                    produto.ItemPedidos.Add(itemPedido);
                 }
             }
             catch (Exception ex)
@@ -112,5 +104,26 @@ namespace Negocio
                 throw new Exception("Não foi possível carregar os ItensPedidos dos Pedidos.\nDetalhes: " + ex.Message);
             }
         }
+
+        //public void AddLimpezas(Quarto quarto)
+        //{
+        //    try
+        //    {
+        //        acessoMySql.LimparParametros();
+        //        acessoMySql.AdicionarParametros("aCodQuarto", quarto.Numero);
+        //        DataTable dataTableLimpezasQuarto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_quarto, datalimpeza FROM limpeza WHERE cod_quarto = " + quarto.Numero, false);
+
+        //        foreach (DataRow linha in dataTableLimpezasQuarto.Rows)
+        //        {
+        //            Limpeza limpeza = new Limpeza(Convert.ToInt32(linha["codigo"]), Convert.ToDateTime(linha["datalimpeza"]), quarto);
+        //            quarto.Limpezas.Add(limpeza);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception("Não foi possível carregar os Quartos.\nDetalhes: " + ex.Message);
+        //    }
+
+        //}
     }
 }

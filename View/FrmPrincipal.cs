@@ -227,5 +227,10 @@ namespace View
             aluguel.ShowDialog();
         }
 
+        private void PicEstoque_Click(object sender, EventArgs e)
+        {
+            FrmProduto produto = new FrmProduto();
+            produto.ShowDialog();
+        }
     }
 }

@@ -41,9 +41,12 @@
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
-            this.picQuarto = new System.Windows.Forms.PictureBox();
+            this.PicQuarto = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.picQuarto)).BeginInit();
+            this.PicEstoque = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.PicQuarto)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicEstoque)).BeginInit();
             this.SuspendLayout();
             // 
             // btnProduto
@@ -200,15 +203,15 @@
             this.textBox8.Size = new System.Drawing.Size(12, 41);
             this.textBox8.TabIndex = 17;
             // 
-            // picQuarto
+            // PicQuarto
             // 
-            this.picQuarto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picQuarto.Location = new System.Drawing.Point(77, 24);
-            this.picQuarto.Name = "picQuarto";
-            this.picQuarto.Size = new System.Drawing.Size(61, 50);
-            this.picQuarto.TabIndex = 18;
-            this.picQuarto.TabStop = false;
-            this.picQuarto.Click += new System.EventHandler(this.picQuarto_Click);
+            this.PicQuarto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PicQuarto.Location = new System.Drawing.Point(77, 24);
+            this.PicQuarto.Name = "PicQuarto";
+            this.PicQuarto.Size = new System.Drawing.Size(61, 50);
+            this.PicQuarto.TabIndex = 18;
+            this.PicQuarto.TabStop = false;
+            this.PicQuarto.Click += new System.EventHandler(this.picQuarto_Click);
             // 
             // label1
             // 
@@ -219,13 +222,34 @@
             this.label1.TabIndex = 19;
             this.label1.Text = "ImagemQuarto";
             // 
+            // PicEstoque
+            // 
+            this.PicEstoque.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PicEstoque.Location = new System.Drawing.Point(238, 24);
+            this.PicEstoque.Name = "PicEstoque";
+            this.PicEstoque.Size = new System.Drawing.Size(61, 50);
+            this.PicEstoque.TabIndex = 20;
+            this.PicEstoque.TabStop = false;
+            this.PicEstoque.Click += new System.EventHandler(this.PicEstoque_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(235, 77);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(83, 13);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "ImagemEstoque";
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(570, 426);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.PicEstoque);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.picQuarto);
+            this.Controls.Add(this.PicQuarto);
             this.Controls.Add(this.textBox8);
             this.Controls.Add(this.textBox7);
             this.Controls.Add(this.textBox6);
@@ -251,7 +275,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Principal";
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.picQuarto)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicQuarto)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicEstoque)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -275,7 +300,9 @@
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.PictureBox picQuarto;
+        private System.Windows.Forms.PictureBox PicQuarto;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox PicEstoque;
+        private System.Windows.Forms.Label label2;
     }
 }

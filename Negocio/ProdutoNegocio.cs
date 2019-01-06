@@ -18,6 +18,7 @@ namespace Negocio
             try
             {
                 acessoMySql.LimparParametros();
+                acessoMySql.AdicionarParametros("aCodigo", produto.Codigo);
                 acessoMySql.AdicionarParametros("aNome", produto.Nome);
                 acessoMySql.AdicionarParametros("aValor", produto.Valor);
                 acessoMySql.AdicionarParametros("aQtdeAtual", produto.Qtdeatual);
@@ -68,12 +69,19 @@ namespace Negocio
             {
                 List<Produto> produtos = new List<Produto>(); 
 
-                DataTable dataTableProduto = acessoMySql.ExecutarConsulta(CommandType.StoredProcedure, "usp_Produtos", false);
+                DataTable dataTableProduto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, nome, valor, qtdeAtual FROM produto ORDER BY codigo", false);
 
                 foreach (DataRow linha in dataTableProduto.Rows)
                 {
                     Produto produto = new Produto(Convert.ToInt32(linha["codigo"]), linha["nome"].ToString(), Convert.ToDouble(linha["valor"]));
-
+                    if(linha["qtdeAtual"] is null)
+                    {
+                        produto.Qtdeatual = null;
+                    }
+                    else
+                    {
+                        produto.Qtdeatual = Convert.ToInt32(linha["qtdeAtual"]);
+                    }
                     produtos.Add(produto);
                 }
                 return produtos;
@@ -81,6 +89,25 @@ namespace Negocio
             catch (Exception ex)
             {
                 throw new Exception("Não foi possível carregar os Produtos.\nDetalhes: " + ex.Message);
+            }
+        }
+
+        public void AddItemProduto(Pedido pedido, Produto produto)
+        {
+            try
+            {
+                acessoMySql.LimparParametros();
+                DataTable dataTablePedidoItensPedidos = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_pedido, cod_produto, qtde, valor FROM itemPedido WHERE cod_pedido = " + pedido.Codigo, false);
+
+                foreach (DataRow linha in dataTablePedidoItensPedidos.Rows)
+                {
+                    ItemPedido itemPedido = new ItemPedido(Convert.ToInt32(linha["codigo"]), Convert.ToInt32(linha["qtde"]), Convert.ToDouble(linha["valor"]), produto, pedido);
+                    pedido.ItemPedidos.Add(itemPedido);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Não foi possível carregar os ItensPedidos dos Pedidos.\nDetalhes: " + ex.Message);
             }
         }
     }

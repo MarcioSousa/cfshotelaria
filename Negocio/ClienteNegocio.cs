@@ -66,25 +66,23 @@ namespace Negocio
             }
         }
 
-        public List<Cliente> Clientes(List<Aluguel> alugueis)
+        public List<Cliente> ClientesAtivos(List<Aluguel> alugueis)
         {
             try
             {
                 List<Cliente> clientes = new List<Cliente>();
-
-                DataTable dataTableClientesAluguel = acessoMySql.ExecutarConsulta(CommandType.StoredProcedure, "usp_Clientes", false);
-
-                foreach (DataRow linha in dataTableClientesAluguel.Rows)
+                for (int t = 0; t < alugueis.Count; t++)
                 {
-                    for (int t = 0; t < alugueis.Count; t++)
+                    acessoMySql.LimparParametros();
+                    DataTable dataTableClientesAluguel = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_aluguel, nome, rg, cpf, contato FROM cliente WHERE cod_aluguel = " + alugueis[t].Codigo, false);
+
+                    foreach (DataRow linha in dataTableClientesAluguel.Rows)
                     {
-                        if (Convert.ToInt32(linha["cod_aluguel"]) == alugueis[t].Codigo)
-                        {
-                            Cliente cliente = new Cliente(Convert.ToInt32(linha["codigo"]), linha["nome"].ToString(), linha["rg"].ToString(), linha["cpf"].ToString(), linha["contato"].ToString(), alugueis[t]);
-                            clientes.Add(cliente);
-                        }
+                        Cliente cliente = new Cliente(Convert.ToInt32(linha["codigo"]), linha["nome"].ToString(), linha["rg"].ToString(), linha["cpf"].ToString(), linha["contato"].ToString(), alugueis[t]);
+                        clientes.Add(cliente);
                     }
                 }
+                
                 return clientes;
             }
             catch (Exception ex)

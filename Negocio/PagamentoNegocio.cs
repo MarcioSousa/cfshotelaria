@@ -70,20 +70,18 @@ namespace Negocio
             try
             {
                 List<Pagamento> pagamentos = new List<Pagamento>();
-
-                DataTable dataTablePagamentos = acessoMySql.ExecutarConsulta(CommandType.StoredProcedure, "usp_Pagamentos", false);
-
-                foreach (DataRow linha in dataTablePagamentos.Rows)
+                for (int t = 0; t < alugueis.Count; t++)
                 {
-                    for (int t = 0; t < alugueis.Count; t++)
+                    acessoMySql.LimparParametros();
+                    DataTable dataTablePagamentos = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_aluguel, tipo, dataPagamento, valor FROM pagamento WHERE cod_aluguel = " + alugueis[t].Codigo, false);
+
+                    foreach (DataRow linha in dataTablePagamentos.Rows)
                     {
-                        if (Convert.ToInt32(linha["cod_aluguel"]) == alugueis[t].Codigo)
-                        {
-                            Pagamento pagamento = new Pagamento(Convert.ToInt32(linha["codigo"]), linha["tipo"].ToString(), Convert.ToDateTime(linha["dataPagamento"]), Convert.ToDouble(linha["valor"]), alugueis[t]);
-                            pagamentos.Add(pagamento);
-                        }
+                        Pagamento pagamento = new Pagamento(Convert.ToInt32(linha["codigo"]), linha["tipo"].ToString(), Convert.ToDateTime(linha["dataPagamento"]), Convert.ToDouble(linha["valor"]), alugueis[t]);
+                        pagamentos.Add(pagamento);
                     }
                 }
+
                 return pagamentos;
             }
             catch (Exception ex)

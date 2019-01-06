@@ -62,25 +62,28 @@ namespace Negocio
             }
         }
 
-        public List<Aluguel> Alugueis(List<Quarto> quartos)
+        public List<Aluguel> AlugueisAberto(List<Quarto> quartos)
         {
             try
             {
                 List<Aluguel> alugueis = new List<Aluguel>();
 
-                DataTable dataTableAluguelQuarto = acessoMySql.ExecutarConsulta(CommandType.StoredProcedure, "usp_AluguelQuarto", false);
+                acessoMySql.LimparParametros();
+                DataTable dataTableAluguelQuarto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_quarto, valor, dataChegada, dataSaida FROM aluguel WHERE dataSaida IS NULL ORDER BY cod_quarto", false);
 
                 foreach (DataRow linha in dataTableAluguelQuarto.Rows)
                 {
                     for (int t = 0; t < quartos.Count; t++)
                     {
-                        if (Convert.ToInt32(linha["cod_quarto"]) == quartos[t].Numero)
+                        if (quartos[t].Numero == Convert.ToInt32(linha["cod_quarto"]))
                         {
                             Aluguel aluguel = new Aluguel(Convert.ToInt32(linha["codigo"]), Convert.ToDouble(linha["valor"]), Convert.ToDateTime(linha["dataChegada"]), quartos[t]);
                             alugueis.Add(aluguel);
+                            break;
                         }
                     }
                 }
+
                 return alugueis;
             }
             catch (Exception ex)
@@ -94,8 +97,7 @@ namespace Negocio
             try
             {
                 acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aCodAluguel", aluguel.Codigo);
-                DataTable dataTableAluguelClientes = acessoMySql.ExecutarConsulta(CommandType.StoredProcedure, "usp_AluguelClientes", false);
+                DataTable dataTableAluguelClientes = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_aluguel, contato, cpf, rg, nome FROM cliente WHERE cod_aluguel = " + aluguel.Codigo, false);
 
                 foreach (DataRow linha in dataTableAluguelClientes.Rows)
                 {
@@ -114,8 +116,7 @@ namespace Negocio
             try
             {
                 acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aCodAluguel", aluguel.Codigo);
-                DataTable dataTableAluguelPagamentos = acessoMySql.ExecutarConsulta(CommandType.StoredProcedure, "usp_AluguelPagamentos", false);
+                DataTable dataTableAluguelPagamentos = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_aluguel, dataPagamento, tipo, valor FROM pagamento WHERE cod_aluguel = " + aluguel.Codigo, false);
 
                 foreach (DataRow linha in dataTableAluguelPagamentos.Rows)
                 {
@@ -134,12 +135,10 @@ namespace Negocio
             try
             {
                 acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aCodAluguel", aluguel.Codigo);
-                DataTable dataTableAluguelPedidos = acessoMySql.ExecutarConsulta(CommandType.StoredProcedure, "usp_AluguelPedidos", false);
+                DataTable dataTableAluguelPedidos = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_aluguel, datapedido FROM pedido WHERE cod_aluguel = " + aluguel.Codigo, false);
 
                 foreach (DataRow linha in dataTableAluguelPedidos.Rows)
                 {
-
                     Pedido pedido = new Pedido(Convert.ToInt32(linha["codigo"]), Convert.ToDateTime(linha["dataPedido"]), aluguel);
                     aluguel.Pedidos.Add(pedido);
                 }
