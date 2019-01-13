@@ -20,7 +20,6 @@ namespace View
         List<Cliente> clientes = new List<Cliente>();
         List<Pagamento> pagamentos = new List<Pagamento>();
         List<Pedido> pedidos = new List<Pedido>();
-        List<ItemPedido> itemPedidos = new List<ItemPedido>();
         List<Produto> produtos = new List<Produto>();
 
         public FrmAluguel()
@@ -30,6 +29,7 @@ namespace View
             DgvLimpeza.AutoGenerateColumns = false;
             DgvCliente.AutoGenerateColumns = false;
             DgvPagamento.AutoGenerateColumns = false;
+            DgvPedido.AutoGenerateColumns = false;
         }
         private void FrmQuarto_Load(object sender, EventArgs e)
         {
@@ -242,10 +242,8 @@ namespace View
         }
         private void DgvQuartos_SelectionChanged(object sender, EventArgs e)
         {
-            CarregaCabecalho();
             CarregaGrids();
         }
-
 
 
         private void CarregaCampos(int numeroQuarto, int qtdeQuarto)
@@ -322,6 +320,7 @@ namespace View
             DgvCliente.DataSource = null;
             DgvLimpeza.DataSource = null;
             DgvPagamento.DataSource = null;
+            DgvPedido.DataSource = null;
 
             for (int t = 0; t < quartos.Count; t++)
             {
@@ -334,15 +333,25 @@ namespace View
             }
 
             //==== CARREGA CLIENTE E PAGAMENTO ====
-            for (int t = 0; t < alugueis.Count; t++)
-            {
-                if(alugueis[t].Quarto.Numero == Convert.ToInt32(DgvQuartos.Rows[DgvQuartos.CurrentRow.Index].Cells[0].Value))
-                {
-                    DgvCliente.DataSource = alugueis[t].Clientes;
-                    DgvPagamento.DataSource = alugueis[t].Pagamentos;
-                    //Parou aqui
-                }
-            }
+            //for (int t = 0; t < alugueis.Count; t++)
+            //{
+            //    if (alugueis[t].Quarto.Numero == Convert.ToInt32(DgvQuartos.Rows[DgvQuartos.CurrentRow.Index].Cells[0].Value))
+            //    {
+            //        DgvCliente.DataSource = alugueis[t].Clientes;
+            //        DgvPagamento.DataSource = alugueis[t].Pagamentos;
+            //        for (int u = 0; u < alugueis[t].Pedidos.Count ; u++)
+            //        {
+            //            DgvPedido.DataSource = alugueis[t].Pedidos[u].ItemPedidos;
+            //        }
+
+            //        CarregaCabecalho(quartos[t]);
+            //        break;
+            //    }
+            //    else
+            //    {
+            //        LimpaCabecalho();
+            //    }
+            //}
 
 
         }
@@ -354,7 +363,6 @@ namespace View
             PagamentoNegocio pagamentoNegocio = new PagamentoNegocio();
             ClienteNegocio clienteNegocio = new ClienteNegocio();
             PedidoNegocio pedidoNegocio = new PedidoNegocio();
-            ItemPedidoNegocio itemPedidoNegocio = new ItemPedidoNegocio();
             ProdutoNegocio produtoNegocio = new ProdutoNegocio();
 
             quartos = quartoNegocio.Quartos();
@@ -379,26 +387,28 @@ namespace View
             for (int t = 0; t < alugueis.Count; t++)
             {
                 aluguelNegocio.AddPagamentos(alugueis[t]);
+                
             }
 
-            pedidos = pedidoNegocio.Pedidos(alugueis);
-
-            for (int t = 0; t < alugueis.Count; t++)
-            {
-                aluguelNegocio.AddPedidos(alugueis[t]);
-            }
-
-            itemPedidos = itemPedidoNegocio.ItemPedidos(pedidos, produtos);
+            pedidos = pedidoNegocio.Pedidos(alugueis, produtos);
 
             for (int t = 0; t < pedidos.Count; t++)
             {
-                for (int u = 0; u < produtos.Count; u++)
+                for (int a = 0; a < alugueis.Count; a++)
                 {
-                    pedidoNegocio.AddItemPedidos(pedidos[t], produtos[u]);
+                    for (int p = 0; p < produtos.Count; p++)
+                    {
+                        if ((pedidos[t].Produto.Codigo == produtos[p].Codigo) && (pedidos[t].Aluguel.Codigo == alugueis[a].Codigo))
+                        {
+                            aluguelNegocio.AddPedidos(alugueis[a], produtos[p], pedidos[t]);
+                        }
+                    }
                 }
             }
+
         }
-        private void CarregaCabecalho()
+
+        private void CarregaCabecalho(Quarto quarto)
         {
             for (int t = 0; t < quartos.Count; t++)
             {
@@ -409,10 +419,6 @@ namespace View
                     LblLocalizacao.Text = quartos[t].Localidade;
                 }
 
-                LblSituacao.Text = "LIVRE";
-                LblDia.Text = "";
-                LblHorario.Text = "";
-
                 for (int u = 0; u < alugueis.Count; u++)
                 {
                     if (alugueis[u].Quarto.Numero == quartos[t].Numero)
@@ -420,10 +426,19 @@ namespace View
                         LblSituacao.Text = "OCUPADO";
                         LblDia.Text = alugueis[u].DataChegada.ToString("dd/MM/yyyy");
                         LblHorario.Text = alugueis[u].DataChegada.ToString("HH:mm:ss");
+                        break;
                     }
                 }
             }
         }
+
+        private void LimpaCabecalho()
+        {
+            LblSituacao.Text = "LIVRE";
+            LblDia.Text = "";
+            LblHorario.Text = "";
+        }
+
         private void InsertionSort(List<Limpeza> limpezas)
         {
             int i, j;
@@ -445,7 +460,10 @@ namespace View
             }
         }
 
+        private void DgvPedido_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
+        }
     }
 }
 

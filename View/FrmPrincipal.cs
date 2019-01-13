@@ -19,7 +19,6 @@ namespace View
         Cliente[] clientes = new Cliente[6];
         Pagamento[] pagamentos = new Pagamento[5];
         Pedido[] pedidos = new Pedido[5];
-        ItemPedido[] itemPedidos = new ItemPedido[7];
         Produto[] produtos = new Produto[5];
         Entrada[] entradas = new Entrada[5];
 
@@ -119,11 +118,11 @@ namespace View
             aluguels[1].Pagamentos.Add(pagamentos[3]);
             aluguels[2].Pagamentos.Add(pagamentos[4]);
 
-            pedidos[0] = new Pedido(1, Convert.ToDateTime("16/09/2018 20:00"), aluguels[0]);
-            pedidos[1] = new Pedido(2, Convert.ToDateTime("16/09/2018 22:00"), aluguels[0]);
-            pedidos[2] = new Pedido(3, Convert.ToDateTime("19/09/2018 23:00"), aluguels[1]);
-            pedidos[3] = new Pedido(4, Convert.ToDateTime("13/08/2018 22:00"), aluguels[3]);
-            pedidos[4] = new Pedido(5, Convert.ToDateTime("15/09/2018 20:00"), aluguels[2]);
+            //pedidos[0] = new Pedido(1, Convert.ToDateTime("16/09/2018 20:00"), aluguels[0]);
+            //pedidos[1] = new Pedido(2, Convert.ToDateTime("16/09/2018 22:00"), aluguels[0]);
+            //pedidos[2] = new Pedido(3, Convert.ToDateTime("19/09/2018 23:00"), aluguels[1]);
+            //pedidos[3] = new Pedido(4, Convert.ToDateTime("13/08/2018 22:00"), aluguels[3]);
+            //pedidos[4] = new Pedido(5, Convert.ToDateTime("15/09/2018 20:00"), aluguels[2]);
 
             aluguels[0].Pedidos.Add(pedidos[0]);
             aluguels[0].Pedidos.Add(pedidos[1]);
@@ -131,29 +130,29 @@ namespace View
             aluguels[2].Pedidos.Add(pedidos[4]);
             aluguels[3].Pedidos.Add(pedidos[3]);
 
-            itemPedidos[0] = new ItemPedido(1, 2, 6.00, produtos[0], pedidos[0]);
-            itemPedidos[1] = new ItemPedido(2, 1, 6.00, produtos[0], pedidos[0]);
-            itemPedidos[2] = new ItemPedido(3, 1, 5.50, produtos[1], pedidos[0]);
-            itemPedidos[3] = new ItemPedido(4, 1, 13.00, produtos[2], pedidos[1]);
-            itemPedidos[4] = new ItemPedido(5, 3, 15.00, produtos[1], pedidos[2]);
-            itemPedidos[5] = new ItemPedido(6, 1, 22.00, produtos[3], pedidos[3]);
-            itemPedidos[6] = new ItemPedido(7, 1, 15.00, produtos[4], pedidos[4]);
+            //itemPedidos[0] = new ItemPedido(1, 2, 6.00, produtos[0], pedidos[0]);
+            //itemPedidos[1] = new ItemPedido(2, 1, 6.00, produtos[0], pedidos[0]);
+            //itemPedidos[2] = new ItemPedido(3, 1, 5.50, produtos[1], pedidos[0]);
+            //itemPedidos[3] = new ItemPedido(4, 1, 13.00, produtos[2], pedidos[1]);
+            //itemPedidos[4] = new ItemPedido(5, 3, 15.00, produtos[1], pedidos[2]);
+            //itemPedidos[5] = new ItemPedido(6, 1, 22.00, produtos[3], pedidos[3]);
+            //itemPedidos[6] = new ItemPedido(7, 1, 15.00, produtos[4], pedidos[4]);
 
-            produtos[0].ItemPedidos.Add(itemPedidos[0]);
-            produtos[0].ItemPedidos.Add(itemPedidos[1]);
-            produtos[1].ItemPedidos.Add(itemPedidos[2]);
-            produtos[1].ItemPedidos.Add(itemPedidos[4]);
-            produtos[2].ItemPedidos.Add(itemPedidos[3]);
-            produtos[3].ItemPedidos.Add(itemPedidos[5]);
-            produtos[4].ItemPedidos.Add(itemPedidos[6]);
+            //produtos[0].ItemPedidos.Add(itemPedidos[0]);
+            //produtos[0].ItemPedidos.Add(itemPedidos[1]);
+            //produtos[1].ItemPedidos.Add(itemPedidos[2]);
+            //produtos[1].ItemPedidos.Add(itemPedidos[4]);
+            //produtos[2].ItemPedidos.Add(itemPedidos[3]);
+            //produtos[3].ItemPedidos.Add(itemPedidos[5]);
+            //produtos[4].ItemPedidos.Add(itemPedidos[6]);
 
-            pedidos[0].ItemPedidos.Add(itemPedidos[0]);
-            pedidos[0].ItemPedidos.Add(itemPedidos[1]);
-            pedidos[0].ItemPedidos.Add(itemPedidos[2]);
-            pedidos[1].ItemPedidos.Add(itemPedidos[3]);
-            pedidos[2].ItemPedidos.Add(itemPedidos[4]);
-            pedidos[3].ItemPedidos.Add(itemPedidos[5]);
-            pedidos[4].ItemPedidos.Add(itemPedidos[6]);
+            //pedidos[0].ItemPedidos.Add(itemPedidos[0]);
+            //pedidos[0].ItemPedidos.Add(itemPedidos[1]);
+            //pedidos[0].ItemPedidos.Add(itemPedidos[2]);
+            //pedidos[1].ItemPedidos.Add(itemPedidos[3]);
+            //pedidos[2].ItemPedidos.Add(itemPedidos[4]);
+            //pedidos[3].ItemPedidos.Add(itemPedidos[5]);
+            //pedidos[4].ItemPedidos.Add(itemPedidos[6]);
 
         }
 
@@ -211,13 +210,6 @@ namespace View
             for (int t = 0; t < pedidos.Count(); t++)
             {
                 MessageBox.Show(pedidos[t].ToString());
-            }
-        }
-        private void btnItemPedido_Click(object sender, EventArgs e)
-        {
-            for(int t = 0; t < itemPedidos.Count(); t++)
-            {
-                MessageBox.Show(itemPedidos[t].ToString());
             }
         }
 

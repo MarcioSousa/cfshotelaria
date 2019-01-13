@@ -31,7 +31,6 @@
             this.btnPagamento = new System.Windows.Forms.Button();
             this.btnEntrada = new System.Windows.Forms.Button();
             this.btnPedido = new System.Windows.Forms.Button();
-            this.btnItemPedido = new System.Windows.Forms.Button();
             this.btnCliente = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -39,7 +38,6 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.PicQuarto = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -51,7 +49,7 @@
             // 
             // btnProduto
             // 
-            this.btnProduto.Location = new System.Drawing.Point(68, 359);
+            this.btnProduto.Location = new System.Drawing.Point(68, 283);
             this.btnProduto.Name = "btnProduto";
             this.btnProduto.Size = new System.Drawing.Size(75, 23);
             this.btnProduto.TabIndex = 1;
@@ -101,7 +99,7 @@
             // 
             // btnEntrada
             // 
-            this.btnEntrada.Location = new System.Drawing.Point(236, 359);
+            this.btnEntrada.Location = new System.Drawing.Point(63, 359);
             this.btnEntrada.Name = "btnEntrada";
             this.btnEntrada.Size = new System.Drawing.Size(75, 23);
             this.btnEntrada.TabIndex = 6;
@@ -118,16 +116,6 @@
             this.btnPedido.Text = "Pedido";
             this.btnPedido.UseVisualStyleBackColor = true;
             this.btnPedido.Click += new System.EventHandler(this.btnPedido_Click);
-            // 
-            // btnItemPedido
-            // 
-            this.btnItemPedido.Location = new System.Drawing.Point(68, 283);
-            this.btnItemPedido.Name = "btnItemPedido";
-            this.btnItemPedido.Size = new System.Drawing.Size(75, 23);
-            this.btnItemPedido.TabIndex = 8;
-            this.btnItemPedido.Text = "ItemPedido";
-            this.btnItemPedido.UseVisualStyleBackColor = true;
-            this.btnItemPedido.Click += new System.EventHandler(this.btnItemPedido_Click);
             // 
             // btnCliente
             // 
@@ -187,14 +175,6 @@
             this.textBox6.Size = new System.Drawing.Size(81, 10);
             this.textBox6.TabIndex = 15;
             // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(149, 365);
-            this.textBox7.Multiline = true;
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(81, 10);
-            this.textBox7.TabIndex = 16;
-            // 
             // textBox8
             // 
             this.textBox8.Location = new System.Drawing.Point(100, 312);
@@ -251,7 +231,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.PicQuarto);
             this.Controls.Add(this.textBox8);
-            this.Controls.Add(this.textBox7);
             this.Controls.Add(this.textBox6);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.textBox4);
@@ -259,7 +238,6 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btnCliente);
-            this.Controls.Add(this.btnItemPedido);
             this.Controls.Add(this.btnPedido);
             this.Controls.Add(this.btnEntrada);
             this.Controls.Add(this.btnPagamento);
@@ -290,7 +268,6 @@
         private System.Windows.Forms.Button btnPagamento;
         private System.Windows.Forms.Button btnEntrada;
         private System.Windows.Forms.Button btnPedido;
-        private System.Windows.Forms.Button btnItemPedido;
         private System.Windows.Forms.Button btnCliente;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
@@ -298,7 +275,6 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.PictureBox PicQuarto;
         private System.Windows.Forms.Label label1;

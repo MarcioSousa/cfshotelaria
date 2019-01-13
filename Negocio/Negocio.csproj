@@ -45,7 +45,6 @@
     <Compile Include="ClienteNegocio.cs" />
     <Compile Include="EntradaNegocio.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="ItemPedidoNegocio.cs" />
     <Compile Include="LimpezaNegocio.cs" />
     <Compile Include="PagamentoNegocio.cs" />
     <Compile Include="PedidoNegocio.cs" />

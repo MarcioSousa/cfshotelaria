@@ -19,7 +19,10 @@ namespace Negocio
             {
                 acessoMySql.LimparParametros();
                 acessoMySql.AdicionarParametros("aCodAluguel", pedido.Aluguel.Codigo);
+                acessoMySql.AdicionarParametros("aCodProduto", pedido.Produto.Codigo);
                 acessoMySql.AdicionarParametros("aDataPedido", pedido.DataPedido);
+                acessoMySql.AdicionarParametros("aQtde", pedido.Qtde);
+                acessoMySql.AdicionarParametros("aValor", pedido.Valor);
                 acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_PedidoNovo");
                 return "Pedido adicionado com sucesso!";
             }
@@ -35,7 +38,10 @@ namespace Negocio
             {
                 acessoMySql.AdicionarParametros("aCodigo", pedido.Codigo);
                 acessoMySql.AdicionarParametros("aCodAluguel", pedido.Aluguel.Codigo);
+                acessoMySql.AdicionarParametros("aCodProduto", pedido.Produto.Codigo);
                 acessoMySql.AdicionarParametros("aDataPedido", pedido.DataPedido);
+                 acessoMySql.AdicionarParametros("aQtde", pedido.Qtde);
+                acessoMySql.AdicionarParametros("aValor", pedido.Valor);
                 acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_PedidoAlterar");
                 return "Pedido alterado com sucesso!.";
             }
@@ -60,48 +66,33 @@ namespace Negocio
             }
         }
 
-        public List<Pedido> Pedidos (List<Aluguel> alugueis)
+        public List<Pedido> Pedidos(List<Aluguel> aluguels, List<Produto> produtos)
         {
             try
             {
                 List<Pedido> pedidos = new List<Pedido>();
-                for (int t = 0; t < alugueis.Count; t++)
-                {
-                    acessoMySql.LimparParametros();
-                    DataTable dataTablePedidos = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_aluguel, datapedido FROM pedido WHERE cod_aluguel = " + alugueis[t].Codigo, false);
 
-                    foreach (DataRow linha in dataTablePedidos.Rows)
+                for (int t = 0; t < aluguels.Count; t++)
+                {
+                    for (int p = 0; p < produtos.Count; p++)
                     {
-                        Pedido pedido = new Pedido(Convert.ToInt32(linha["codigo"]), Convert.ToDateTime(linha["dataPedido"]), alugueis[t]);
-                        pedidos.Add(pedido);
+                        acessoMySql.LimparParametros();
+                        DataTable dataTablePedidos = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, datapedido, qtde, valor, cod_aluguel FROM pedido WHERE cod_aluguel = " + aluguels[t].Codigo + " AND cod_produto = " + produtos[p].Codigo , false);
+
+                        foreach (DataRow linha in dataTablePedidos.Rows)
+                        {
+                            Pedido pedido = new Pedido(Convert.ToInt32(linha["codigo"]), Convert.ToDateTime(linha["dataPedido"]), Convert.ToInt32(linha["qtde"]), Convert.ToDouble(linha["valor"]), aluguels[t], produtos[p]);
+                            pedidos.Add(pedido);
+                        }
                     }
                 }
 
                 return pedidos;
+
             }
             catch (Exception ex)
             {
                 throw new Exception("Não foi possível carregar as Limpezas.\nDetalhes: " + ex.Message);
-            }
-        }
-
-        public void AddItemPedidos(Pedido pedido, Produto produto)
-        {
-            try
-            {
-                acessoMySql.LimparParametros();
-                DataTable dataTablePedidoItensPedidos = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_pedido, cod_produto, qtde, valor FROM itemPedido WHERE cod_pedido = " + pedido.Codigo + " AND cod_produto = " + produto.Codigo, false);
-
-                foreach (DataRow linha in dataTablePedidoItensPedidos.Rows)
-                {
-                    ItemPedido itemPedido = new ItemPedido(Convert.ToInt32(linha["codigo"]), Convert.ToInt32(linha["qtde"]), Convert.ToDouble(linha["valor"]), produto, pedido);
-                    pedido.ItemPedidos.Add(itemPedido);
-                    produto.ItemPedidos.Add(itemPedido);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Não foi possível carregar os ItensPedidos dos Pedidos.\nDetalhes: " + ex.Message);
             }
         }
 
@@ -127,3 +118,5 @@ namespace Negocio
         //}
     }
 }
+
+//SELECT P.codigo, P.datapedido, B.nome, P.qtde, P.valor, P.cod_aluguel FROM pedido P INNER JOIN produto B ON B.codigo = P.cod_produto WHERE P.cod_aluguel = " + pedido.Aluguel.Codigo

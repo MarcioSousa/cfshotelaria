@@ -130,16 +130,18 @@ namespace Negocio
             }
         }
 
-        public void AddPedidos(Aluguel aluguel)
+        //Só foi passado 3 parâmetros pois pedido tem o código como chave primária
+        //Se fosse duas chaves primárias (aluguel e produto), então era somente passar dois parâmetros.
+        public void AddPedidos(Aluguel aluguel, Produto produto, Pedido pedido)
         {
             try
             {
                 acessoMySql.LimparParametros();
-                DataTable dataTableAluguelPedidos = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_aluguel, datapedido FROM pedido WHERE cod_aluguel = " + aluguel.Codigo, false);
+                DataTable dataTableAluguelPedidos = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, datapedido, qtde, valor, cod_aluguel, cod_produto FROM pedido WHERE codigo = " + pedido.Codigo, false);
 
                 foreach (DataRow linha in dataTableAluguelPedidos.Rows)
                 {
-                    Pedido pedido = new Pedido(Convert.ToInt32(linha["codigo"]), Convert.ToDateTime(linha["dataPedido"]), aluguel);
+                    pedido = new Pedido(Convert.ToInt32(linha["codigo"]), Convert.ToDateTime(linha["dataPedido"]), Convert.ToInt32(linha["qtde"]), Convert.ToDouble(linha["valor"]), aluguel, produto);
                     aluguel.Pedidos.Add(pedido);
                 }
             }
@@ -148,6 +150,8 @@ namespace Negocio
                 throw new Exception("Não foi possível carregar os Quartos.\nDetalhes: " + ex.Message);
             }
         }
+
+
     }
 }
 
