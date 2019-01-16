@@ -14,7 +14,7 @@ namespace View
 {
     public partial class FrmQuarto : Form
     {
-        private List<Quarto> quartos;
+        List<Quarto> quartos;
         bool novo = false;
 
         public FrmQuarto(List<Quarto> quartos)
@@ -23,7 +23,6 @@ namespace View
             DgvQuarto.AutoGenerateColumns = false;
             this.quartos = quartos;
         }
-
         private void BtnAdd_Click(object sender, EventArgs e)
         {
             try
@@ -49,6 +48,8 @@ namespace View
                         quartos.Add(quarto);
                         DgvQuarto.DataSource = null;
                         DgvQuarto.DataSource = quartos;
+                        DgvQuarto.Update();
+                        DgvQuarto.Refresh();
                         FechaCampos();
                     }
                     else
@@ -81,27 +82,38 @@ namespace View
                 MessageBox.Show("Não foi possível cadastrar o quarto.\nAviso:" + ex.Message);
             }
         }
-
         private void FrmQuarto_Load(object sender, EventArgs e)
         {
-            DgvQuarto.DataSource = quartos;
-
-            DgvQuarto.Update();
-            DgvQuarto.Refresh();
+            CarregaQuartos();
         }
 
         private void DgvQuarto_SelectionChanged(object sender, EventArgs e)
         {
-            TxtNumero.Text = DgvQuarto.Rows[DgvQuarto.CurrentRow.Index].Cells[0].Value.ToString();
-            TxtValorDiaria.Text = (Convert.ToDouble(DgvQuarto.Rows[DgvQuarto.CurrentRow.Index].Cells[1].Value)).ToString("N2");
-            TxtLocalidade.Text = DgvQuarto.Rows[DgvQuarto.CurrentRow.Index].Cells[2].Value.ToString();
-        }
+            try
+            {
+                if (quartos.Count != 0)
+                {
+                    TxtNumero.Text = DgvQuarto.Rows[DgvQuarto.CurrentRow.Index].Cells[0].Value.ToString();
+                    TxtValorDiaria.Text = (Convert.ToDouble(DgvQuarto.Rows[DgvQuarto.CurrentRow.Index].Cells[1].Value)).ToString("N2");
+                    TxtLocalidade.Text = DgvQuarto.Rows[DgvQuarto.CurrentRow.Index].Cells[2].Value.ToString();
+                }
+                else
+                {
+                    TxtNumero.Text = "";
+                    TxtValorDiaria.Text = "";
+                    TxtLocalidade.Text = "";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
+        }
         private void BtnFinalizar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void BtnNovo_Click(object sender, EventArgs e)
         {
             novo = true;
@@ -110,16 +122,122 @@ namespace View
             TxtNumero.Enabled = true;
             TxtNumero.Focus();
         }
-
         private void BtnEditar_Click(object sender, EventArgs e)
         {
             novo = false;
             AbreCampos();
             TxtValorDiaria.Focus();
         }
+        private void BtnCancelar_Click(object sender, EventArgs e)
+        {
+            novo = false;
+            FechaCampos();
+            Ep.Clear();
+            TxtNumero.Text = DgvQuarto.Rows[DgvQuarto.CurrentRow.Index].Cells[0].Value.ToString();
+            TxtValorDiaria.Text = (Convert.ToDouble(DgvQuarto.Rows[DgvQuarto.CurrentRow.Index].Cells[1].Value)).ToString("N2");
+            TxtLocalidade.Text = DgvQuarto.Rows[DgvQuarto.CurrentRow.Index].Cells[2].Value.ToString();
+        }
+        private void TxtNumero_Validating(object sender, CancelEventArgs e)
+        {
+            if (TxtNumero.Enabled == true)
+            {
+                if (TxtNumero.Text != "")
+                {
+                    if (Convert.ToInt32(TxtNumero.Text) > 0)
+                    {
+                        for (int t = 0; t < quartos.Count; t++)
+                        {
+                            if (quartos[t].Numero == Convert.ToInt32(TxtNumero.Text))
+                            {
+                                Ep.SetError(TxtNumero, "Número já existe!");
+                                TxtNumero.Focus();
+                                return;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Ep.SetError(TxtNumero, "Digite um número maior que zero!");
+                        TxtNumero.Focus();
+                        return;
+                    }
+                }
 
+                Ep.Clear();
+            }
+        }
+        private void BtnExcluir_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Deseja Excluir o Quarto Selecionado?", "Exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                try
+                {
+                    for (int t = 0; t < quartos.Count; t++)
+                    {
+                        if (quartos[t].Numero.ToString() == TxtNumero.Text)
+                        {
+                            QuartoNegocio quartoNegocio = new QuartoNegocio();
+                            quartoNegocio.Excluir(quartos[t]);
+                            quartos.Remove(quartos[t]);
+                            MessageBox.Show("Excluído com Sucesso!", "Exclusão", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            break;
+                        }
+                    }
+                    CarregaQuartos();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Não foi possível excluir.\nEntre em contato com o desenvolvedor!\nAviso: " + ex.Message, "Exclusão", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        private void TxtValorDiaria_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            if (e.KeyChar == ',')
+            {
+                e.Handled = false;
+            }
+            if (e.KeyChar == (char)Keys.Back)
+            {
+                e.Handled = false;
+            }
+        }
+        private void TxtNumero_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            if (e.KeyChar == (char)Keys.Back)
+            {
+                e.Handled = false;
+            }
+        }
 
+        private void CarregaQuartos()
+        {
+            DgvQuarto.DataSource = null;
+            DgvQuarto.DataSource = quartos;
 
+            DgvQuarto.Update();
+            DgvQuarto.Refresh();
+
+            if(quartos.Count == 0)
+            {
+                BtnEditar.Enabled = false;
+                BtnExcluir.Enabled = false;
+            }
+            else
+            {
+                BtnEditar.Enabled = true;
+                BtnExcluir.Enabled = true;
+            }
+
+        }
         private void AbreCampos()
         {
             TxtValorDiaria.Enabled = true;
@@ -152,101 +270,5 @@ namespace View
             DgvQuarto.Enabled = true;
         }
 
-        private void BtnCancelar_Click(object sender, EventArgs e)
-        {
-            novo = false;
-            FechaCampos();
-            Ep.Clear();
-            TxtNumero.Text = DgvQuarto.Rows[DgvQuarto.CurrentRow.Index].Cells[0].Value.ToString();
-            TxtValorDiaria.Text = (Convert.ToDouble(DgvQuarto.Rows[DgvQuarto.CurrentRow.Index].Cells[1].Value)).ToString("N2");
-            TxtLocalidade.Text = DgvQuarto.Rows[DgvQuarto.CurrentRow.Index].Cells[2].Value.ToString();
-        }
-
-        private void TxtNumero_Validating(object sender, CancelEventArgs e)
-        {
-            if (TxtNumero.Enabled == true)
-            {
-                if (TxtNumero.Text != "")
-                {
-                    if (Convert.ToInt32(TxtNumero.Text) > 0)
-                    {
-                        for (int t = 0; t < quartos.Count; t++)
-                        {
-                            if (quartos[t].Numero == Convert.ToInt32(TxtNumero.Text))
-                            {
-                                Ep.SetError(TxtNumero, "Número já existe!");
-                                TxtNumero.Focus();
-                                return;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Ep.SetError(TxtNumero, "Digite um número maior que zero!");
-                        TxtNumero.Focus();
-                        return;
-                    }
-                }
-
-                Ep.Clear();
-            }
-        }
-
-        private void BtnExcluir_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Deseja Excluir o Quarto Selecionado?", "Exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                try
-                {
-                    for (int t = 0; t < quartos.Count; t++)
-                    {
-                        if (quartos[t].Numero.ToString() == DgvQuarto.Rows[DgvQuarto.CurrentRow.Index].Cells[0].Value.ToString())
-                        {
-                            QuartoNegocio quartoNegocio = new QuartoNegocio();
-                            quartoNegocio.Excluir(quartos[t]);
-                            quartos.Remove(quartos[t]);
-                            MessageBox.Show("Excluído com Sucesso!", "Exclusão", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            DgvQuarto.DataSource = null;
-                            DgvQuarto.DataSource = quartos;
-                            DgvQuarto.Refresh();
-                            DgvQuarto.Update();
-                            return;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Não foi possível excluir.\nEntre em contato com o desenvolvedor!\nAviso: " + ex.Message, "Exclusão", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void TxtValorDiaria_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-            if(e.KeyChar == ',')
-            {
-                e.Handled = false;  
-            }
-            if(e.KeyChar == (char)Keys.Back)
-            {
-                e.Handled = false;
-            }
-        }
-
-        private void TxtNumero_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-            if(e.KeyChar == (char)Keys.Back)
-            {
-                e.Handled = false;
-            }
-        }
     }
 }

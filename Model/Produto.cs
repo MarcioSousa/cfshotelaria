@@ -43,11 +43,7 @@ namespace Model
 
         public override string ToString()
         {
-            return "\n=== PRODUTO ===" +
-                "\nO codigo do produto é: " + codigo +
-                "\nO nome do produto é: " + nome +
-                "\nO valor do produto é: R$ " + valor +
-                "\nA quantidade atual do produto é: " + qtdeatual;
+            return nome;
         }
     }
 }

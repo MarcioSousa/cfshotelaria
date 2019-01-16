@@ -96,6 +96,14 @@ namespace Negocio
             }
         }
 
+
+
+    }
+}
+
+//SELECT P.codigo, P.datapedido, B.nome, P.qtde, P.valor, P.cod_aluguel FROM pedido P INNER JOIN produto B ON B.codigo = P.cod_produto WHERE P.cod_aluguel = " + pedido.Aluguel.Codigo
+
+
         //public void AddLimpezas(Quarto quarto)
         //{
         //    try
@@ -116,7 +124,4 @@ namespace Negocio
         //    }
 
         //}
-    }
-}
 
-//SELECT P.codigo, P.datapedido, B.nome, P.qtde, P.valor, P.cod_aluguel FROM pedido P INNER JOIN produto B ON B.codigo = P.cod_produto WHERE P.cod_aluguel = " + pedido.Aluguel.Codigo

@@ -55,7 +55,6 @@
             this.btnProduto.TabIndex = 1;
             this.btnProduto.Text = "Produto";
             this.btnProduto.UseVisualStyleBackColor = true;
-            this.btnProduto.Click += new System.EventHandler(this.btnProduto_Click);
             // 
             // btnQuarto
             // 
@@ -65,7 +64,6 @@
             this.btnQuarto.TabIndex = 2;
             this.btnQuarto.Text = "Quarto";
             this.btnQuarto.UseVisualStyleBackColor = true;
-            this.btnQuarto.Click += new System.EventHandler(this.btnQuarto_Click);
             // 
             // btnAluguel
             // 
@@ -75,7 +73,6 @@
             this.btnAluguel.TabIndex = 3;
             this.btnAluguel.Text = "Aluguel";
             this.btnAluguel.UseVisualStyleBackColor = true;
-            this.btnAluguel.Click += new System.EventHandler(this.btnAluguel_Click);
             // 
             // btnLimpeza
             // 
@@ -85,7 +82,6 @@
             this.btnLimpeza.TabIndex = 4;
             this.btnLimpeza.Text = "Limpezas";
             this.btnLimpeza.UseVisualStyleBackColor = true;
-            this.btnLimpeza.Click += new System.EventHandler(this.btnLimpeza_Click);
             // 
             // btnPagamento
             // 
@@ -95,7 +91,6 @@
             this.btnPagamento.TabIndex = 5;
             this.btnPagamento.Text = "Pagamento";
             this.btnPagamento.UseVisualStyleBackColor = true;
-            this.btnPagamento.Click += new System.EventHandler(this.btnPagamento_Click);
             // 
             // btnEntrada
             // 
@@ -105,7 +100,6 @@
             this.btnEntrada.TabIndex = 6;
             this.btnEntrada.Text = "Entrada";
             this.btnEntrada.UseVisualStyleBackColor = true;
-            this.btnEntrada.Click += new System.EventHandler(this.btnEntrada_Click);
             // 
             // btnPedido
             // 
@@ -115,7 +109,6 @@
             this.btnPedido.TabIndex = 7;
             this.btnPedido.Text = "Pedido";
             this.btnPedido.UseVisualStyleBackColor = true;
-            this.btnPedido.Click += new System.EventHandler(this.btnPedido_Click);
             // 
             // btnCliente
             // 
@@ -125,7 +118,6 @@
             this.btnCliente.TabIndex = 9;
             this.btnCliente.Text = "Cliente";
             this.btnCliente.UseVisualStyleBackColor = true;
-            this.btnCliente.Click += new System.EventHandler(this.btnCliente_Click);
             // 
             // textBox1
             // 
