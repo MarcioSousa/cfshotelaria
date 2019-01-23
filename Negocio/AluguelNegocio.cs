@@ -13,15 +13,16 @@ namespace Negocio
     {
         AcessoMySql acessoMySql = new AcessoMySql();
 
-        public string Inserir(int codigoQuarto)
+        public string Inserir(Aluguel aluguel)
         {
             try
             {
                 acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aCodQuarto", codigoQuarto);
-                acessoMySql.AdicionarParametros("aValor", 0.00);
-                acessoMySql.AdicionarParametros("aDataChegada", DateTime.Now);
-                return acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_AluguelNovo").ToString();
+                acessoMySql.AdicionarParametros("aCodQuarto", aluguel.Quarto.Numero);
+                acessoMySql.AdicionarParametros("aValor", aluguel.Valor);
+                acessoMySql.AdicionarParametros("aDataChegada", aluguel.DataChegada);
+                aluguel.Codigo = Convert.ToInt32(acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_AluguelNovo"));
+                return aluguel.Codigo.ToString();
             }
             catch (Exception ex)
             {
@@ -126,7 +127,7 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                throw new Exception("Não foi possível carregar os Quartos.\nDetalhes: " + ex.Message);
+                throw new Exception("Não foi possível carregar os Pagamentos.\nDetalhes: " + ex.Message);
             }
         }
 
@@ -147,10 +148,9 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-                throw new Exception("Não foi possível carregar os Quartos.\nDetalhes: " + ex.Message);
+                throw new Exception("Não foi possível carregar os Pedidos.\nDetalhes: " + ex.Message);
             }
         }
-
 
     }
 }

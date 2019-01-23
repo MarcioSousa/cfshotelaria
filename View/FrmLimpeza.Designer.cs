@@ -68,7 +68,7 @@
             this.NudQuartoNumero.Name = "NudQuartoNumero";
             this.NudQuartoNumero.ReadOnly = true;
             this.NudQuartoNumero.Size = new System.Drawing.Size(107, 26);
-            this.NudQuartoNumero.TabIndex = 0;
+            this.NudQuartoNumero.TabIndex = 1;
             this.NudQuartoNumero.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NudQuartoNumero.Value = new decimal(new int[] {
             1,
@@ -91,7 +91,7 @@
             this.DtpDataLimpeza.Location = new System.Drawing.Point(126, 88);
             this.DtpDataLimpeza.Name = "DtpDataLimpeza";
             this.DtpDataLimpeza.Size = new System.Drawing.Size(107, 26);
-            this.DtpDataLimpeza.TabIndex = 1;
+            this.DtpDataLimpeza.TabIndex = 2;
             // 
             // groupBox1
             // 
@@ -120,7 +120,7 @@
             this.TxtCodigo.Name = "TxtCodigo";
             this.TxtCodigo.ReadOnly = true;
             this.TxtCodigo.Size = new System.Drawing.Size(223, 19);
-            this.TxtCodigo.TabIndex = 0;
+            this.TxtCodigo.TabIndex = 5;
             this.TxtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // BtnCancelar
@@ -140,7 +140,7 @@
             this.BtnConfirmar.Location = new System.Drawing.Point(156, 156);
             this.BtnConfirmar.Name = "BtnConfirmar";
             this.BtnConfirmar.Size = new System.Drawing.Size(88, 30);
-            this.BtnConfirmar.TabIndex = 3;
+            this.BtnConfirmar.TabIndex = 0;
             this.BtnConfirmar.Text = "Confirmar";
             this.BtnConfirmar.UseVisualStyleBackColor = true;
             this.BtnConfirmar.Click += new System.EventHandler(this.BtnConfirmar_Click);
@@ -151,7 +151,7 @@
             this.DtpHoraLimpeza.Location = new System.Drawing.Point(126, 122);
             this.DtpHoraLimpeza.Name = "DtpHoraLimpeza";
             this.DtpHoraLimpeza.Size = new System.Drawing.Size(107, 26);
-            this.DtpHoraLimpeza.TabIndex = 2;
+            this.DtpHoraLimpeza.TabIndex = 3;
             // 
             // label3
             // 

@@ -29,22 +29,24 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAluguel));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.BtnOcuparQuarto = new System.Windows.Forms.Button();
+            this.lblCodigoAluguel = new System.Windows.Forms.Label();
             this.BtnQuarto = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.LblNumeroQuarto = new System.Windows.Forms.Label();
@@ -60,11 +62,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.PbxAddCliente = new System.Windows.Forms.PictureBox();
-            this.PbxExcluirCliente = new System.Windows.Forms.PictureBox();
-            this.PbxEditaCliente = new System.Windows.Forms.PictureBox();
             this.DgvCliente = new System.Windows.Forms.DataGridView();
-            this.ALUGUEL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CodCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DgvPedido = new System.Windows.Forms.DataGridView();
             this.CODIGOP = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -78,7 +77,6 @@
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DATAPAG = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VALOR = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label10 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.DgvQuarto = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -89,7 +87,6 @@
             this.CODIGO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.label16 = new System.Windows.Forms.Label();
@@ -110,7 +107,6 @@
             this.PbxNovaLimpeza = new System.Windows.Forms.PictureBox();
             this.PbxExcluiLimpeza = new System.Windows.Forms.PictureBox();
             this.PbxEditaLimpeza = new System.Windows.Forms.PictureBox();
-            this.label13 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label23 = new System.Windows.Forms.Label();
             this.lblTotalAluguel = new System.Windows.Forms.Label();
@@ -119,11 +115,14 @@
             this.label20 = new System.Windows.Forms.Label();
             this.lblTotalPedido = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
+            this.PbxEditaCliente = new System.Windows.Forms.PictureBox();
+            this.PbxExcluirCliente = new System.Windows.Forms.PictureBox();
+            this.PbxNovoCliente = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PbxAddCliente)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PbxExcluirCliente)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PbxEditaCliente)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DgvCliente)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DgvPedido)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DgvPagamento)).BeginInit();
@@ -140,10 +139,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.PbxExcluiLimpeza)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbxEditaLimpeza)).BeginInit();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PbxEditaCliente)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbxExcluirCliente)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbxNovoCliente)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.BtnOcuparQuarto);
+            this.groupBox1.Controls.Add(this.lblCodigoAluguel);
             this.groupBox1.Controls.Add(this.BtnQuarto);
             this.groupBox1.Controls.Add(this.panel2);
             this.groupBox1.Controls.Add(this.label4);
@@ -163,6 +167,28 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
+            // BtnOcuparQuarto
+            // 
+            this.BtnOcuparQuarto.AutoSize = true;
+            this.BtnOcuparQuarto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.BtnOcuparQuarto.Location = new System.Drawing.Point(22, 127);
+            this.BtnOcuparQuarto.Name = "BtnOcuparQuarto";
+            this.BtnOcuparQuarto.Size = new System.Drawing.Size(166, 30);
+            this.BtnOcuparQuarto.TabIndex = 77;
+            this.BtnOcuparQuarto.Text = "Liberar Quarto";
+            this.BtnOcuparQuarto.UseVisualStyleBackColor = true;
+            this.BtnOcuparQuarto.Click += new System.EventHandler(this.BtnOcuparQuarto_Click);
+            // 
+            // lblCodigoAluguel
+            // 
+            this.lblCodigoAluguel.AutoSize = true;
+            this.lblCodigoAluguel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCodigoAluguel.Location = new System.Drawing.Point(431, 140);
+            this.lblCodigoAluguel.Name = "lblCodigoAluguel";
+            this.lblCodigoAluguel.Size = new System.Drawing.Size(110, 16);
+            this.lblCodigoAluguel.TabIndex = 76;
+            this.lblCodigoAluguel.Text = "CodigoAluguel";
+            // 
             // BtnQuarto
             // 
             this.BtnQuarto.Location = new System.Drawing.Point(466, 12);
@@ -178,7 +204,7 @@
             this.panel2.BackColor = System.Drawing.SystemColors.Info;
             this.panel2.Controls.Add(this.LblNumeroQuarto);
             this.panel2.Controls.Add(this.label3);
-            this.panel2.Location = new System.Drawing.Point(40, 56);
+            this.panel2.Location = new System.Drawing.Point(58, 43);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(95, 78);
             this.panel2.TabIndex = 73;
@@ -208,7 +234,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(14, 16);
+            this.label4.Location = new System.Drawing.Point(32, 16);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(146, 20);
             this.label4.TabIndex = 62;
@@ -218,7 +244,7 @@
             // 
             this.LblSituacao.AutoSize = true;
             this.LblSituacao.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblSituacao.Location = new System.Drawing.Point(284, 34);
+            this.LblSituacao.Location = new System.Drawing.Point(312, 34);
             this.LblSituacao.Name = "LblSituacao";
             this.LblSituacao.Size = new System.Drawing.Size(114, 16);
             this.LblSituacao.TabIndex = 61;
@@ -228,7 +254,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(182, 34);
+            this.label9.Location = new System.Drawing.Point(210, 34);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(73, 16);
             this.label9.TabIndex = 60;
@@ -238,7 +264,7 @@
             // 
             this.LblHorario.AutoSize = true;
             this.LblHorario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblHorario.Location = new System.Drawing.Point(284, 82);
+            this.LblHorario.Location = new System.Drawing.Point(312, 82);
             this.LblHorario.Name = "LblHorario";
             this.LblHorario.Size = new System.Drawing.Size(114, 16);
             this.LblHorario.TabIndex = 59;
@@ -248,7 +274,7 @@
             // 
             this.LblValorQuarto.AutoSize = true;
             this.LblValorQuarto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblValorQuarto.Location = new System.Drawing.Point(284, 106);
+            this.LblValorQuarto.Location = new System.Drawing.Point(312, 106);
             this.LblValorQuarto.Name = "LblValorQuarto";
             this.LblValorQuarto.Size = new System.Drawing.Size(114, 16);
             this.LblValorQuarto.TabIndex = 49;
@@ -258,7 +284,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(182, 106);
+            this.label5.Location = new System.Drawing.Point(210, 106);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(54, 16);
             this.label5.TabIndex = 48;
@@ -268,7 +294,7 @@
             // 
             this.LblLocalizacao.AutoSize = true;
             this.LblLocalizacao.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblLocalizacao.Location = new System.Drawing.Point(284, 130);
+            this.LblLocalizacao.Location = new System.Drawing.Point(312, 130);
             this.LblLocalizacao.Name = "LblLocalizacao";
             this.LblLocalizacao.Size = new System.Drawing.Size(114, 16);
             this.LblLocalizacao.TabIndex = 53;
@@ -278,7 +304,7 @@
             // 
             this.LblDia.AutoSize = true;
             this.LblDia.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblDia.Location = new System.Drawing.Point(284, 58);
+            this.LblDia.Location = new System.Drawing.Point(312, 58);
             this.LblDia.Name = "LblDia";
             this.LblDia.Size = new System.Drawing.Size(114, 16);
             this.LblDia.TabIndex = 55;
@@ -288,7 +314,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(182, 82);
+            this.label8.Location = new System.Drawing.Point(210, 82);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(64, 16);
             this.label8.TabIndex = 58;
@@ -298,7 +324,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(182, 130);
+            this.label6.Location = new System.Drawing.Point(210, 130);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(96, 16);
             this.label6.TabIndex = 51;
@@ -308,43 +334,11 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(182, 58);
+            this.label7.Location = new System.Drawing.Point(210, 58);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(36, 16);
             this.label7.TabIndex = 57;
             this.label7.Text = "Dia:";
-            // 
-            // PbxAddCliente
-            // 
-            this.PbxAddCliente.Image = ((System.Drawing.Image)(resources.GetObject("PbxAddCliente.Image")));
-            this.PbxAddCliente.Location = new System.Drawing.Point(188, 171);
-            this.PbxAddCliente.Name = "PbxAddCliente";
-            this.PbxAddCliente.Size = new System.Drawing.Size(28, 28);
-            this.PbxAddCliente.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PbxAddCliente.TabIndex = 63;
-            this.PbxAddCliente.TabStop = false;
-            this.PbxAddCliente.Click += new System.EventHandler(this.PbxAddCliente_Click);
-            // 
-            // PbxExcluirCliente
-            // 
-            this.PbxExcluirCliente.Image = ((System.Drawing.Image)(resources.GetObject("PbxExcluirCliente.Image")));
-            this.PbxExcluirCliente.Location = new System.Drawing.Point(256, 171);
-            this.PbxExcluirCliente.Name = "PbxExcluirCliente";
-            this.PbxExcluirCliente.Size = new System.Drawing.Size(28, 28);
-            this.PbxExcluirCliente.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PbxExcluirCliente.TabIndex = 65;
-            this.PbxExcluirCliente.TabStop = false;
-            this.PbxExcluirCliente.Click += new System.EventHandler(this.PbxExcluirCliente_Click);
-            // 
-            // PbxEditaCliente
-            // 
-            this.PbxEditaCliente.Image = ((System.Drawing.Image)(resources.GetObject("PbxEditaCliente.Image")));
-            this.PbxEditaCliente.Location = new System.Drawing.Point(222, 171);
-            this.PbxEditaCliente.Name = "PbxEditaCliente";
-            this.PbxEditaCliente.Size = new System.Drawing.Size(28, 28);
-            this.PbxEditaCliente.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PbxEditaCliente.TabIndex = 64;
-            this.PbxEditaCliente.TabStop = false;
             // 
             // DgvCliente
             // 
@@ -354,28 +348,29 @@
             this.DgvCliente.AllowUserToResizeRows = false;
             this.DgvCliente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvCliente.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ALUGUEL,
+            this.CodCliente,
             this.dataGridViewTextBoxColumn3});
-            this.DgvCliente.Location = new System.Drawing.Point(18, 205);
+            this.DgvCliente.Location = new System.Drawing.Point(3, 207);
             this.DgvCliente.MultiSelect = false;
             this.DgvCliente.Name = "DgvCliente";
             this.DgvCliente.ReadOnly = true;
             this.DgvCliente.RowHeadersVisible = false;
             this.DgvCliente.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvCliente.Size = new System.Drawing.Size(266, 132);
+            this.DgvCliente.Size = new System.Drawing.Size(281, 132);
             this.DgvCliente.TabIndex = 3;
             // 
-            // ALUGUEL
+            // CodCliente
             // 
-            this.ALUGUEL.HeaderText = "CodAluguel";
-            this.ALUGUEL.Name = "ALUGUEL";
-            this.ALUGUEL.ReadOnly = true;
+            this.CodCliente.DataPropertyName = "codigo";
+            this.CodCliente.HeaderText = "Codigo";
+            this.CodCliente.Name = "CodCliente";
+            this.CodCliente.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn3
             // 
             this.dataGridViewTextBoxColumn3.DataPropertyName = "nome";
-            dataGridViewCellStyle29.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle29;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewTextBoxColumn3.DefaultCellStyle = dataGridViewCellStyle15;
             this.dataGridViewTextBoxColumn3.HeaderText = "Nome(s) Cliente(s)";
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             this.dataGridViewTextBoxColumn3.ReadOnly = true;
@@ -387,19 +382,19 @@
             this.DgvPedido.AllowUserToDeleteRows = false;
             this.DgvPedido.AllowUserToResizeColumns = false;
             this.DgvPedido.AllowUserToResizeRows = false;
-            dataGridViewCellStyle30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.DgvPedido.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle30;
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.DgvPedido.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
             this.DgvPedido.BackgroundColor = System.Drawing.SystemColors.Control;
             this.DgvPedido.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.DgvPedido.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle31.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle31.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle31.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DgvPedido.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DgvPedido.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
             this.DgvPedido.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvPedido.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CODIGOP,
@@ -426,8 +421,8 @@
             // dataGridViewTextBoxColumn5
             // 
             this.dataGridViewTextBoxColumn5.DataPropertyName = "DataPedido";
-            dataGridViewCellStyle32.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle32;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridViewTextBoxColumn5.DefaultCellStyle = dataGridViewCellStyle18;
             this.dataGridViewTextBoxColumn5.HeaderText = "DataPedido";
             this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             this.dataGridViewTextBoxColumn5.ReadOnly = true;
@@ -436,8 +431,8 @@
             // PRODUTO
             // 
             this.PRODUTO.DataPropertyName = "produto";
-            dataGridViewCellStyle33.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PRODUTO.DefaultCellStyle = dataGridViewCellStyle33;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PRODUTO.DefaultCellStyle = dataGridViewCellStyle19;
             this.PRODUTO.HeaderText = "Produto";
             this.PRODUTO.Name = "PRODUTO";
             this.PRODUTO.ReadOnly = true;
@@ -446,9 +441,9 @@
             // QTDE
             // 
             this.QTDE.DataPropertyName = "Qtde";
-            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle34.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.QTDE.DefaultCellStyle = dataGridViewCellStyle34;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.QTDE.DefaultCellStyle = dataGridViewCellStyle20;
             this.QTDE.HeaderText = "Qtde";
             this.QTDE.Name = "QTDE";
             this.QTDE.ReadOnly = true;
@@ -457,9 +452,9 @@
             // VALORR
             // 
             this.VALORR.DataPropertyName = "Valor";
-            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle35.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.VALORR.DefaultCellStyle = dataGridViewCellStyle35;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.VALORR.DefaultCellStyle = dataGridViewCellStyle21;
             this.VALORR.HeaderText = "Valor";
             this.VALORR.Name = "VALORR";
             this.VALORR.ReadOnly = true;
@@ -486,13 +481,13 @@
             this.dataGridViewTextBoxColumn4,
             this.DATAPAG,
             this.VALOR});
-            this.DgvPagamento.Location = new System.Drawing.Point(18, 377);
+            this.DgvPagamento.Location = new System.Drawing.Point(3, 381);
             this.DgvPagamento.MultiSelect = false;
             this.DgvPagamento.Name = "DgvPagamento";
             this.DgvPagamento.ReadOnly = true;
             this.DgvPagamento.RowHeadersVisible = false;
             this.DgvPagamento.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvPagamento.Size = new System.Drawing.Size(267, 110);
+            this.DgvPagamento.Size = new System.Drawing.Size(281, 110);
             this.DgvPagamento.TabIndex = 52;
             // 
             // CODIGOC
@@ -521,22 +516,12 @@
             // VALOR
             // 
             this.VALOR.DataPropertyName = "Valor";
-            dataGridViewCellStyle36.Format = "C";
-            this.VALOR.DefaultCellStyle = dataGridViewCellStyle36;
+            dataGridViewCellStyle22.Format = "C";
+            this.VALOR.DefaultCellStyle = dataGridViewCellStyle22;
             this.VALOR.HeaderText = "Valor";
             this.VALOR.Name = "VALOR";
             this.VALOR.ReadOnly = true;
             this.VALOR.Width = 65;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.label10.Location = new System.Drawing.Point(17, 351);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(121, 20);
-            this.label10.TabIndex = 51;
-            this.label10.Text = "Pagamento(s)";
             // 
             // groupBox2
             // 
@@ -554,8 +539,8 @@
             this.DgvQuarto.AllowUserToDeleteRows = false;
             this.DgvQuarto.AllowUserToResizeColumns = false;
             this.DgvQuarto.AllowUserToResizeRows = false;
-            dataGridViewCellStyle37.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.DgvQuarto.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle37;
+            dataGridViewCellStyle23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.DgvQuarto.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle23;
             this.DgvQuarto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DgvQuarto.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn6,
@@ -574,8 +559,8 @@
             // dataGridViewTextBoxColumn6
             // 
             this.dataGridViewTextBoxColumn6.DataPropertyName = "Numero";
-            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle38;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn6.DefaultCellStyle = dataGridViewCellStyle24;
             this.dataGridViewTextBoxColumn6.HeaderText = "Numero";
             this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             this.dataGridViewTextBoxColumn6.ReadOnly = true;
@@ -584,9 +569,9 @@
             // dataGridViewTextBoxColumn7
             // 
             this.dataGridViewTextBoxColumn7.DataPropertyName = "valorDiaria";
-            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle39.Format = "C";
-            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle39;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle25.Format = "C";
+            this.dataGridViewTextBoxColumn7.DefaultCellStyle = dataGridViewCellStyle25;
             this.dataGridViewTextBoxColumn7.HeaderText = "Diária";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             this.dataGridViewTextBoxColumn7.ReadOnly = true;
@@ -595,8 +580,8 @@
             // dataGridViewTextBoxColumn8
             // 
             this.dataGridViewTextBoxColumn8.DataPropertyName = "Localidade";
-            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle40;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn8.DefaultCellStyle = dataGridViewCellStyle26;
             this.dataGridViewTextBoxColumn8.HeaderText = "Localidade";
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             this.dataGridViewTextBoxColumn8.ReadOnly = true;
@@ -623,13 +608,13 @@
             this.CODIGO,
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2});
-            this.DgvLimpeza.Location = new System.Drawing.Point(17, 527);
+            this.DgvLimpeza.Location = new System.Drawing.Point(3, 533);
             this.DgvLimpeza.MultiSelect = false;
             this.DgvLimpeza.Name = "DgvLimpeza";
             this.DgvLimpeza.ReadOnly = true;
             this.DgvLimpeza.RowHeadersVisible = false;
             this.DgvLimpeza.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvLimpeza.Size = new System.Drawing.Size(267, 139);
+            this.DgvLimpeza.Size = new System.Drawing.Size(281, 133);
             this.DgvLimpeza.TabIndex = 2;
             // 
             // CODIGO
@@ -643,8 +628,8 @@
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.DataPropertyName = "quarto";
-            dataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle41;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle27;
             this.dataGridViewTextBoxColumn1.HeaderText = "Quarto";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
@@ -653,22 +638,12 @@
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.DataPropertyName = "dataLimpeza";
-            dataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle42;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle28;
             this.dataGridViewTextBoxColumn2.HeaderText = "Data";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
             this.dataGridViewTextBoxColumn2.Width = 160;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(14, 501);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 20);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Limpezas";
             // 
             // panel1
             // 
@@ -799,7 +774,7 @@
             // PbxNovoPagamento
             // 
             this.PbxNovoPagamento.Image = ((System.Drawing.Image)(resources.GetObject("PbxNovoPagamento.Image")));
-            this.PbxNovoPagamento.Location = new System.Drawing.Point(189, 343);
+            this.PbxNovoPagamento.Location = new System.Drawing.Point(189, 347);
             this.PbxNovoPagamento.Name = "PbxNovoPagamento";
             this.PbxNovoPagamento.Size = new System.Drawing.Size(28, 28);
             this.PbxNovoPagamento.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -810,7 +785,7 @@
             // PbxExcluirPagamento
             // 
             this.PbxExcluirPagamento.Image = ((System.Drawing.Image)(resources.GetObject("PbxExcluirPagamento.Image")));
-            this.PbxExcluirPagamento.Location = new System.Drawing.Point(256, 343);
+            this.PbxExcluirPagamento.Location = new System.Drawing.Point(256, 347);
             this.PbxExcluirPagamento.Name = "PbxExcluirPagamento";
             this.PbxExcluirPagamento.Size = new System.Drawing.Size(28, 28);
             this.PbxExcluirPagamento.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -821,17 +796,18 @@
             // PbxEditarPagamento
             // 
             this.PbxEditarPagamento.Image = ((System.Drawing.Image)(resources.GetObject("PbxEditarPagamento.Image")));
-            this.PbxEditarPagamento.Location = new System.Drawing.Point(223, 343);
+            this.PbxEditarPagamento.Location = new System.Drawing.Point(223, 347);
             this.PbxEditarPagamento.Name = "PbxEditarPagamento";
             this.PbxEditarPagamento.Size = new System.Drawing.Size(28, 28);
             this.PbxEditarPagamento.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PbxEditarPagamento.TabIndex = 67;
             this.PbxEditarPagamento.TabStop = false;
+            this.PbxEditarPagamento.Click += new System.EventHandler(this.PbxEditarPagamento_Click);
             // 
             // PbxNovaLimpeza
             // 
             this.PbxNovaLimpeza.Image = ((System.Drawing.Image)(resources.GetObject("PbxNovaLimpeza.Image")));
-            this.PbxNovaLimpeza.Location = new System.Drawing.Point(188, 493);
+            this.PbxNovaLimpeza.Location = new System.Drawing.Point(188, 499);
             this.PbxNovaLimpeza.Name = "PbxNovaLimpeza";
             this.PbxNovaLimpeza.Size = new System.Drawing.Size(28, 28);
             this.PbxNovaLimpeza.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -842,7 +818,7 @@
             // PbxExcluiLimpeza
             // 
             this.PbxExcluiLimpeza.Image = ((System.Drawing.Image)(resources.GetObject("PbxExcluiLimpeza.Image")));
-            this.PbxExcluiLimpeza.Location = new System.Drawing.Point(256, 493);
+            this.PbxExcluiLimpeza.Location = new System.Drawing.Point(256, 499);
             this.PbxExcluiLimpeza.Name = "PbxExcluiLimpeza";
             this.PbxExcluiLimpeza.Size = new System.Drawing.Size(28, 28);
             this.PbxExcluiLimpeza.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -853,23 +829,13 @@
             // PbxEditaLimpeza
             // 
             this.PbxEditaLimpeza.Image = ((System.Drawing.Image)(resources.GetObject("PbxEditaLimpeza.Image")));
-            this.PbxEditaLimpeza.Location = new System.Drawing.Point(222, 493);
+            this.PbxEditaLimpeza.Location = new System.Drawing.Point(222, 499);
             this.PbxEditaLimpeza.Name = "PbxEditaLimpeza";
             this.PbxEditaLimpeza.Size = new System.Drawing.Size(28, 28);
             this.PbxEditaLimpeza.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PbxEditaLimpeza.TabIndex = 70;
             this.PbxEditaLimpeza.TabStop = false;
             this.PbxEditaLimpeza.Click += new System.EventHandler(this.PbxEditaLimpeza_Click);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.label13.Location = new System.Drawing.Point(14, 179);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(86, 20);
-            this.label13.TabIndex = 72;
-            this.label13.Text = "Cliente(s)";
             // 
             // panel3
             // 
@@ -957,14 +923,79 @@
             this.label17.TabIndex = 61;
             this.label17.Text = "Pedidos:";
             // 
+            // PbxEditaCliente
+            // 
+            this.PbxEditaCliente.Image = ((System.Drawing.Image)(resources.GetObject("PbxEditaCliente.Image")));
+            this.PbxEditaCliente.Location = new System.Drawing.Point(222, 173);
+            this.PbxEditaCliente.Name = "PbxEditaCliente";
+            this.PbxEditaCliente.Size = new System.Drawing.Size(28, 28);
+            this.PbxEditaCliente.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PbxEditaCliente.TabIndex = 64;
+            this.PbxEditaCliente.TabStop = false;
+            this.PbxEditaCliente.Click += new System.EventHandler(this.PbxEditaCliente_Click);
+            // 
+            // PbxExcluirCliente
+            // 
+            this.PbxExcluirCliente.Image = ((System.Drawing.Image)(resources.GetObject("PbxExcluirCliente.Image")));
+            this.PbxExcluirCliente.Location = new System.Drawing.Point(256, 173);
+            this.PbxExcluirCliente.Name = "PbxExcluirCliente";
+            this.PbxExcluirCliente.Size = new System.Drawing.Size(28, 28);
+            this.PbxExcluirCliente.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PbxExcluirCliente.TabIndex = 65;
+            this.PbxExcluirCliente.TabStop = false;
+            this.PbxExcluirCliente.Click += new System.EventHandler(this.PbxExcluirCliente_Click);
+            // 
+            // PbxNovoCliente
+            // 
+            this.PbxNovoCliente.Image = ((System.Drawing.Image)(resources.GetObject("PbxNovoCliente.Image")));
+            this.PbxNovoCliente.Location = new System.Drawing.Point(188, 173);
+            this.PbxNovoCliente.Name = "PbxNovoCliente";
+            this.PbxNovoCliente.Size = new System.Drawing.Size(28, 28);
+            this.PbxNovoCliente.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PbxNovoCliente.TabIndex = 63;
+            this.PbxNovoCliente.TabStop = false;
+            this.PbxNovoCliente.Click += new System.EventHandler(this.PbxNovoCliente_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.label1.Location = new System.Drawing.Point(-1, 358);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(121, 20);
+            this.label1.TabIndex = 76;
+            this.label1.Text = "Pagamento(s)";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.label10.Location = new System.Drawing.Point(-1, 184);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(86, 20);
+            this.label10.TabIndex = 77;
+            this.label10.Text = "Cliente(s)";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.label13.Location = new System.Drawing.Point(-1, 510);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(97, 20);
+            this.label13.TabIndex = 78;
+            this.label13.Text = "Limpeza(s)";
+            // 
             // FrmAluguel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1264, 681);
-            this.Controls.Add(this.panel3);
             this.Controls.Add(this.label13);
-            this.Controls.Add(this.PbxAddCliente);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.PbxNovoCliente);
             this.Controls.Add(this.PbxNovaLimpeza);
             this.Controls.Add(this.PbxExcluirCliente);
             this.Controls.Add(this.PbxExcluiLimpeza);
@@ -976,12 +1007,10 @@
             this.Controls.Add(this.TxtSemana);
             this.Controls.Add(this.DgvLimpeza);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.DgvCliente);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.DgvPagamento);
-            this.Controls.Add(this.label10);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -994,9 +1023,6 @@
             this.groupBox1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PbxAddCliente)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PbxExcluirCliente)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PbxEditaCliente)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DgvCliente)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DgvPedido)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DgvPagamento)).EndInit();
@@ -1017,6 +1043,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.PbxEditaLimpeza)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PbxEditaCliente)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbxExcluirCliente)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbxNovoCliente)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1027,7 +1056,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView DgvLimpeza;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView DgvCliente;
         private System.Windows.Forms.Label LblValorQuarto;
         private System.Windows.Forms.Label label5;
@@ -1042,7 +1070,6 @@
         private System.Windows.Forms.Label LblSituacao;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.DataGridView DgvPagamento;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DataGridView DgvPedido;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Panel panel1;
@@ -1060,16 +1087,12 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Timer Tempo;
         private System.Windows.Forms.TextBox TxtSemana;
-        private System.Windows.Forms.PictureBox PbxAddCliente;
-        private System.Windows.Forms.PictureBox PbxExcluirCliente;
-        private System.Windows.Forms.PictureBox PbxEditaCliente;
         private System.Windows.Forms.PictureBox PbxNovoPagamento;
         private System.Windows.Forms.PictureBox PbxExcluirPagamento;
         private System.Windows.Forms.PictureBox PbxEditarPagamento;
         private System.Windows.Forms.PictureBox PbxNovaLimpeza;
         private System.Windows.Forms.PictureBox PbxExcluiLimpeza;
         private System.Windows.Forms.PictureBox PbxEditaLimpeza;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label23;
@@ -1079,8 +1102,6 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label lblTotalPedido;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ALUGUEL;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.Button BtnQuarto;
         private System.Windows.Forms.DataGridViewTextBoxColumn CODIGO;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
@@ -1098,5 +1119,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.PictureBox PbxNovoCliente;
+        private System.Windows.Forms.PictureBox PbxExcluirCliente;
+        private System.Windows.Forms.PictureBox PbxEditaCliente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CodCliente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.Label lblCodigoAluguel;
+        private System.Windows.Forms.Button BtnOcuparQuarto;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label1;
     }
 }

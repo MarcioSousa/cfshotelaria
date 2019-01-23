@@ -22,7 +22,6 @@ namespace View
         List<Pedido> pedidos = new List<Pedido>();
         List<Produto> produtos = new List<Produto>();
 
-
         public FrmAluguel()
         {
             InitializeComponent();
@@ -32,14 +31,71 @@ namespace View
             DgvPagamento.AutoGenerateColumns = false;
             DgvPedido.AutoGenerateColumns = false;
         }
+        private void CarregaLists()
+        {
+            LimpezaNegocio limpezaNegocio = new LimpezaNegocio();
+            QuartoNegocio quartoNegocio = new QuartoNegocio();
+            AluguelNegocio aluguelNegocio = new AluguelNegocio();
+            PagamentoNegocio pagamentoNegocio = new PagamentoNegocio();
+            ClienteNegocio clienteNegocio = new ClienteNegocio();
+            PedidoNegocio pedidoNegocio = new PedidoNegocio();
+            ProdutoNegocio produtoNegocio = new ProdutoNegocio();
+
+            quartos = quartoNegocio.Quartos();
+            limpezas = limpezaNegocio.Limpezas(quartos);
+
+            for (int t = 0; t < quartos.Count; t++)
+            {
+                quartoNegocio.AddLimpezas(quartos[t]);
+            }
+
+            produtos = produtoNegocio.Produtos();
+
+            alugueis = aluguelNegocio.AlugueisAberto(quartos);
+            clientes = clienteNegocio.ClientesAtivos(alugueis);
+
+            for (int t = 0; t < alugueis.Count; t++)
+            {
+                aluguelNegocio.AddClientes(alugueis[t]);
+            }
+
+            pagamentos = pagamentoNegocio.Pagamentos(alugueis);
+
+            for (int t = 0; t < alugueis.Count; t++)
+            {
+                aluguelNegocio.AddPagamentos(alugueis[t]);
+
+            }
+
+            pedidos = pedidoNegocio.Pedidos(alugueis, produtos);
+
+            for (int t = 0; t < pedidos.Count; t++)
+            {
+                for (int a = 0; a < alugueis.Count; a++)
+                {
+                    for (int p = 0; p < produtos.Count; p++)
+                    {
+                        if ((pedidos[t].Produto.Codigo == produtos[p].Codigo) && (pedidos[t].Aluguel.Codigo == alugueis[a].Codigo))
+                        {
+                            aluguelNegocio.AddPedidos(alugueis[a], produtos[p], pedidos[t]);
+                        }
+                    }
+                }
+            }
+
+        }
+
         private void FrmQuarto_Load(object sender, EventArgs e)
         {
+            lblCodigoAluguel.Text = "";
+
             try
             {
                 CarregaLists();
                 Tempo.Start();
 
                 CarregaGridQuarto();
+                CarregaGridCliente();
             }
             catch (Exception ex)
             {
@@ -87,48 +143,128 @@ namespace View
                 TxtSemana.Text = "Sábado, " + DateTime.Now.ToString();
             }
         }
-        private void PbxAddCliente_Click(object sender, EventArgs e)
+        private void BtnQuarto_Click(object sender, EventArgs e)
         {
             try
             {
-                if (Convert.ToInt32(LblNumeroQuarto.Text) == 0)
-                {
-                    if (quartos.Count == 0)
-                    {
-                        MessageBox.Show("Comece cadastrando primeiramente o Quarto\nclicando no botão 'Quartos' logo acima.", "Cadastro de Limpeza", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Selecione o quarto para poder fazer o cadastro de cliente!", "Não selecionado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    return;
-                }
-                else
-                {
-                    FrmCliente frmCliente = new FrmCliente(clientes);
-                    frmCliente.ShowDialog();
+                FrmQuarto frmCadQuarto = new FrmQuarto(quartos);
+                frmCadQuarto.ShowDialog();
 
-                    //for (int t = 0; t < clientes.Count; t++)
-                    //{
-                    //    if (Convert.ToInt32(DgvCliente.Rows[0].Cells[0].Value) == clientes[t].Aluguel.Codigo)
-                    //    {
-                    //        //clientesQuarto.Add(clientes[t]);
-                    //    }
-                    //}
+                InsertionSort(quartos);
 
-                    //if (clientes.Count == 0)
-                    //{
-                    //    AluguelNegocio aluguelNegocio = new AluguelNegocio();
-                    //    int retorno = Convert.ToInt32(aluguelNegocio.Inserir(Convert.ToInt32(LblNumeroQuarto.Text)));
-                    //    MessageBox.Show(retorno.ToString());
-                    //}
+                CarregaGridQuarto();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+        private void DgvQuarto_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                DgvLimpeza.DataSource = null;
+
+                CarregaGridCliente();
+             
+
+                lblCodigoAluguel.Text = "";
+
+                for (int t = 0; t < alugueis.Count; t++)
+                {
+                    if (alugueis[t].Quarto.Numero == Convert.ToInt32(DgvQuarto.Rows[DgvQuarto.CurrentRow.Index].Cells[0].Value))
+                    {
+                        CarregaCabecalho(alugueis[t]);
+                        lblCodigoAluguel.Text = alugueis[t].Codigo.ToString();
+                        CarregaGridLimpezas(alugueis[t].Quarto);
+                        break;
+                    }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Não foi possível cadastrar o Aluguel.\nDetalhes: " + ex.Message);
+                MessageBox.Show("Não foi possível carregar os dados do quarto.\nMensagem: " + ex.Message);
             }
         }
+        private void BtnOcuparQuarto_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (BtnOcuparQuarto.Text == "OCUPAR QUARTO")
+                {
+                    for (int t = 0; t < quartos.Count; t++)
+                    {
+                        if (quartos[t].Numero == Convert.ToInt32(LblNumeroQuarto.Text))
+                        {
+                            AluguelNegocio aluguelNegocio = new AluguelNegocio();
+                            Aluguel aluguel = new Aluguel(null, 0, DateTime.Now, quartos[t]);
+
+                            aluguel.Codigo = Convert.ToInt32(aluguelNegocio.Inserir(aluguel));
+
+                            FrmCliente frmCliente = new FrmCliente(aluguel);
+                            frmCliente.ShowDialog();
+
+                            alugueis.Add(aluguel);
+
+                            CarregaCabecalho(aluguel);
+
+                            for (int u = 0; u < alugueis.Count; u++)
+                            {
+                                if (alugueis[u].Codigo == Convert.ToInt32(lblCodigoAluguel.Text))
+                                {
+                                    clientes.Add(alugueis[u].Clientes[0]);
+                                    break;
+                                }
+                            }
+                            //for(int u = 0; u < )
+
+                            //aluguelNegocio.AddClientes(aluguel);
+
+                            CarregaGridCliente();
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    for (int a = 0; a < alugueis.Count; a++)
+                    {
+                        if (alugueis[a].Codigo == Convert.ToInt32(lblCodigoAluguel.Text))
+                        {
+                            if (alugueis[a].Clientes.Count == 0 && alugueis[a].Pagamentos.Count == 0 && alugueis[a].Pedidos.Count == 0)
+                            {
+                                AluguelNegocio aluguelNegocio = new AluguelNegocio();
+                                aluguelNegocio.Excluir(alugueis[a]);
+                                alugueis.RemoveAt(a);
+                                MessageBox.Show("Quarto LIBERADO!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                BtnOcuparQuarto.Text = "OCUPAR QUARTO";
+                                for (int t = 0; t < quartos.Count; t++)
+                                {
+                                    if (quartos[t].Numero == Convert.ToInt32(LblNumeroQuarto.Text))
+                                    {
+                                        LimpaCabecalho(quartos[t]);
+                                        break;
+                                    }
+                                }
+
+                                break;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Delete primeiro todos os clientes, pagamentos e pedidos deste mesmo quarto para poder liberar o mesmo.", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Não foi retornado um número!\nMensagem: " + ex.Message);
+            }
+        }
+
         private void PbxNovaLimpeza_Click(object sender, EventArgs e)
         {
             try
@@ -151,23 +287,102 @@ namespace View
                     {
                         if (quartos[t].Numero == Convert.ToInt32(LblNumeroQuarto.Text))
                         {
-                            FrmLimpeza frmLimpeza = new FrmLimpeza(quartos[t], limpezas, 0);
+                            FrmLimpeza frmLimpeza = new FrmLimpeza(quartos[t]);
                             frmLimpeza.ShowDialog();
 
-                            InsertionSort(limpezas);
-
-                            if (limpezas.Count > 10)
+                            if (quartos[t].Limpezas.Count != Convert.ToInt32(DgvLimpeza.Rows.Count))
                             {
-                                limpezas.RemoveAt(10);
+                                for (int q = 0; q < quartos[t].Limpezas.Count; q++)
+                                {
+                                    for (int g = 0; g < DgvLimpeza.Rows.Count; g++)
+                                    {
+                                        if(quartos[t].Limpezas[q].Codigo == Convert.ToInt32(DgvLimpeza.Rows[g].Cells[0].Value))
+                                        {
+                                            limpezas.Add(quartos[t].Limpezas[q]);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                         
+                            if(DgvLimpeza.Rows.Count == 0)
+                            {
+                                limpezas.Add(quartos[t].Limpezas[0]);
                             }
 
-                            DgvLimpeza.DataSource = null;
-                            DgvLimpeza.DataSource = limpezas;
-
-                            DgvLimpeza.Update();
-                            DgvLimpeza.Refresh();
-
+                            
+                            CarregaGridLimpezas(quartos[t]);
                             break;
+
+
+
+
+
+
+
+
+
+
+
+
+                            //for(int l = 0; l < limpezas.Count; l++)
+                            //{
+                            //    if(limpezas[l].Quarto.Numero == quartos[t].Numero)
+                            //    {
+
+                            //    }
+                            //}
+
+
+
+
+
+
+
+                            //for(int q = 0; q < quartos.Count; q++)
+                            //{
+                            //    if (quartos[q].Numero == quartos[t].Numero)
+                            //    {
+
+                            //    }
+                            //}
+
+                            //for(int l = 0; l < limpezas.Count; l++)
+                            //{
+
+                            //}
+
+
+                            //for (int l = 0; l < limpezas.Count; l++)
+                            //{
+                            //    if(limpezas[l].Quarto.Numero == Convert.ToInt32(LblNumeroQuarto.Text))
+                            //    {
+                            //        if(limpezas[l].Quarto.Limpezas.Count != quartos[t].Limpezas.Count)
+                            //        {
+                            //            limpezas.Add(quartos[t].Limpezas[limpezas[l].Quarto.Limpezas.Count - 1]);
+                            //            break;
+                            //        }
+                            //    }
+                            //}
+
+
+
+                            //for (int c = 0; c < clientes.Count; c++)
+                            //{
+                            //    if (clientes[c].Aluguel.Codigo == Convert.ToInt32(lblCodigoAluguel.Text))
+                            //    {
+                            //        if (clientes[c].Aluguel.Clientes.Count != alugueis[t].Clientes.Count)
+                            //        {
+                            //            clientes.Add(alugueis[t].Clientes[clientes[c].Aluguel.Clientes.Count - 1]);
+                            //            break;
+                            //        }
+                            //        break;
+                            //    }
+                            //}
+
+
+
+
                         }
                     }
                 }
@@ -177,6 +392,97 @@ namespace View
                 MessageBox.Show("Não foi possível adicionar uma nova limpeza!", "Aviso.", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+        private void PbxNovoCliente_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Convert.ToInt32(LblNumeroQuarto.Text) == 0)
+                {
+                    if (quartos.Count == 0)
+                    {
+                        MessageBox.Show("Comece cadastrando primeiramente o Quarto\nclicando no botão 'Quartos' logo acima.", "Cadastro de Limpeza", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Selecione o quarto para poder fazer o cadastro de cliente!", "Não selecionado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    return;
+                }
+                else
+                {
+                    if (lblCodigoAluguel.Text != "")
+                    {
+                        for (int t = 0; t < alugueis.Count; t++)
+                        {
+                            if (alugueis[t].Codigo == Convert.ToInt32(lblCodigoAluguel.Text))
+                            {
+                                FrmCliente frmCliente = new FrmCliente(alugueis[t]);
+                                frmCliente.ShowDialog();
+
+                                for (int c = 0; c < clientes.Count; c++)
+                                {
+                                    if (clientes[c].Aluguel.Codigo == Convert.ToInt32(lblCodigoAluguel.Text))
+                                    {
+                                        if (clientes[c].Aluguel.Clientes.Count != alugueis[t].Clientes.Count)
+                                        {
+                                            clientes.Add(alugueis[t].Clientes[clientes[c].Aluguel.Clientes.Count - 1]);
+                                            break;
+                                        }
+                                        break;
+                                    }
+                                }
+
+                                CarregaGridCliente();
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Clique no botão 'Ocupar Quarto' primeiramente.", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Clique no botão 'Ocupar Quarto' primeiramente. Mensagem:" + ex.Message, "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        private void PbxNovoPagamento_Click(object sender, EventArgs e)
+        {
+            //try
+            //{
+            //    if (Convert.ToInt32(LblNumeroQuarto.Text) == 0)
+            //    {
+            //        if (quartos.Count == 0)
+            //        {
+            //            MessageBox.Show("Comece cadastrando primeiramente o Quarto\nclicando no botão 'Quartos' logo acima!", "Cadastro de Limpeza", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //        }
+            //        else
+            //        {
+            //            MessageBox.Show("Selecione o quarto para poder fazer o cadastro de pagamento!", "Não selecionado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //        }
+            //        return;
+            //    }
+            //    else
+            //    {
+            //        if (DgvCliente.Rows.Count == 0)
+            //        {
+            //            MessageBox.Show("Cadastre primeiramente o Cliente para quarto.");
+            //        }
+            //        else
+            //        {
+            //            FrmPagamento frmPagamento = new FrmPagamento();
+            //            frmPagamento.ShowDialog();
+            //        }
+            //    }
+            //}
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("Não foi possível adicionar um novo pagamento!", "Aviso.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //}
+        }
+
         private void PbxEditaLimpeza_Click(object sender, EventArgs e)
         {
             try
@@ -185,18 +491,18 @@ namespace View
                 {
                     if (quartos[t].Numero == Convert.ToInt32(LblNumeroQuarto.Text))
                     {
-                        FrmLimpeza frmLimpeza = new FrmLimpeza(quartos[t], limpezas, Convert.ToInt32(DgvLimpeza.Rows[DgvLimpeza.CurrentRow.Index].Cells[0].Value));
-                        frmLimpeza.ShowDialog();
+                        for (int l = 0; l < quartos[t].Limpezas.Count; l++)
+                        {
+                            if (quartos[t].Limpezas[l].Codigo == Convert.ToInt32(DgvLimpeza.Rows[DgvLimpeza.CurrentRow.Index].Cells[0].Value))
+                            {
+                                FrmLimpeza frmLimpeza = new FrmLimpeza(quartos[t], quartos[t].Limpezas[l]);
+                                frmLimpeza.ShowDialog();
 
-                        InsertionSort(limpezas);
+                                CarregaGridLimpezas(quartos[t]);
 
-                        DgvLimpeza.DataSource = null;
-                        DgvLimpeza.DataSource = limpezas;
-
-                        DgvLimpeza.Update();
-                        DgvLimpeza.Refresh();
-
-                        break;
+                                break;
+                            }
+                        }
                     }
                 }
             }
@@ -205,55 +511,49 @@ namespace View
                 MessageBox.Show("Não foi possível adicionar uma nova limpeza!\nAviso:" + ex.Message, "Aviso.", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-        private void BtnEditarQuarto_Click(object sender, EventArgs e)
+        private void PbxEditaCliente_Click(object sender, EventArgs e)
         {
-            FrmQuarto frmCadQuarto = new FrmQuarto(quartos);
-            frmCadQuarto.ShowDialog();
-        }
-        private void PbxNovoPagamento_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (Convert.ToInt32(LblNumeroQuarto.Text) == 0)
-                {
-                    if (quartos.Count == 0)
-                    {
-                        MessageBox.Show("Comece cadastrando primeiramente o Quarto\nclicando no botão 'Quartos' logo acima!", "Cadastro de Limpeza", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Selecione o quarto para poder fazer o cadastro de pagamento!", "Não selecionado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    return;
-                }
-                else
-                {
-                    FrmPagamento frmPagamento = new FrmPagamento();
-                    frmPagamento.ShowDialog();
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Não foi possível adicionar um novo pagamento!", "Aviso.", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-        private void BtnQuarto_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                FrmQuarto frmCadQuarto = new FrmQuarto(quartos);
-                frmCadQuarto.ShowDialog();
+            //try
+            //{
+            //    if (quartos.Count != 0)
+            //    {
+            //        for (int t = 0; t < quartos.Count; t++)
+            //        {
+            //            for (int u = 0; u < alugueis.Count; u++)
+            //            {
+            //                if (quartos[t].Numero == alugueis[u].Quarto.Numero)
+            //                {
+            //                    for (int c = 0; c < alugueis[u].Clientes.Count; c++)
+            //                    {
+            //                        if (alugueis[u].Clientes[c].Codigo == Convert.ToInt32(DgvCliente.Rows[DgvCliente.CurrentRow.Index].Cells[0].Value))
+            //                        {
+            //                            FrmCliente frmCliente = new FrmCliente(alugueis[u], alugueis[u].Clientes[c]);
+            //                            frmCliente.ShowDialog();
 
-                InsertionSort(quartos);
+            //                            CarregaGridCliente();
 
-                CarregaGridQuarto();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            //                            break;
+            //                        }
+            //                    }
+            //                }
+            //            }
+            //        }
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Registre seu primeiro quarto no sistema clicando no botão 'Quartos'");
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Não foi possível editar o cliente.\nMensagem: " + ex.Message);
+            //}
+        }
+        private void PbxEditarPagamento_Click(object sender, EventArgs e)
+        {
 
         }
+
         private void PbxExcluiLimpeza_Click(object sender, EventArgs e)
         {
             if (DgvLimpeza.Rows.Count != 0)
@@ -261,20 +561,21 @@ namespace View
                 if (MessageBox.Show("Deseja excluir a limpeza selecionada?", "Exclusão de Limpeza", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     LimpezaNegocio limpezaNegocio = new LimpezaNegocio();
-                    for (int t = 0; t < limpezas.Count; t++)
+
+                    for (int t = 0; t < quartos.Count; t++)
                     {
-                        if (Convert.ToInt32(DgvLimpeza.Rows[DgvLimpeza.CurrentRow.Index].Cells[0].Value.ToString()) == limpezas[t].Codigo)
+                        for (int l = 0; l < quartos[t].Limpezas.Count; l++)
                         {
-                            limpezaNegocio.Excluir(limpezas[t]);
-                            limpezas.RemoveAt(t);
+                            if (quartos[t].Limpezas[l].Codigo == Convert.ToInt32(DgvLimpeza.Rows[DgvLimpeza.CurrentRow.Index].Cells[0].Value))
+                            {
+                                limpezaNegocio.Excluir(quartos[t].Limpezas[l]);
+                                quartos[t].Limpezas.RemoveAt(l);
 
-                            DgvLimpeza.DataSource = null;
-                            DgvLimpeza.DataSource = limpezas;
-                            DgvLimpeza.Update();
-                            DgvLimpeza.Refresh();
+                                CarregaGridLimpezas(quartos[t]);
 
-                            MessageBox.Show("Excluído com Sucesso!", "Conclusão", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            break;
+                                MessageBox.Show("Excluído com Sucesso!", "Conclusão", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                break;
+                            }
                         }
                     }
                 }
@@ -283,22 +584,107 @@ namespace View
             {
                 MessageBox.Show("Não tem limpeza para ser excluída!", "Não Exclusão", MessageBoxButtons.OK, MessageBoxIcon.None);
             }
-
         }
-        private void DgvQuarto_SelectionChanged(object sender, EventArgs e)
+        private void PbxExcluirCliente_Click(object sender, EventArgs e)
         {
-            CarregaGrids();
+            //if (DgvCliente.Rows.Count != 0)
+            //{
+            //    if (MessageBox.Show("Deseja excluir o Cliente selecionado?", "Exclusão de Cliente", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            //    {
+            //        ClienteNegocio clienteNegocio = new ClienteNegocio();
+            //        for (int t = 0; t < clientes.Count; t++)
+            //        {
+            //            if (Convert.ToInt32(DgvCliente.Rows[DgvCliente.CurrentRow.Index].Cells[0].Value.ToString()) == clientes[t].Codigo)
+            //            {
+            //                clienteNegocio.Excluir(clientes[t]);
+            //                clientes.RemoveAt(t);
 
-            for (int t = 0; t < alugueis.Count; t++)
+            //                for (int u = 0; u < alugueis.Count; u++)
+            //                {
+            //                    if (alugueis[u].Codigo == Convert.ToInt32(lblCodigoAluguel.Text))
+            //                    {
+            //                        alugueis[u].Clientes.RemoveAt(u);
+            //                    }
+            //                }
+
+            //                CarregaGridCliente();
+
+            //                MessageBox.Show("Excluído com Sucesso!", "Conclusão", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //                break;
+            //            }
+            //        }
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Exclusão Cancelada!", "Não Exclusão", MessageBoxButtons.OK, MessageBoxIcon.None);
+            //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Cadastre seu primeiro Cliente ao quarto selecionado!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //}
+        }
+        private void PbxExcluirPagamento_Click(object sender, EventArgs e)
+        {
+            //if (DgvPagamento.Rows.Count != 0)
+            //{
+            //    if (MessageBox.Show("Deseja excluir o pagamento selecionada?", "Exclusão de Pagamento", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            //    {
+            //        PagamentoNegocio pagamentoNegocio = new PagamentoNegocio();
+
+            //        for (int t = 0; t < pagamentos.Count; t++)
+            //        {
+            //            if (Convert.ToInt32(DgvPagamento.Rows[DgvPagamento.CurrentRow.Index].Cells[0].Value.ToString()) == pagamentos[t].Codigo)
+            //            {
+            //                pagamentoNegocio.Excluir(pagamentos[t]);
+            //                pagamentos.RemoveAt(t);
+
+            //                DgvPagamento.DataSource = null;
+            //                DgvPagamento.DataSource = pagamentos;
+
+            //                DgvPagamento.Update();
+            //                DgvPagamento.Refresh();
+
+            //                MessageBox.Show("Excluído com Sucesso!", "Conclusão", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //                break;
+            //            }
+            //        }
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Não tem pagamento para ser excluído!", "Não Exclusão", MessageBoxButtons.OK, MessageBoxIcon.None);
+            //    }
+            //}
+        }
+
+
+        private void ApagarAluguel(Aluguel aluguel)
+        {
+            try
             {
-                if (alugueis[t].Quarto.Numero == Convert.ToInt32(DgvQuarto.Rows[DgvQuarto.CurrentRow.Index].Cells[0].Value))
-                {
-                    CarregaCabecalho(alugueis[t]);
-                    break;
-                }
+                AluguelNegocio aluguelNegocio = new AluguelNegocio();
+                aluguelNegocio.Excluir(aluguel);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Não foi possível excluir o Aluguel.\nMensagem: " + ex.Message);
             }
         }
+        private void CarregaGridLimpezas(Quarto quarto)
+        {
+            InsertionSort(quarto.Limpezas);
 
+            if (quarto.Limpezas.Count > 10)
+            {
+                quarto.Limpezas.RemoveAt(10);
+            }
+
+            DgvLimpeza.DataSource = null;
+            DgvLimpeza.DataSource = quarto.Limpezas;
+
+            DgvLimpeza.Update();
+            DgvLimpeza.Refresh();
+        }
         private void CarregaCampos(int numeroQuarto, int qtdeQuarto)
         {
             //    DgvCliente.Rows.Clear();
@@ -367,101 +753,17 @@ namespace View
             //        }
             //    }
         }
-        private void CarregaGrids()
-        {
-            //==== CARREGA LIMPEZA =====
-            DgvCliente.DataSource = null;
-            DgvLimpeza.DataSource = null;
-            DgvPagamento.DataSource = null;
-            DgvPedido.DataSource = null;
-
-            for (int t = 0; t < quartos.Count; t++)
-            {
-                if (quartos[t].Numero == Convert.ToInt32(DgvQuarto.Rows[DgvQuarto.CurrentRow.Index].Cells[0].Value))
-                {
-                    InsertionSort(quartos[t].Limpezas);
-                    DgvLimpeza.DataSource = quartos[t].Limpezas;
-
-                    DgvLimpeza.Update();
-                    DgvLimpeza.Refresh();
-
-                    LimpaCabecalho(quartos[t]);
-                    break;
-                }
-            }
-
-            //==== CARREGA CLIENTE, PAGAMENTO, PEDIDO ====
-            for (int t = 0; t < alugueis.Count; t++)
-            {
-                if (alugueis[t].Quarto.Numero == Convert.ToInt32(LblNumeroQuarto.Text))
-                {
-                    DgvCliente.DataSource = alugueis[t].Clientes;
-                    DgvPagamento.DataSource = alugueis[t].Pagamentos;
-                    DgvPedido.DataSource = alugueis[t].Pedidos;
-                    break;
-                }
-            }
-        }
-        private void CarregaLists()
-        {
-            LimpezaNegocio limpezaNegocio = new LimpezaNegocio();
-            QuartoNegocio quartoNegocio = new QuartoNegocio();
-            AluguelNegocio aluguelNegocio = new AluguelNegocio();
-            PagamentoNegocio pagamentoNegocio = new PagamentoNegocio();
-            ClienteNegocio clienteNegocio = new ClienteNegocio();
-            PedidoNegocio pedidoNegocio = new PedidoNegocio();
-            ProdutoNegocio produtoNegocio = new ProdutoNegocio();
-
-            quartos = quartoNegocio.Quartos();
-            limpezas = limpezaNegocio.Limpezas(quartos);
-            produtos = produtoNegocio.Produtos();
-
-            for (int t = 0; t < quartos.Count; t++)
-            {
-                quartoNegocio.AddLimpezas(quartos[t]);
-            }
-
-            alugueis = aluguelNegocio.AlugueisAberto(quartos);
-            clientes = clienteNegocio.ClientesAtivos(alugueis);
-
-            for (int t = 0; t < alugueis.Count; t++)
-            {
-                aluguelNegocio.AddClientes(alugueis[t]);
-            }
-
-            pagamentos = pagamentoNegocio.Pagamentos(alugueis);
-
-            for (int t = 0; t < alugueis.Count; t++)
-            {
-                aluguelNegocio.AddPagamentos(alugueis[t]);
-
-            }
-
-            pedidos = pedidoNegocio.Pedidos(alugueis, produtos);
-
-            for (int t = 0; t < pedidos.Count; t++)
-            {
-                for (int a = 0; a < alugueis.Count; a++)
-                {
-                    for (int p = 0; p < produtos.Count; p++)
-                    {
-                        if ((pedidos[t].Produto.Codigo == produtos[p].Codigo) && (pedidos[t].Aluguel.Codigo == alugueis[a].Codigo))
-                        {
-                            aluguelNegocio.AddPedidos(alugueis[a], produtos[p], pedidos[t]);
-                        }
-                    }
-                }
-            }
-
-        }
         private void CarregaCabecalho(Aluguel aluguel)
         {
+            lblCodigoAluguel.Text = aluguel.Codigo.ToString();
             LblNumeroQuarto.Text = aluguel.Quarto.Numero.ToString("000");
             LblSituacao.Text = "OCUPADO";
             LblDia.Text = aluguel.DataChegada.ToShortDateString();
             LblHorario.Text = aluguel.DataChegada.ToShortTimeString();
             LblValorQuarto.Text = aluguel.Valor.ToString("C");
             LblLocalizacao.Text = aluguel.Quarto.Localidade;
+            BtnOcuparQuarto.Visible = true;
+            BtnOcuparQuarto.Text = "LIBERAR QUARTO";
 
             CalcularTotalQuarto(aluguel);
         }
@@ -469,12 +771,14 @@ namespace View
         {
             if (quartos.Count == 0)
             {
+
                 LblNumeroQuarto.Text = "000";
                 LblSituacao.Text = "";
                 LblDia.Text = "";
                 LblHorario.Text = "";
                 LblValorQuarto.Text = "";
                 LblLocalizacao.Text = "";
+                BtnOcuparQuarto.Visible = false;
             }
             else
             {
@@ -484,8 +788,10 @@ namespace View
                 LblHorario.Text = "";
                 LblValorQuarto.Text = quarto.ValorDiaria.ToString("C");
                 LblLocalizacao.Text = quarto.Localidade;
+                BtnOcuparQuarto.Visible = true;
+                BtnOcuparQuarto.Text = "OCUPAR QUARTO";
             }
-
+            lblCodigoAluguel.Text = "";
             lblTotalPedido.Text = "";
             lblQtdeDiasValor.Text = "";
             lblTotalAluguel.Text = "";
@@ -529,8 +835,40 @@ namespace View
                 MessageBox.Show(ex.Message);
             }
         }
+        private void CarregaGridCliente()
+        {
+            try
+            {
+                DgvCliente.DataSource = null;
 
-        //InsertionSort
+                for (int t = 0; t < alugueis.Count; t++)
+                {
+                    if (lblCodigoAluguel.Text != "")
+                    {
+                        if (alugueis[t].Codigo == Convert.ToInt32(lblCodigoAluguel.Text))
+                        {
+                            DgvCliente.DataSource = alugueis[t].Clientes;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Não foi possível carregar os clientes!\nMensagem: " + ex.Message);
+            }
+
+            DgvCliente.Update();
+            DgvCliente.Refresh();
+
+        }
+
         private void InsertionSort(List<Quarto> quartos)
         {
             int i, j;
@@ -572,67 +910,5 @@ namespace View
             }
         }
 
-        private void PbxExcluirCliente_Click(object sender, EventArgs e)
-        {
-            if (DgvCliente.Rows.Count != 0)
-            {
-                if (MessageBox.Show("Deseja excluir o Cliente selecionado?", "Exclusão de Cliente", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    //LimpezaNegocio limpezaNegocio = new LimpezaNegocio();
-                    //for (int t = 0; t < limpezas.Count; t++)
-                    //{
-                    //    if (Convert.ToInt32(DgvLimpeza.Rows[DgvLimpeza.CurrentRow.Index].Cells[0].Value.ToString()) == limpezas[t].Codigo)
-                    //    {
-                    //        limpezaNegocio.Excluir(limpezas[t]);
-                    //        limpezas.RemoveAt(t);
-
-                    //        DgvLimpeza.DataSource = null;
-                    //        DgvLimpeza.DataSource = limpezas;
-                    //        DgvLimpeza.Update();
-                    //        DgvLimpeza.Refresh();
-
-                    //        MessageBox.Show("Excluído com Sucesso!", "Conclusão", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //        break;
-                    //    }
-                    //}
-                }
-                else
-                {
-                    MessageBox.Show("Não tem cliente para ser excluído!", "Não Exclusão", MessageBoxButtons.OK, MessageBoxIcon.None);
-                }
-            }
-
-
-        }
-        private void PbxExcluirPagamento_Click(object sender, EventArgs e)
-        {
-            if (DgvPagamento.Rows.Count != 0)
-            {
-                if (MessageBox.Show("Deseja excluir o pagamento selecionada?", "Exclusão de Pagamento", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    //LimpezaNegocio limpezaNegocio = new LimpezaNegocio();
-                    //for (int t = 0; t < limpezas.Count; t++)
-                    //{
-                    //    if (Convert.ToInt32(DgvLimpeza.Rows[DgvLimpeza.CurrentRow.Index].Cells[0].Value.ToString()) == limpezas[t].Codigo)
-                    //    {
-                    //        limpezaNegocio.Excluir(limpezas[t]);
-                    //        limpezas.RemoveAt(t);
-
-                    //        DgvLimpeza.DataSource = null;
-                    //        DgvLimpeza.DataSource = limpezas;
-                    //        DgvLimpeza.Update();
-                    //        DgvLimpeza.Refresh();
-
-                    //        MessageBox.Show("Excluído com Sucesso!", "Conclusão", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //        break;
-                    //    }
-                    //}
-                }
-                else
-                {
-                    MessageBox.Show("Não tem pagamento para ser excluído!", "Não Exclusão", MessageBoxButtons.OK, MessageBoxIcon.None);
-                }
-            }
-        }
     }
 }

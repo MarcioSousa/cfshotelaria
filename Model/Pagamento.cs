@@ -8,19 +8,19 @@ namespace Model
 {
     public class Pagamento
     {
-        private int codigo;
+        private int? codigo;
         private string tipo;
         private DateTime dataPagamento;
         private double valor;
         private Aluguel aluguel;
 
-        public int Codigo { get => codigo; set => codigo = value; }
+        public int? Codigo { get => codigo; set => codigo = value; }
         public string Tipo { get => tipo; set => tipo = value; }
         public DateTime DataPagamento { get => dataPagamento; set => dataPagamento = value; }
         public double Valor { get => valor; set => valor = value; }
         public Aluguel Aluguel { get => aluguel; set => aluguel = value; }
 
-        public Pagamento(int codigo, string tipo, DateTime dataPagamento, double valor, Aluguel aluguel)
+        public Pagamento(int? codigo, string tipo, DateTime dataPagamento, double valor, Aluguel aluguel)
         {
             this.codigo = codigo;
             this.tipo = tipo;

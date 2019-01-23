@@ -14,52 +14,44 @@ namespace View
 {
     public partial class FrmLimpeza : Form
     {
-        Quarto quarto;
-        List<Limpeza> limpezas;
         Limpeza limpeza;
+        Quarto quarto;
 
-        int codigoLimpeza;
-
-        public FrmLimpeza(Quarto quarto, List <Limpeza> limpezas, int codigoLimpeza)
+        public FrmLimpeza(Quarto quarto)
         {
             InitializeComponent();
             this.quarto = quarto;
-            this.limpezas = limpezas;
-            this.codigoLimpeza = codigoLimpeza;
         }
+
+        public FrmLimpeza(Quarto quarto, Limpeza limpeza)
+        {
+            InitializeComponent();
+            this.quarto = quarto;
+            this.limpeza = limpeza;
+        }
+
 
         private void FrmLimpeza_Load(object sender, EventArgs e)
         {
             try
             {
-                if (codigoLimpeza == 0)
+                if(limpeza is null)
                 {
-                    TxtCodigo.Text = "Nova Limpeza";
+                    //NOVA LIMPEZA
+                    NudQuartoNumero.Value = quarto.Numero;
                 }
                 else
                 {
-                    TxtCodigo.Text = codigoLimpeza.ToString();
-                    
-                    for(int t = 0; t < limpezas.Count; t++)
-                    {
-                        if(limpezas[t].Codigo == codigoLimpeza)
-                        {
-                            DtpDataLimpeza.Value = limpezas[t].DataLimpeza;
-                            DtpHoraLimpeza.Value = limpezas[t].DataLimpeza;
-                        }
-                    }
-
+                    //EDITA LIMPEZA
+                    NudQuartoNumero.Value = limpeza.Quarto.Numero;
+                    DtpDataLimpeza.Value = limpeza.DataLimpeza;
+                    DtpHoraLimpeza.Value = limpeza.DataLimpeza;
                 }
-
-                NudQuartoNumero.Value = quarto.Numero;
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Código do Quarto não carregado!\nAviso: " + ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-
-
         }
 
         private void BtnConfirmar_Click(object sender, EventArgs e)
@@ -67,49 +59,36 @@ namespace View
             try
             {
                 LimpezaNegocio limpezaNegocio = new LimpezaNegocio();
-
-                if (codigoLimpeza == 0)
+                if (limpeza is null)
                 {
-                    limpeza = new Limpeza(null, Convert.ToDateTime(DtpDataLimpeza.Text + " " + DtpHoraLimpeza.Text), quarto);
-                    try
+                    //NOVA LIMPEZA
+                    limpeza = new Limpeza(null, Convert.ToDateTime(DtpDataLimpeza.Text + " " + DtpHoraLimpeza.Text), quarto)
                     {
-                        limpeza.Codigo = Convert.ToInt32(limpezaNegocio.Inserir(limpeza));
-                        limpezas.Add(limpeza);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Erro ao criar o código da limpeza!\nMensagem: " + ex.Message, "Cancelamento", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-
+                        Quarto = quarto
+                    };
+                    limpezaNegocio.Inserir(limpeza);
+                   
+                    quarto.Limpezas.Add(limpeza);
                 }
                 else
                 {
-                    for (int t = 0; t < limpezas.Count; t++)
-                    {
-                        if (limpezas[t].Codigo == Convert.ToInt32(TxtCodigo.Text))
-                        {
-                            limpezas[t].Codigo = Convert.ToInt32(TxtCodigo.Text);
-                            limpezas[t].DataLimpeza = Convert.ToDateTime(DtpDataLimpeza.Text + " " + DtpHoraLimpeza.Text);
-                            limpezas[t].Quarto = quarto;
-
-                            limpezaNegocio.Alterar(limpezas[t]);
-
-                            break;
-                        }
-                    }
+                    //EDITA LIMPEZA
+                    limpeza.DataLimpeza = Convert.ToDateTime(DtpDataLimpeza.Text + " " + DtpHoraLimpeza.Text);
+                    limpezaNegocio.Alterar(limpeza);
                 }
-
                 this.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Não foi possível gravar a Limpeza.\nAviso: " + ex.Message, "Gravação", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+
         }
 
         private void BtnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
     }
 }

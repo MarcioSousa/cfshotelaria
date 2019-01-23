@@ -93,6 +93,26 @@ namespace Negocio
             }
         }
 
+        //public void AddPedidos(Quarto quarto)
+        //{
+        //    try
+        //    {
+        //        acessoMySql.LimparParametros();
+        //        DataTable dataTableLimpezasQuarto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_quarto, datalimpeza FROM limpeza WHERE cod_quarto = " + quarto.Numero, false);
+
+        //        foreach (DataRow linha in dataTableLimpezasQuarto.Rows)
+        //        {
+        //            Limpeza limpeza = new Limpeza(Convert.ToInt32(linha["codigo"]), Convert.ToDateTime(linha["datalimpeza"]), quarto);
+        //            quarto.Limpezas.Add(limpeza);
+        //        }
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception("Não foi possível carregar as Limpezas do quarto " + quarto.Numero + ".\nDetalhes: " + ex.Message);
+        //    }
+        //}
+
         //public void AddItemProduto(Pedido pedido, Produto produto)
         //{
         //    try

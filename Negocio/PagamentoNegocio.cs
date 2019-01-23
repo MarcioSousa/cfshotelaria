@@ -18,11 +18,11 @@ namespace Negocio
             try
             {
                 acessoMySql.LimparParametros();
-                //acessoMySql.AdicionarParametros("aCodCliente", pagamento.Cliente.Codigo);
+                acessoMySql.AdicionarParametros("aCodAluguel", pagamento.Aluguel.Codigo);
                 acessoMySql.AdicionarParametros("aTipo", pagamento.Tipo);
                 acessoMySql.AdicionarParametros("aDataPagamento", pagamento.DataPagamento);
                 acessoMySql.AdicionarParametros("aValor", pagamento.Valor);
-                acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_PagamentoNovo");
+                pagamento.Codigo = Convert.ToInt32(acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_PagamentoNovo"));
                 return "Pagamento adicionado com sucesso!";
             }
             catch (Exception ex)

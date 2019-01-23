@@ -14,63 +14,82 @@ namespace View
 {
     public partial class FrmCliente : Form
     {
-        List<Cliente> clientes;
-
-        public FrmCliente(List<Cliente> clientes)
+        Cliente cliente;
+        Aluguel aluguel;
+        
+        public FrmCliente(Aluguel aluguel)
         {
             InitializeComponent();
-            this.clientes = clientes;
+            this.aluguel = aluguel;
         }
-
+        public FrmCliente(Aluguel aluguel, Cliente cliente)
+        {
+            InitializeComponent();
+            this.aluguel = aluguel;
+            this.cliente = cliente;
+        }
         private void FrmCliente_Load(object sender, EventArgs e)
         {
-            if (clientes.Count != 0)
+            try
             {
-                MessageBox.Show(clientes[0].Aluguel.Codigo.ToString());
-                LblAluguel.Text = "Aluguel Nº " + clientes[0].Aluguel.Codigo.ToString();
+                if (cliente != null)
+                {
+                    //EDITA CLIENTE
+                    TxtCodigo.Text = cliente.Codigo.ToString();
+                    TxtNome.Text = cliente.Nome;
+                    TxtRg.Text = cliente.Rg;
+                    TxtCpf.Text = cliente.Cpf;
+                    TxtContato.Text = cliente.Contato;
+                }
             }
-
-            for (int t = 0; t < clientes.Count; t++)
+            catch (Exception ex)
             {
-                DgvCliente.Rows.Add(clientes[t].Aluguel.Codigo.ToString(), clientes[t].Codigo.ToString(), clientes[t].Nome.ToString(), clientes[t].Rg.ToString(), clientes[t].Cpf.ToString(), clientes[t].Contato.ToString());
+                MessageBox.Show("Dados não coletados!\nAviso: " + ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-
         }
-
-        private void DgvCliente_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void BtnCancelar_Click(object sender, EventArgs e)
         {
-            TxtCodigo.Text = DgvCliente.Rows[DgvCliente.CurrentRow.Index].Cells[1].Value.ToString();
-            TxtNome.Text = DgvCliente.Rows[DgvCliente.CurrentRow.Index].Cells[2].Value.ToString();
-            TxtRg.Text = DgvCliente.Rows[DgvCliente.CurrentRow.Index].Cells[3].Value.ToString();
-            TxtCpf.Text = DgvCliente.Rows[DgvCliente.CurrentRow.Index].Cells[4].Value.ToString();
-            TxtContato.Text = DgvCliente.Rows[DgvCliente.CurrentRow.Index].Cells[5].Value.ToString();
+            this.Close();
         }
-
-        private void BtnNovo_Click(object sender, EventArgs e)
+        private void BtnFinalizar_Click(object sender, EventArgs e)
         {
-            LimparCampos();
-            AbrirBotoes();
+            try
+            {
+                ClienteNegocio clienteNegocio = new ClienteNegocio();
+                
+                if(cliente is null)
+                {
+                    //NOVO CLIENTE
+                    cliente = new Cliente(null, TxtNome.Text, TxtRg.Text, TxtCpf.Text, TxtContato.Text, aluguel);
+                    clienteNegocio.Inserir(cliente);
+
+                    aluguel.Clientes.Add(cliente);
+                }
+                else
+                {
+                    //EDITA CLIENTE
+                    cliente.Nome = TxtNome.Text;
+                    cliente.Rg = TxtRg.Text;
+                    cliente.Cpf = TxtCpf.Text;
+                    cliente.Contato = TxtContato.Text;
+                    clienteNegocio.Alterar(cliente);
+                }
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Não foi possível gravar o Cliente.\nAviso: " + ex.Message, "Gravação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
-        private void BtnEditar_Click(object sender, EventArgs e)
+        private void AbrirCampos()
         {
-            AbrirBotoes();
+            TxtNome.Enabled = true;
+            TxtRg.Enabled = true;
+            TxtCpf.Enabled = true;
+            TxtContato.Enabled = true;
+            TxtNome.Focus();
         }
-
-        public void AbrirBotoes()
-        {
-            DgvCliente.Enabled = false;
-
-            BtnNovo.Enabled = false;
-            BtnEditar.Enabled = false;
-
-            BtnLimpar.Enabled = true;
-            BtnFinalizar.Enabled = true;
-
-            BtnExcluir.Enabled = false;
-            BtnFinalizar.Enabled = false;
-        }
-
         public void LimparCampos()
         {
             TxtNome.Text = "";
@@ -79,22 +98,5 @@ namespace View
             TxtContato.Text = "";
         }
 
-        private void BtnLimpar_Click(object sender, EventArgs e)
-        {
-            LimparCampos();
-        }
-
-        private void BtnCancelar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BtnAdicionar_Click(object sender, EventArgs e)
-        {
-            if(LblAluguel.Text == "Aluguel Nº ")
-            {
-
-            }
-        }
     }
 }

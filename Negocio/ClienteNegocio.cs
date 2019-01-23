@@ -23,8 +23,8 @@ namespace Negocio
                 acessoMySql.AdicionarParametros("aRg", cliente.Rg);
                 acessoMySql.AdicionarParametros("aCpf", cliente.Cpf);
                 acessoMySql.AdicionarParametros("aContato", cliente.Contato);
-                acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_ClienteNovo");
-                return "Cliente adicionado com sucesso!";
+                cliente.Codigo = Convert.ToInt32(acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_ClienteNovo"));
+                return "Cliente Cadastrado!";
             }
             catch (Exception ex)
             {

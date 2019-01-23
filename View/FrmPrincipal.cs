@@ -14,6 +14,14 @@ namespace View
 {
     public partial class FrmPrincipal : Form
     {
+        //List<Limpeza> limpezas = new List<Limpeza>();
+        //List<Quarto> quartos = new List<Quarto>();
+        //List<Aluguel> aluguels = new List<Aluguel>();
+        //List<Cliente> clientes = new List<Cliente>();
+        //List<Pagamento> pagamentos = new List<Pagamento>();
+        //List<Pedido> pedidos = new List<Pedido>();
+        //List<Produto> produtos = new List<Produto>();
+        //List<Entrada> entradas = new List<Entrada>();
 
         public FrmPrincipal()
         {
@@ -22,15 +30,38 @@ namespace View
 
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
-            FrmSplashScreen splashScreen = new FrmSplashScreen();
-            splashScreen.ShowDialog();
-            FrmAcesso acesso = new FrmAcesso();
-            acesso.ShowDialog();
+            //FrmSplashScreen splashScreen = new FrmSplashScreen();
+            //splashScreen.ShowDialog();
+            //FrmAcesso acesso = new FrmAcesso();
+            //acesso.ShowDialog();
 
-            if (!acesso.abrirPrincipal)
-            {
-                this.Close();
-            }
+            //if (!acesso.abrirPrincipal)
+            //{
+            //    this.Close();
+            //}
+
+            //QuartoNegocio quartoNegocio = new QuartoNegocio();
+
+            //quartos[0] = new Quarto(20, 80.00, "2º Andar");
+            //quartos[1] = new Quarto(21, 98.00, "3º Andar");
+            //quartos[2] = new Quarto(10, 85.00, "Térreo");
+            //quartos[3] = new Quarto(11, 102.00, "Térreo");
+            //quartos[4] = new Quarto(12, 98.00, "1º Andar");
+
+            //limpezas[0] = new Limpeza(1, DateTime.Now, quartos[0]);
+            //limpezas[1] = new Limpeza(2, DateTime.Now, quartos[1]);
+            //limpezas[2] = new Limpeza(3, DateTime.Now, quartos[0]);
+            //limpezas[3] = new Limpeza(4, DateTime.Now, quartos[2]);
+            //limpezas[4] = new Limpeza(5, DateTime.Now, quartos[0]);
+
+            //quartos[0].Limpezas.Add(limpezas[0]);
+            ////ou
+            //quartoNegocio.AddLimpezas(quartos[0]);
+            
+
+
+
+
 
         }
 
