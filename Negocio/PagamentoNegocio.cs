@@ -18,7 +18,7 @@ namespace Negocio
             try
             {
                 acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aCodAluguel", pagamento.Aluguel.Codigo);
+                acessoMySql.AdicionarParametros("aCodAluguel", pagamento.CodigoAluguel);
                 acessoMySql.AdicionarParametros("aTipo", pagamento.Tipo);
                 acessoMySql.AdicionarParametros("aDataPagamento", pagamento.DataPagamento);
                 acessoMySql.AdicionarParametros("aValor", pagamento.Valor);
@@ -65,21 +65,20 @@ namespace Negocio
             }
         }
 
-        public List<Pagamento> Pagamentos(List<Aluguel> alugueis)
+        public List<Pagamento> Pagamentos(Aluguel aluguel)
         {
             try
             {
+                //Aluguel aluguel = new Aluguel();
                 List<Pagamento> pagamentos = new List<Pagamento>();
-                for (int t = 0; t < alugueis.Count; t++)
-                {
-                    acessoMySql.LimparParametros();
-                    DataTable dataTablePagamentos = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_aluguel, tipo, dataPagamento, valor FROM pagamento WHERE cod_aluguel = " + alugueis[t].Codigo, false);
 
-                    foreach (DataRow linha in dataTablePagamentos.Rows)
-                    {
-                        Pagamento pagamento = new Pagamento(Convert.ToInt32(linha["codigo"]), linha["tipo"].ToString(), Convert.ToDateTime(linha["dataPagamento"]), Convert.ToDouble(linha["valor"]), alugueis[t]);
-                        pagamentos.Add(pagamento);
-                    }
+                acessoMySql.LimparParametros();
+                DataTable dataTablePagamentos = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_aluguel, tipo, dataPagamento, valor FROM pagamento WHERE cod_aluguel = " + aluguel.Codigo, false);
+
+                foreach (DataRow linha in dataTablePagamentos.Rows)
+                {
+                    Pagamento pagamento = new Pagamento(Convert.ToInt32(linha["codigo"]), linha["tipo"].ToString(), Convert.ToDateTime(linha["dataPagamento"]), Convert.ToDouble(linha["valor"]), aluguel.Codigo);
+                    pagamentos.Add(pagamento);
                 }
 
                 return pagamentos;

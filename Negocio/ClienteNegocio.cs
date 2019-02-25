@@ -18,7 +18,7 @@ namespace Negocio
             try
             {
                 acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aCodAluguel", cliente.Aluguel.Codigo);
+                acessoMySql.AdicionarParametros("aCodAluguel", cliente.CodigoAluguel);
                 acessoMySql.AdicionarParametros("aNome", cliente.Nome);
                 acessoMySql.AdicionarParametros("aRg", cliente.Rg);
                 acessoMySql.AdicionarParametros("aCpf", cliente.Cpf);
@@ -37,7 +37,7 @@ namespace Negocio
             try
             {
                 acessoMySql.AdicionarParametros("aCodigo", cliente.Codigo);
-                acessoMySql.AdicionarParametros("aCodAluguel", cliente.Aluguel.Codigo);
+                acessoMySql.AdicionarParametros("aCodAluguel", cliente.CodigoAluguel);
                 acessoMySql.AdicionarParametros("aNome", cliente.Nome);
                 acessoMySql.AdicionarParametros("aRg", cliente.Rg);
                 acessoMySql.AdicionarParametros("aCpf", cliente.Cpf);
@@ -66,23 +66,21 @@ namespace Negocio
             }
         }
 
-        public List<Cliente> ClientesAtivos(List<Aluguel> alugueis)
+        public List<Cliente> ClientesAtivos(Aluguel aluguel)
         {
             try
             {
                 List<Cliente> clientes = new List<Cliente>();
-                for (int t = 0; t < alugueis.Count; t++)
-                {
-                    acessoMySql.LimparParametros();
-                    DataTable dataTableClientesAluguel = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_aluguel, nome, rg, cpf, contato FROM cliente WHERE cod_aluguel = " + alugueis[t].Codigo, false);
 
-                    foreach (DataRow linha in dataTableClientesAluguel.Rows)
-                    {
-                        Cliente cliente = new Cliente(Convert.ToInt32(linha["codigo"]), linha["nome"].ToString(), linha["rg"].ToString(), linha["cpf"].ToString(), linha["contato"].ToString(), alugueis[t]);
-                        clientes.Add(cliente);
-                    }
+                acessoMySql.LimparParametros();
+                DataTable dataTableClientesAluguel = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_aluguel, nome, rg, cpf, contato FROM cliente WHERE cod_aluguel = " + aluguel.Codigo, false);
+
+                foreach (DataRow linha in dataTableClientesAluguel.Rows)
+                {
+                    Cliente cliente = new Cliente(Convert.ToInt32(linha["codigo"]), linha["nome"].ToString(), linha["rg"].ToString(), linha["cpf"].ToString(), linha["contato"].ToString(), aluguel.Codigo);
+                    clientes.Add(cliente);
                 }
-                
+
                 return clientes;
             }
             catch (Exception ex)

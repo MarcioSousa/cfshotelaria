@@ -111,7 +111,7 @@
             // TxtRg
             // 
             this.TxtRg.Location = new System.Drawing.Point(62, 75);
-            this.TxtRg.MaxLength = 15;
+            this.TxtRg.MaxLength = 20;
             this.TxtRg.Name = "TxtRg";
             this.TxtRg.Size = new System.Drawing.Size(116, 20);
             this.TxtRg.TabIndex = 1;
@@ -119,7 +119,7 @@
             // TxtCpf
             // 
             this.TxtCpf.Location = new System.Drawing.Point(224, 75);
-            this.TxtCpf.MaxLength = 15;
+            this.TxtCpf.MaxLength = 20;
             this.TxtCpf.Name = "TxtCpf";
             this.TxtCpf.Size = new System.Drawing.Size(123, 20);
             this.TxtCpf.TabIndex = 2;

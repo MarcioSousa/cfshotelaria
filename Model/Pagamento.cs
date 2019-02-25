@@ -9,24 +9,29 @@ namespace Model
     public class Pagamento
     {
         private int? codigo;
+        private int codigoAluguel;
         private string tipo;
         private DateTime dataPagamento;
         private double valor;
-        private Aluguel aluguel;
 
         public int? Codigo { get => codigo; set => codigo = value; }
+        public int CodigoAluguel { get => codigoAluguel; set => codigoAluguel = value; }
         public string Tipo { get => tipo; set => tipo = value; }
         public DateTime DataPagamento { get => dataPagamento; set => dataPagamento = value; }
         public double Valor { get => valor; set => valor = value; }
-        public Aluguel Aluguel { get => aluguel; set => aluguel = value; }
 
-        public Pagamento(int? codigo, string tipo, DateTime dataPagamento, double valor, Aluguel aluguel)
+        public Pagamento(int? codigo)
+        {
+            this.codigo = codigo;
+        }
+
+        public Pagamento(int? codigo, string tipo, DateTime dataPagamento, double valor, int codigoAluguel)
         {
             this.codigo = codigo;
             this.tipo = tipo;
             this.dataPagamento = dataPagamento;
             this.valor = valor;
-            this.aluguel = aluguel;
+            this.codigoAluguel = codigoAluguel;
         }
 
         public override bool Equals(object obj)

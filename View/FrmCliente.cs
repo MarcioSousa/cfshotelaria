@@ -22,12 +22,14 @@ namespace View
             InitializeComponent();
             this.aluguel = aluguel;
         }
+
         public FrmCliente(Aluguel aluguel, Cliente cliente)
         {
             InitializeComponent();
             this.aluguel = aluguel;
             this.cliente = cliente;
         }
+
         private void FrmCliente_Load(object sender, EventArgs e)
         {
             try
@@ -60,10 +62,8 @@ namespace View
                 if(cliente is null)
                 {
                     //NOVO CLIENTE
-                    cliente = new Cliente(null, TxtNome.Text, TxtRg.Text, TxtCpf.Text, TxtContato.Text, aluguel);
+                    cliente = new Cliente(0, TxtNome.Text, TxtRg.Text, TxtCpf.Text, TxtContato.Text, aluguel.Codigo);
                     clienteNegocio.Inserir(cliente);
-
-                    aluguel.Clientes.Add(cliente);
                 }
                 else
                 {
@@ -73,6 +73,7 @@ namespace View
                     cliente.Cpf = TxtCpf.Text;
                     cliente.Contato = TxtContato.Text;
                     clienteNegocio.Alterar(cliente);
+                    MessageBox.Show("Editado com sucesso!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 this.Close();
             }

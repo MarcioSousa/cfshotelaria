@@ -14,7 +14,7 @@ namespace View
 {
     public partial class FrmProduto : Form
     {
-        List<Produto> produtos;
+        //List<Produto> produtos;
 
         public FrmProduto()
         {
@@ -24,21 +24,21 @@ namespace View
 
         private void FrmProduto_Load(object sender, EventArgs e)
         {
-            CarregaListProdutos();
+            //CarregaListProdutos();
 
             DgvProduto.DataSource = null;
-            DgvProduto.DataSource = produtos;
+            //DgvProduto.DataSource = produtos;
 
             DgvProduto.Refresh();
             DgvProduto.Update();
         }
 
-        private void CarregaListProdutos()
-        {
-            ProdutoNegocio produtoNegocio = new ProdutoNegocio();
-            produtos = produtoNegocio.Produtos();
+        //private void CarregaListProdutos()
+        //{
+        //    ProdutoNegocio produtoNegocio = new ProdutoNegocio();
+        //    produtos = produtoNegocio.Produtos();
 
-        }
+        //}
 
         private void BtnAdicionar_Click(object sender, EventArgs e)
         {
@@ -59,12 +59,12 @@ namespace View
                         produto.Qtdeatual = Convert.ToInt32(TxtQtdeAtual.Text);
                     }
 
-                    produtos.Add(produto);
+                    //produtos.Add(produto);
 
-                    InsertionSort();
+                    //InsertionSort();
 
                     DgvProduto.DataSource = null;
-                    DgvProduto.DataSource = produtos;
+                    //DgvProduto.DataSource = produtos;
 
                     DgvProduto.Refresh();
                     DgvProduto.Update();
@@ -81,26 +81,26 @@ namespace View
             }
         }
 
-        private void InsertionSort()
-        {
-            int i, j;
+        //private void InsertionSort()
+        //{
+        //    int i, j;
 
-            Produto atual = new Produto(-1, "", 0);
+        //    Produto atual = new Produto(-1, "", 0);
 
-            for (i = 1; i < produtos.Count; i++)
-            {
-                atual = produtos[i];
-                j = i;
+        //    for (i = 1; i < produtos.Count; i++)
+        //    {
+        //        atual = produtos[i];
+        //        j = i;
 
-                while ((j > 0) && produtos[j - 1].Codigo > atual.Codigo)
-                {
-                    produtos[j] = produtos[j - 1];
-                    j = j - 1;
-                }
+        //        while ((j > 0) && produtos[j - 1].Codigo > atual.Codigo)
+        //        {
+        //            produtos[j] = produtos[j - 1];
+        //            j = j - 1;
+        //        }
 
-                produtos[j] = atual;
-            }
-        }
+        //        produtos[j] = atual;
+        //    }
+        //}
 
 
         private void BtnNovo_Click(object sender, EventArgs e)

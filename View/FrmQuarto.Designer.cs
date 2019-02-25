@@ -43,16 +43,19 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.BtnAdd = new System.Windows.Forms.Button();
+            this.BtnAdicionar = new System.Windows.Forms.Button();
             this.BtnExcluir = new System.Windows.Forms.Button();
-            this.BtnFinalizar = new System.Windows.Forms.Button();
+            this.BtnEncerrar = new System.Windows.Forms.Button();
             this.BtnNovo = new System.Windows.Forms.Button();
             this.BtnEditar = new System.Windows.Forms.Button();
-            this.BtnCancelar = new System.Windows.Forms.Button();
             this.Ep = new System.Windows.Forms.ErrorProvider(this.components);
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.BtnFinalizar = new System.Windows.Forms.Button();
+            this.BtnCancelar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DgvQuarto)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Ep)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // DgvQuarto
@@ -68,13 +71,13 @@
             this.NUMERO,
             this.VALOR,
             this.LOCALIDADE});
-            this.DgvQuarto.Location = new System.Drawing.Point(12, 125);
+            this.DgvQuarto.Location = new System.Drawing.Point(8, 19);
             this.DgvQuarto.MultiSelect = false;
             this.DgvQuarto.Name = "DgvQuarto";
             this.DgvQuarto.ReadOnly = true;
             this.DgvQuarto.RowHeadersVisible = false;
             this.DgvQuarto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DgvQuarto.Size = new System.Drawing.Size(373, 291);
+            this.DgvQuarto.Size = new System.Drawing.Size(373, 298);
             this.DgvQuarto.TabIndex = 6;
             this.DgvQuarto.SelectionChanged += new System.EventHandler(this.DgvQuarto_SelectionChanged);
             // 
@@ -114,10 +117,10 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.BtnAdd);
+            this.groupBox1.Controls.Add(this.BtnAdicionar);
             this.groupBox1.Location = new System.Drawing.Point(12, 41);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(373, 78);
+            this.groupBox1.Size = new System.Drawing.Size(387, 77);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             // 
@@ -178,20 +181,20 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Número";
             // 
-            // BtnAdd
+            // BtnAdicionar
             // 
-            this.BtnAdd.Enabled = false;
-            this.BtnAdd.Location = new System.Drawing.Point(290, 43);
-            this.BtnAdd.Name = "BtnAdd";
-            this.BtnAdd.Size = new System.Drawing.Size(75, 23);
-            this.BtnAdd.TabIndex = 3;
-            this.BtnAdd.Text = "Confirmar";
-            this.BtnAdd.UseVisualStyleBackColor = true;
-            this.BtnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
+            this.BtnAdicionar.Enabled = false;
+            this.BtnAdicionar.Location = new System.Drawing.Point(290, 43);
+            this.BtnAdicionar.Name = "BtnAdicionar";
+            this.BtnAdicionar.Size = new System.Drawing.Size(75, 23);
+            this.BtnAdicionar.TabIndex = 3;
+            this.BtnAdicionar.Text = "Adicionar";
+            this.BtnAdicionar.UseVisualStyleBackColor = true;
+            this.BtnAdicionar.Click += new System.EventHandler(this.BtnAdicionar_Click);
             // 
             // BtnExcluir
             // 
-            this.BtnExcluir.Location = new System.Drawing.Point(12, 422);
+            this.BtnExcluir.Location = new System.Drawing.Point(174, 12);
             this.BtnExcluir.Name = "BtnExcluir";
             this.BtnExcluir.Size = new System.Drawing.Size(75, 23);
             this.BtnExcluir.TabIndex = 5;
@@ -199,15 +202,15 @@
             this.BtnExcluir.UseVisualStyleBackColor = true;
             this.BtnExcluir.Click += new System.EventHandler(this.BtnExcluir_Click);
             // 
-            // BtnFinalizar
+            // BtnEncerrar
             // 
-            this.BtnFinalizar.Location = new System.Drawing.Point(312, 422);
-            this.BtnFinalizar.Name = "BtnFinalizar";
-            this.BtnFinalizar.Size = new System.Drawing.Size(75, 23);
-            this.BtnFinalizar.TabIndex = 3;
-            this.BtnFinalizar.Text = "Finalizar";
-            this.BtnFinalizar.UseVisualStyleBackColor = true;
-            this.BtnFinalizar.Click += new System.EventHandler(this.BtnFinalizar_Click);
+            this.BtnEncerrar.Location = new System.Drawing.Point(324, 482);
+            this.BtnEncerrar.Name = "BtnEncerrar";
+            this.BtnEncerrar.Size = new System.Drawing.Size(75, 23);
+            this.BtnEncerrar.TabIndex = 3;
+            this.BtnEncerrar.Text = "Encerrar";
+            this.BtnEncerrar.UseVisualStyleBackColor = true;
+            this.BtnEncerrar.Click += new System.EventHandler(this.BtnEncerrar_Click);
             // 
             // BtnNovo
             // 
@@ -229,10 +232,35 @@
             this.BtnEditar.UseVisualStyleBackColor = true;
             this.BtnEditar.Click += new System.EventHandler(this.BtnEditar_Click);
             // 
+            // Ep
+            // 
+            this.Ep.ContainerControl = this;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.BtnFinalizar);
+            this.groupBox2.Controls.Add(this.DgvQuarto);
+            this.groupBox2.Location = new System.Drawing.Point(12, 124);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(387, 352);
+            this.groupBox2.TabIndex = 7;
+            this.groupBox2.TabStop = false;
+            // 
+            // BtnFinalizar
+            // 
+            this.BtnFinalizar.Enabled = false;
+            this.BtnFinalizar.Location = new System.Drawing.Point(306, 323);
+            this.BtnFinalizar.Name = "BtnFinalizar";
+            this.BtnFinalizar.Size = new System.Drawing.Size(75, 23);
+            this.BtnFinalizar.TabIndex = 8;
+            this.BtnFinalizar.Text = "Finalizar";
+            this.BtnFinalizar.UseVisualStyleBackColor = true;
+            this.BtnFinalizar.Click += new System.EventHandler(this.BtnFinalizar_Click);
+            // 
             // BtnCancelar
             // 
             this.BtnCancelar.Enabled = false;
-            this.BtnCancelar.Location = new System.Drawing.Point(93, 422);
+            this.BtnCancelar.Location = new System.Drawing.Point(12, 482);
             this.BtnCancelar.Name = "BtnCancelar";
             this.BtnCancelar.Size = new System.Drawing.Size(75, 23);
             this.BtnCancelar.TabIndex = 4;
@@ -240,22 +268,18 @@
             this.BtnCancelar.UseVisualStyleBackColor = true;
             this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
             // 
-            // Ep
-            // 
-            this.Ep.ContainerControl = this;
-            // 
             // FrmQuarto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(399, 450);
+            this.ClientSize = new System.Drawing.Size(413, 517);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.BtnCancelar);
+            this.Controls.Add(this.BtnExcluir);
             this.Controls.Add(this.BtnEditar);
             this.Controls.Add(this.BtnNovo);
-            this.Controls.Add(this.BtnFinalizar);
-            this.Controls.Add(this.BtnExcluir);
+            this.Controls.Add(this.BtnEncerrar);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.DgvQuarto);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -267,6 +291,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Ep)).EndInit();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -280,16 +305,18 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button BtnAdd;
+        private System.Windows.Forms.Button BtnAdicionar;
         private System.Windows.Forms.Button BtnExcluir;
-        private System.Windows.Forms.Button BtnFinalizar;
+        private System.Windows.Forms.Button BtnEncerrar;
         private System.Windows.Forms.DataGridViewTextBoxColumn NUMERO;
         private System.Windows.Forms.DataGridViewTextBoxColumn VALOR;
         private System.Windows.Forms.DataGridViewTextBoxColumn LOCALIDADE;
         private System.Windows.Forms.Button BtnNovo;
         private System.Windows.Forms.Button BtnEditar;
-        private System.Windows.Forms.Button BtnCancelar;
         private System.Windows.Forms.ErrorProvider Ep;
         private System.Windows.Forms.TextBox TxtNumero;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button BtnFinalizar;
+        private System.Windows.Forms.Button BtnCancelar;
     }
 }

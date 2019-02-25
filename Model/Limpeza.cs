@@ -16,6 +16,11 @@ namespace Model
         public DateTime DataLimpeza { get => dataLimpeza; set => dataLimpeza = value; }
         public Quarto Quarto { get => quarto; set => quarto = value; }
 
+        public Limpeza(int? codigo)
+        {
+            this.Codigo = codigo;
+        }
+
         public Limpeza(int? codigo, DateTime dataLimpeza, Quarto quarto)
         {
             this.Codigo = codigo;

@@ -80,8 +80,8 @@ namespace View
 
         private void PicEstoque_Click(object sender, EventArgs e)
         {
-            //FrmProduto produto = new FrmProduto();
-            //produto.ShowDialog();
+            FrmEstoque frmEstoque = new FrmEstoque();
+            frmEstoque.ShowDialog();
         }
 
     }

@@ -8,25 +8,35 @@ namespace Model
 {
     public class Entrada
     {
-        private int codigo;
+        private int? codigo;
+        private int codigoProduto;
         private DateTime dataEntrada;
         private DateTime dataVencimento;
         private int qtde;
-        private Produto produto;
+        //private Produto produto;
 
-        public int Codigo { get => codigo; set => codigo = value; }
+        public int? Codigo { get => codigo; set => codigo = value; }
+        public int CodigoProduto { get => codigoProduto; set => codigoProduto = value; }
         public DateTime DataEntrada { get => dataEntrada; set => dataEntrada = value; }
         public DateTime DataVencimento { get => dataVencimento; set => dataVencimento = value; }
         public int Qtde { get => qtde; set => qtde = value; }
-        public Produto Produto { get => produto; set => produto = value; }
 
-        public Entrada(int codigo, DateTime dataEntrada, DateTime dataVencimento, int qtde, Produto produto)
+
+        //public Produto Produto { get => produto; set => produto = value; }
+
+        public Entrada(int? codigo)
+        {
+            this.codigo = codigo;
+        }
+
+        public Entrada(int? codigo, DateTime dataEntrada, DateTime dataVencimento, int qtde, int codigoProduto)
         {
             this.codigo = codigo;
             this.dataEntrada = dataEntrada;
             this.dataVencimento = dataVencimento;
             this.qtde = qtde;
-            this.produto = produto;
+            this.codigoProduto = codigoProduto;
+            //this.produto = produto;
         }
 
         public override bool Equals(object obj)
@@ -45,11 +55,9 @@ namespace Model
         {
             return "\n=== ENTRADA ===" +
                 "\nA entrada de código: " + codigo +
-                "\nProduto: " + produto.Nome +
                 "\nA entrada do produto foi em: " + dataEntrada +
                 "\nA data de vencimento é de: " + dataVencimento +
-                "\nA quantidade que foi estocado é de: " + qtde +
-                "\n" + produto;
+                "\nA quantidade que foi estocado é de: " + qtde;
         }
     }
 

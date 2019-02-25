@@ -286,6 +286,15 @@ INSERT INTO `itempedido` (`codigo`, `cod_pedido`, `cod_produto`, `qtde`, `valor`
 -- Estrutura da tabela `limpeza`
 --
 
+CREATE TABLE limpeza(
+  codigo int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  cod_quarto int(11) NOT NULL,
+  datalimpeza datetime NOT NULL,
+  CONSTRAINT fk_codigoquarto FOREIGN KEY(cod_quarto) REFERENCES quarto(codigo)
+)
+
+ALTER TABLE limpeza ADD CONSTRAINT fk_quarto FOREIGN KEY(cod_quarto) REFERENCES quarto(codigo);
+
 DROP TABLE IF EXISTS `limpeza`;
 CREATE TABLE IF NOT EXISTS `limpeza` (
   `codigo` int(11) NOT NULL AUTO_INCREMENT,

@@ -22,8 +22,7 @@ namespace Negocio
                 acessoMySql.AdicionarParametros("aNome", produto.Nome);
                 acessoMySql.AdicionarParametros("aValor", produto.Valor);
                 acessoMySql.AdicionarParametros("aQtdeAtual", produto.Qtdeatual);
-                acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_ProdutoNovo");
-                return "Produto adicionado com sucesso!";
+                return acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_ProdutoNovo").ToString();
             }
             catch (Exception ex)
             {
@@ -63,17 +62,49 @@ namespace Negocio
             }
         }
 
+        public Produto Produto(Produto produto)
+        {
+            try
+            {
+                DataTable dataTableProduto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, nome, valor, qtdeAtual FROM produto WHERE codigo = " + produto.Codigo, false);
+
+                foreach (DataRow linha in dataTableProduto.Rows)
+                {
+                    produto.Codigo = Convert.ToInt32(linha["codigo"]);
+                    produto.Nome = linha["nome"].ToString();
+                    produto.Valor = Convert.ToDouble(linha["valor"]);
+
+                    if (linha["qtdeAtual"] is DBNull)
+                    {
+                        produto.Qtdeatual = null;
+                    }
+                    else
+                    {
+                        produto.Qtdeatual = Convert.ToInt32(linha["qtdeAtual"]);
+                    }
+                }
+                return produto;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Não foi possível carregar os Produtos.\nDetalhes: " + ex.Message);
+            }
+        }
+
         public List<Produto> Produtos()
         {
             try
             {
-                List<Produto> produtos = new List<Produto>(); 
-
+                List<Produto> produtos = new List<Produto>();
+                
                 DataTable dataTableProduto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, nome, valor, qtdeAtual FROM produto ORDER BY codigo", false);
 
                 foreach (DataRow linha in dataTableProduto.Rows)
                 {
-                    Produto produto = new Produto(Convert.ToInt32(linha["codigo"]), linha["nome"].ToString(), Convert.ToDouble(linha["valor"]));
+                    Produto produto = new Produto();
+                    produto.Codigo = Convert.ToInt32(linha["codigo"]);
+                    produto.Nome = linha["nome"].ToString();
+                    produto.Valor = Convert.ToDouble(linha["valor"]);
 
                     if (linha["qtdeAtual"] is DBNull)
                     {
@@ -93,43 +124,38 @@ namespace Negocio
             }
         }
 
-        //public void AddPedidos(Quarto quarto)
-        //{
-        //    try
-        //    {
-        //        acessoMySql.LimparParametros();
-        //        DataTable dataTableLimpezasQuarto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_quarto, datalimpeza FROM limpeza WHERE cod_quarto = " + quarto.Numero, false);
+        public List<Produto> ProdutosEstoque()
+        {
+            try
+            {
+                List<Produto> produtos = new List<Produto>();
 
-        //        foreach (DataRow linha in dataTableLimpezasQuarto.Rows)
-        //        {
-        //            Limpeza limpeza = new Limpeza(Convert.ToInt32(linha["codigo"]), Convert.ToDateTime(linha["datalimpeza"]), quarto);
-        //            quarto.Limpezas.Add(limpeza);
-        //        }
+                DataTable dataTableProduto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, nome, valor, qtdeAtual FROM produto WHERE qtdeAtual IS NOT NULL ORDER BY codigo", false);
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception("Não foi possível carregar as Limpezas do quarto " + quarto.Numero + ".\nDetalhes: " + ex.Message);
-        //    }
-        //}
+                foreach (DataRow linha in dataTableProduto.Rows)
+                {
+                    Produto produto = new Produto();
+                    produto.Codigo = Convert.ToInt32(linha["codigo"]);
+                    produto.Nome = linha["nome"].ToString();
+                    produto.Valor = Convert.ToDouble(linha["valor"]);
 
-        //public void AddItemProduto(Pedido pedido, Produto produto)
-        //{
-        //    try
-        //    {
-        //        acessoMySql.LimparParametros();
-        //        DataTable dataTablePedidoItensPedidos = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_pedido, cod_produto, qtde, valor FROM itemPedido WHERE cod_pedido = " + pedido.Codigo, false);
+                    if (linha["qtdeAtual"] is DBNull)
+                    {
+                        produto.Qtdeatual = null;
+                    }
+                    else
+                    {
+                        produto.Qtdeatual = Convert.ToInt32(linha["qtdeAtual"]);
+                    }
+                    produtos.Add(produto);
+                }
+                return produtos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Não foi possível carregar os Produtos.\nDetalhes: " + ex.Message);
+            }
+        }
 
-        //        foreach (DataRow linha in dataTablePedidoItensPedidos.Rows)
-        //        {
-        //            ItemPedido itemPedido = new ItemPedido(Convert.ToInt32(linha["codigo"]), Convert.ToInt32(linha["qtde"]), Convert.ToDouble(linha["valor"]), produto, pedido);
-        //            pedido.ItemPedidos.Add(itemPedido);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception("Não foi possível carregar os ItensPedidos dos Pedidos.\nDetalhes: " + ex.Message);
-        //    }
-        //}
     }
 }

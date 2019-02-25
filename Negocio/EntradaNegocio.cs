@@ -18,12 +18,11 @@ namespace Negocio
             try
             {
                 acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aCodProduto", entrada.Produto.Codigo);
+                acessoMySql.AdicionarParametros("aCodProduto", entrada.CodigoProduto);
                 acessoMySql.AdicionarParametros("aDataEntrada", entrada.DataEntrada);
                 acessoMySql.AdicionarParametros("aDataVencimento", entrada.DataVencimento);
                 acessoMySql.AdicionarParametros("aQtde", entrada.Qtde);
-                acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_EntradaNovo");
-                return "Entrada adicionado com sucesso!";
+                return acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_EntradaNovo").ToString();
             }
             catch (Exception ex)
             {
@@ -36,7 +35,6 @@ namespace Negocio
             try
             {
                 acessoMySql.AdicionarParametros("aCodigo", entrada.Codigo);
-                acessoMySql.AdicionarParametros("aCodProduto", entrada.Produto.Codigo);
                 acessoMySql.AdicionarParametros("aDataEntrada", entrada.DataEntrada);
                 acessoMySql.AdicionarParametros("aDataVencimento", entrada.DataVencimento);
                 acessoMySql.AdicionarParametros("aQtde", entrada.Qtde);
@@ -63,5 +61,30 @@ namespace Negocio
                 return ex.Message;
             }
         }
+
+        public List<Entrada> Entradas(Produto produto)
+        {
+            try
+            {
+                List<Entrada> entradas = new List<Entrada>();
+
+                acessoMySql.LimparParametros();
+
+                DataTable dataTableClientesAluguel = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_produto, dataEntrada, dataVencimento, qtde FROM entrada WHERE cod_produto = " + produto.Codigo + " ORDER BY dataEntrada DESC", false);
+
+                foreach (DataRow linha in dataTableClientesAluguel.Rows)
+                {
+                    Entrada entrada = new Entrada(Convert.ToInt32(linha["codigo"]), Convert.ToDateTime(linha["dataEntrada"]), Convert.ToDateTime(linha["dataVencimento"]), Convert.ToInt32(linha["qtde"]), Convert.ToInt32(linha["cod_produto"]));
+                    entradas.Add(entrada);
+                }
+
+                return entradas;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Não foi possível carregar as Entradas dos Produtos.\nDetalhes: " + ex.Message);
+            }
+        }
+
     }
 }

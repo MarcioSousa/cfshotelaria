@@ -43,7 +43,7 @@ namespace View
                 else
                 {
                     //EDITA LIMPEZA
-                    NudQuartoNumero.Value = limpeza.Quarto.Numero;
+                    NudQuartoNumero.Value = quarto.Numero;
                     DtpDataLimpeza.Value = limpeza.DataLimpeza;
                     DtpHoraLimpeza.Value = limpeza.DataLimpeza;
                 }
@@ -62,13 +62,8 @@ namespace View
                 if (limpeza is null)
                 {
                     //NOVA LIMPEZA
-                    limpeza = new Limpeza(null, Convert.ToDateTime(DtpDataLimpeza.Text + " " + DtpHoraLimpeza.Text), quarto)
-                    {
-                        Quarto = quarto
-                    };
+                    limpeza = new Limpeza(null, Convert.ToDateTime(DtpDataLimpeza.Text + " " + DtpHoraLimpeza.Text), quarto);
                     limpezaNegocio.Inserir(limpeza);
-                   
-                    quarto.Limpezas.Add(limpeza);
                 }
                 else
                 {

@@ -84,46 +84,46 @@ namespace Negocio
             }
         }
 
-        public List<Quarto> QuartosOcupados()
-        {
-            try
-            {
-                List<Quarto> quartos = new List<Quarto>();
+        //public List<Quarto> QuartosOcupados()
+        //{
+        //    try
+        //    {
+        //        List<Quarto> quartos = new List<Quarto>();
 
-                DataTable dataTableQuarto = acessoMySql.ExecutarConsulta(CommandType.StoredProcedure, "SELECT Q.numero, Q.valorDiaria, Q.localidade FROM quarto Q INNER JOIN aluguel A ON A.cod_quarto = Q.numero AND A.dataSaida IS NULL ORDER BY Q.numero", false);
+        //        DataTable dataTableQuarto = acessoMySql.ExecutarConsulta(CommandType.StoredProcedure, "SELECT Q.numero, Q.valorDiaria, Q.localidade FROM quarto Q INNER JOIN aluguel A ON A.cod_quarto = Q.numero AND A.dataSaida IS NULL ORDER BY Q.numero", false);
 
-                foreach (DataRow linha in dataTableQuarto.Rows)
-                {
-                    Quarto quarto = new Quarto(Convert.ToInt32(linha["numero"]), Convert.ToDouble(linha["valorDiaria"]), linha["localidade"].ToString());
-                    quartos.Add(quarto);
-                }
+        //        foreach (DataRow linha in dataTableQuarto.Rows)
+        //        {
+        //            Quarto quarto = new Quarto(Convert.ToInt32(linha["numero"]), Convert.ToDouble(linha["valorDiaria"]), linha["localidade"].ToString());
+        //            quartos.Add(quarto);
+        //        }
 
-                return quartos;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Não foi possível carregar os Quartos Ocupados.\nDetalhes: " + ex.Message);
-            }
-        }
+        //        return quartos;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception("Não foi possível carregar os Quartos Ocupados.\nDetalhes: " + ex.Message);
+        //    }
+        //}
 
-        public void AddLimpezas(Quarto quarto)
-        {
-            try
-            {
-                acessoMySql.LimparParametros();
-                DataTable dataTableLimpezasQuarto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_quarto, datalimpeza FROM limpeza WHERE cod_quarto = " + quarto.Numero, false);
+        //public void AddLimpezas(Quarto quarto)
+        //{
+        //    try
+        //    {
+        //        acessoMySql.LimparParametros();
+        //        DataTable dataTableLimpezasQuarto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_quarto, datalimpeza FROM limpeza WHERE cod_quarto = " + quarto.Numero + " LIMIT 0,10", false);
 
-                foreach(DataRow linha in dataTableLimpezasQuarto.Rows)
-                {
-                    Limpeza limpeza = new Limpeza(Convert.ToInt32(linha["codigo"]), Convert.ToDateTime(linha["datalimpeza"]), quarto);
-                    quarto.Limpezas.Add(limpeza);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Não foi possível carregar as Limpezas do quarto " + quarto.Numero + ".\nDetalhes: " + ex.Message);
-            }
-        }
+        //        foreach (DataRow linha in dataTableLimpezasQuarto.Rows)
+        //        {
+        //            Limpeza limpeza = new Limpeza(Convert.ToInt32(linha["codigo"]), Convert.ToDateTime(linha["datalimpeza"]), quarto);
+        //            quarto.Limpezas.Add(limpeza);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception("Não foi possível carregar as Limpezas do quarto " + quarto.Numero + ".\nDetalhes: " + ex.Message);
+        //    }
+        //}
 
     }
 }
