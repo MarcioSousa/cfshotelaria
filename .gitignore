@@ -330,3 +330,8 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+
+
+Control/bin/*
+Control/obj/*
+Control/Properties/*

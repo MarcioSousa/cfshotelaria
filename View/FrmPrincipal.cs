@@ -84,6 +84,11 @@ namespace View
             frmEstoque.ShowDialog();
         }
 
+        private void PicEstatistica_Click(object sender, EventArgs e)
+        {
+            FrmEstatistica frmEstatistica = new FrmEstatistica();
+            frmEstatistica.ShowDialog();
+        }
     }
 }
 

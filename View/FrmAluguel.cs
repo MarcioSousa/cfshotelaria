@@ -153,6 +153,11 @@ namespace View
 
                     CarregaGridCliente(aluguel);
 
+                    if(DgvCliente.Rows.Count == 0)
+                    {
+                        MessageBox.Show("Clique no botão de '+' para adicionar o cliente no quarto ou clique em 'Liberar Quarto'!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
                     BtnOcuparQuarto.Text = "LIBERAR QUARTO";
                     CarregaAluguel();
                     CalcularTotalQuarto(aluguel);
@@ -833,6 +838,9 @@ namespace View
 
         }
 
-
+        private void BtnFechar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

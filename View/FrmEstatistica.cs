@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace View
 {
-    public partial class FrmEntrada : Form
+    public partial class FrmEstatistica : Form
     {
-        public FrmEntrada()
+        public FrmEstatistica()
         {
             InitializeComponent();
         }

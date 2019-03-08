@@ -43,8 +43,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.PicEstoque = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.PicEstatistica = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.PicQuarto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicEstoque)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicEstatistica)).BeginInit();
             this.SuspendLayout();
             // 
             // btnProduto
@@ -213,11 +216,32 @@
             this.label2.TabIndex = 21;
             this.label2.Text = "ImagemEstoque";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(388, 77);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(97, 13);
+            this.label3.TabIndex = 23;
+            this.label3.Text = "ImagemEstatisticas";
+            // 
+            // PicEstatistica
+            // 
+            this.PicEstatistica.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PicEstatistica.Location = new System.Drawing.Point(391, 24);
+            this.PicEstatistica.Name = "PicEstatistica";
+            this.PicEstatistica.Size = new System.Drawing.Size(61, 50);
+            this.PicEstatistica.TabIndex = 22;
+            this.PicEstatistica.TabStop = false;
+            this.PicEstatistica.Click += new System.EventHandler(this.PicEstatistica_Click);
+            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(570, 426);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.PicEstatistica);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.PicEstoque);
             this.Controls.Add(this.label1);
@@ -247,6 +271,7 @@
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PicQuarto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PicEstoque)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicEstatistica)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -272,5 +297,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox PicEstoque;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.PictureBox PicEstatistica;
     }
 }

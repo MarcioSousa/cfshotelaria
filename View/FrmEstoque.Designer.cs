@@ -34,6 +34,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.GbxProduto = new System.Windows.Forms.GroupBox();
             this.CbxEstoque = new System.Windows.Forms.CheckBox();
             this.TxtQtde = new System.Windows.Forms.TextBox();
@@ -614,6 +615,8 @@
             // VALORUM
             // 
             this.VALORUM.DataPropertyName = "Valor";
+            dataGridViewCellStyle7.Format = "C";
+            this.VALORUM.DefaultCellStyle = dataGridViewCellStyle7;
             this.VALORUM.HeaderText = "Valor";
             this.VALORUM.Name = "VALORUM";
             this.VALORUM.ReadOnly = true;

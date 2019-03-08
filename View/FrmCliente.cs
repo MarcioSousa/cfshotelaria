@@ -58,24 +58,44 @@ namespace View
             try
             {
                 ClienteNegocio clienteNegocio = new ClienteNegocio();
-                
-                if(cliente is null)
+
+                if (cliente is null)
                 {
                     //NOVO CLIENTE
-                    cliente = new Cliente(0, TxtNome.Text, TxtRg.Text, TxtCpf.Text, TxtContato.Text, aluguel.Codigo);
-                    clienteNegocio.Inserir(cliente);
+                    if (TxtNome.Text != "")
+                    {
+                        cliente = new Cliente(0, TxtNome.Text, TxtRg.Text, TxtCpf.Text, TxtContato.Text, aluguel.Codigo);
+                        clienteNegocio.Inserir(cliente);
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Digite pelo menos o nome do cliente!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        TxtNome.Focus();
+                    }
+
+
                 }
                 else
                 {
                     //EDITA CLIENTE
-                    cliente.Nome = TxtNome.Text;
-                    cliente.Rg = TxtRg.Text;
-                    cliente.Cpf = TxtCpf.Text;
-                    cliente.Contato = TxtContato.Text;
-                    clienteNegocio.Alterar(cliente);
-                    MessageBox.Show("Editado com sucesso!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (TxtNome.Text != "")
+                    {
+                        cliente.Nome = TxtNome.Text;
+                        cliente.Rg = TxtRg.Text;
+                        cliente.Cpf = TxtCpf.Text;
+                        cliente.Contato = TxtContato.Text;
+                        clienteNegocio.Alterar(cliente);
+                        MessageBox.Show("Editado com sucesso!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Digite pelo menos o nome do cliente!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        TxtNome.Focus();
+                    }
+
                 }
-                this.Close();
             }
             catch (Exception ex)
             {
