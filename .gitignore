@@ -332,6 +332,4 @@ ASALocalRun/
 .localhistory/
 
 
-Control/bin/*
-Control/obj/*
-Control/Properties/*
+.Control/Properties/*
