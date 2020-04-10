@@ -11,18 +11,18 @@ namespace Negocio
 {
     public class PagamentoNegocio
     {
-        AcessoMySql acessoMySql = new AcessoMySql();
+        AcessoSqlServer acessoSqlServer = new AcessoSqlServer();
 
         public string Inserir(Pagamento pagamento)
         {
             try
             {
-                acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aCodAluguel", pagamento.CodigoAluguel);
-                acessoMySql.AdicionarParametros("aTipo", pagamento.Tipo);
-                acessoMySql.AdicionarParametros("aDataPagamento", pagamento.DataPagamento);
-                acessoMySql.AdicionarParametros("aValor", pagamento.Valor);
-                pagamento.Codigo = Convert.ToInt32(acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_PagamentoNovo"));
+                //acessoMySql.LimparParametros();
+                //acessoMySql.AdicionarParametros("aCodAluguel", pagamento.CodigoAluguel);
+                //acessoMySql.AdicionarParametros("aTipo", pagamento.Tipo);
+                //acessoMySql.AdicionarParametros("aDataPagamento", pagamento.DataPagamento);
+                //acessoMySql.AdicionarParametros("aValor", pagamento.Valor);
+                pagamento.Codigo = Convert.ToInt32(acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_PagamentoNovo"));
                 return "Pagamento adicionado com sucesso!";
             }
             catch (Exception ex)
@@ -35,13 +35,13 @@ namespace Negocio
         {
             try
             {
-                acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aCodigo", pagamento.Codigo);
-                //acessoMySql.AdicionarParametros("aCodCliente", pagamento.Cliente.Codigo);
-                acessoMySql.AdicionarParametros("aTipo", pagamento.Tipo);
-                acessoMySql.AdicionarParametros("aDataPagamento", pagamento.DataPagamento);
-                acessoMySql.AdicionarParametros("aValor", pagamento.Valor);
-                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_PagamentoAlterar");
+                //acessoMySql.LimparParametros();
+                //acessoMySql.AdicionarParametros("aCodigo", pagamento.Codigo);
+                ////acessoMySql.AdicionarParametros("aCodCliente", pagamento.Cliente.Codigo);
+                //acessoMySql.AdicionarParametros("aTipo", pagamento.Tipo);
+                //acessoMySql.AdicionarParametros("aDataPagamento", pagamento.DataPagamento);
+                //acessoMySql.AdicionarParametros("aValor", pagamento.Valor);
+                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_PagamentoAlterar");
                 return "Pagamento alterado com sucesso!.";
             }
             catch (Exception ex)
@@ -54,9 +54,9 @@ namespace Negocio
         {
             try
             {
-                acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aCodigo", pagamento.Codigo);
-                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_PagamentoExcluir");
+                //acessoMySql.LimparParametros();
+                //acessoMySql.AdicionarParametros("aCodigo", pagamento.Codigo);
+                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_PagamentoExcluir");
                 return "Pagamento excluído com Sucesso!";
             }
             catch (Exception ex)
@@ -72,8 +72,8 @@ namespace Negocio
                 //Aluguel aluguel = new Aluguel();
                 List<Pagamento> pagamentos = new List<Pagamento>();
 
-                acessoMySql.LimparParametros();
-                DataTable dataTablePagamentos = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_aluguel, tipo, dataPagamento, valor FROM pagamento WHERE cod_aluguel = " + aluguel.Codigo, false);
+                //acessoSqlServer.LimparParametros();
+                DataTable dataTablePagamentos = acessoSqlServer.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_aluguel, tipo, dataPagamento, valor FROM pagamento WHERE cod_aluguel = " + aluguel.Codigo);
 
                 foreach (DataRow linha in dataTablePagamentos.Rows)
                 {

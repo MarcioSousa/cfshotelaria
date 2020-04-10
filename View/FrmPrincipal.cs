@@ -89,6 +89,12 @@ namespace View
             FrmEstatistica frmEstatistica = new FrmEstatistica();
             frmEstatistica.ShowDialog();
         }
+
+        private void BtnQuarto_Click(object sender, EventArgs e)
+        {
+            FrmQuarto frmQuarto = new FrmQuarto();
+            frmQuarto.ShowDialog();
+        }
     }
 }
 

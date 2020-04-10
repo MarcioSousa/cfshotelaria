@@ -11,19 +11,19 @@ namespace Negocio
 {
     public class ClienteNegocio
     {
-        AcessoMySql acessoMySql = new AcessoMySql();
+        AcessoSqlServer acessoSqlServer = new AcessoSqlServer();
 
         public string Inserir(Cliente cliente)
         {
             try
             {
-                acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aCodAluguel", cliente.CodigoAluguel);
-                acessoMySql.AdicionarParametros("aNome", cliente.Nome);
-                acessoMySql.AdicionarParametros("aRg", cliente.Rg);
-                acessoMySql.AdicionarParametros("aCpf", cliente.Cpf);
-                acessoMySql.AdicionarParametros("aContato", cliente.Contato);
-                cliente.Codigo = Convert.ToInt32(acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_ClienteNovo"));
+                //acessoMySql.LimparParametros();
+                //acessoMySql.AdicionarParametros("aCodAluguel", cliente.CodigoAluguel);
+                //acessoMySql.AdicionarParametros("aNome", cliente.Nome);
+                //acessoMySql.AdicionarParametros("aRg", cliente.Rg);
+                //acessoMySql.AdicionarParametros("aCpf", cliente.Cpf);
+                //acessoMySql.AdicionarParametros("aContato", cliente.Contato);
+                cliente.Codigo = Convert.ToInt32(acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_ClienteNovo"));
                 return "Cliente Cadastrado!";
             }
             catch (Exception ex)
@@ -36,13 +36,13 @@ namespace Negocio
         {
             try
             {
-                acessoMySql.AdicionarParametros("aCodigo", cliente.Codigo);
-                acessoMySql.AdicionarParametros("aCodAluguel", cliente.CodigoAluguel);
-                acessoMySql.AdicionarParametros("aNome", cliente.Nome);
-                acessoMySql.AdicionarParametros("aRg", cliente.Rg);
-                acessoMySql.AdicionarParametros("aCpf", cliente.Cpf);
-                acessoMySql.AdicionarParametros("aContato", cliente.Contato);
-                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_ClienteAlterar");
+                //acessoMySql.AdicionarParametros("aCodigo", cliente.Codigo);
+                //acessoMySql.AdicionarParametros("aCodAluguel", cliente.CodigoAluguel);
+                //acessoMySql.AdicionarParametros("aNome", cliente.Nome);
+                //acessoMySql.AdicionarParametros("aRg", cliente.Rg);
+                //acessoMySql.AdicionarParametros("aCpf", cliente.Cpf);
+                //acessoMySql.AdicionarParametros("aContato", cliente.Contato);
+                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_ClienteAlterar");
                 return "Cliente alterado com sucesso!.";
             }
             catch (Exception ex)
@@ -55,9 +55,9 @@ namespace Negocio
         {
             try
             {
-                acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aCodigo", cliente.Codigo);
-                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_ClienteExcluir");
+                //acessoMySql.LimparParametros();
+                //acessoMySql.AdicionarParametros("aCodigo", cliente.Codigo);
+                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_ClienteExcluir");
                 return "Cliente excluído com Sucesso!";
             }
             catch (Exception ex)
@@ -72,8 +72,8 @@ namespace Negocio
             {
                 List<Cliente> clientes = new List<Cliente>();
 
-                acessoMySql.LimparParametros();
-                DataTable dataTableClientesAluguel = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_aluguel, nome, rg, cpf, contato FROM cliente WHERE cod_aluguel = " + aluguel.Codigo, false);
+                //acessoSqlServer.LimparParametros();
+                DataTable dataTableClientesAluguel = acessoSqlServer.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_aluguel, nome, rg, cpf, contato FROM cliente WHERE cod_aluguel = " + aluguel.Codigo);
 
                 foreach (DataRow linha in dataTableClientesAluguel.Rows)
                 {

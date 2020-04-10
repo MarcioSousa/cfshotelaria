@@ -11,19 +11,19 @@ namespace Negocio
 {
     public class PedidoNegocio
     {
-        AcessoMySql acessoMySql = new AcessoMySql();
+        AcessoSqlServer acessoSqlServer = new AcessoSqlServer();
 
         public string Inserir(Pedido pedido)
         {
             try
             {
-                acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aCodAluguel", pedido.CodigoAluguel);
-                acessoMySql.AdicionarParametros("aCodProduto", pedido.CodigoProduto);
-                acessoMySql.AdicionarParametros("aDataPedido", pedido.DataPedido);
-                acessoMySql.AdicionarParametros("aQtde", pedido.Qtde);
-                acessoMySql.AdicionarParametros("aValor", pedido.Valor);
-                pedido.Codigo = Convert.ToInt32(acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_PedidoNovo"));
+                //acessoMySql.LimparParametros();
+                //acessoMySql.AdicionarParametros("aCodAluguel", pedido.CodigoAluguel);
+                //acessoMySql.AdicionarParametros("aCodProduto", pedido.CodigoProduto);
+                //acessoMySql.AdicionarParametros("aDataPedido", pedido.DataPedido);
+                //acessoMySql.AdicionarParametros("aQtde", pedido.Qtde);
+                //acessoMySql.AdicionarParametros("aValor", pedido.Valor);
+                pedido.Codigo = Convert.ToInt32(acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_PedidoNovo"));
                 return "Pedido adicionado com sucesso!";
             }
             catch (Exception ex)
@@ -36,13 +36,13 @@ namespace Negocio
         {
             try
             {
-                acessoMySql.AdicionarParametros("aCodigo", pedido.Codigo);
-                acessoMySql.AdicionarParametros("aCodAluguel", pedido.CodigoAluguel);
-                acessoMySql.AdicionarParametros("aCodProduto", pedido.CodigoProduto);
-                acessoMySql.AdicionarParametros("aDataPedido", pedido.DataPedido);
-                 acessoMySql.AdicionarParametros("aQtde", pedido.Qtde);
-                acessoMySql.AdicionarParametros("aValor", pedido.Valor);
-                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_PedidoAlterar");
+                //acessoMySql.AdicionarParametros("aCodigo", pedido.Codigo);
+                //acessoMySql.AdicionarParametros("aCodAluguel", pedido.CodigoAluguel);
+                //acessoMySql.AdicionarParametros("aCodProduto", pedido.CodigoProduto);
+                //acessoMySql.AdicionarParametros("aDataPedido", pedido.DataPedido);
+                // acessoMySql.AdicionarParametros("aQtde", pedido.Qtde);
+                //acessoMySql.AdicionarParametros("aValor", pedido.Valor);
+                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_PedidoAlterar");
                 return "Pedido alterado com sucesso!.";
             }
             catch (Exception ex)
@@ -55,9 +55,9 @@ namespace Negocio
         {
             try
             {
-                acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aCodigo", pedido.Codigo);
-                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_PedidoExcluir");
+                //acessoMySql.LimparParametros();
+                //acessoMySql.AdicionarParametros("aCodigo", pedido.Codigo);
+                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_PedidoExcluir");
                 return "Pedido excluído com Sucesso!";
             }
             catch (Exception ex)
@@ -72,8 +72,8 @@ namespace Negocio
             {
                 List<Pedido> pedidos = new List<Pedido>();
 
-                acessoMySql.LimparParametros();
-                DataTable dataTablePedidos = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT E.codigo, E.datapedido, E.qtde, E.valor, R.codigo, R.nome FROM pedido E INNER JOIN produto R ON E.cod_produto = R.codigo WHERE E.cod_aluguel = " + aluguel.Codigo, false);
+                //acessoMySql.LimparParametros();
+                DataTable dataTablePedidos = acessoSqlServer.ExecutarConsulta(CommandType.Text, "SELECT E.codigo, E.datapedido, E.qtde, E.valor, R.codigo, R.nome FROM pedido E INNER JOIN produto R ON E.cod_produto = R.codigo WHERE E.cod_aluguel = " + aluguel.Codigo);
 
                 foreach (DataRow linha in dataTablePedidos.Rows)
                 {
@@ -97,9 +97,9 @@ namespace Negocio
             {
                 List<Pedido> pedidos = new List<Pedido>();
 
-                acessoMySql.LimparParametros();
+                //acessoMySql.LimparParametros();
 
-                DataTable dataTableSaidasProduto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_aluguel, cod_produto, datapedido, qtde, valor FROM pedido WHERE cod_produto = " + produto.Codigo + " ORDER BY datapedido DESC", false);
+                DataTable dataTableSaidasProduto = acessoSqlServer.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_aluguel, cod_produto, datapedido, qtde, valor FROM pedido WHERE cod_produto = " + produto.Codigo + " ORDER BY datapedido DESC");
 
                 foreach (DataRow linha in dataTableSaidasProduto.Rows)
                 {

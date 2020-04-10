@@ -11,18 +11,18 @@ namespace Negocio
 {
     public class EntradaNegocio
     {
-        AcessoMySql acessoMySql = new AcessoMySql();
+        AcessoSqlServer acessoSqlServer = new AcessoSqlServer();
 
         public string Inserir(Entrada entrada)
         {
             try
             {
-                acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aCodProduto", entrada.CodigoProduto);
-                acessoMySql.AdicionarParametros("aDataEntrada", entrada.DataEntrada);
-                acessoMySql.AdicionarParametros("aDataVencimento", entrada.DataVencimento);
-                acessoMySql.AdicionarParametros("aQtde", entrada.Qtde);
-                return acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_EntradaNovo").ToString();
+                //acessoMySql.LimparParametros();
+                //acessoMySql.AdicionarParametros("aCodProduto", entrada.CodigoProduto);
+                //acessoMySql.AdicionarParametros("aDataEntrada", entrada.DataEntrada);
+                //acessoMySql.AdicionarParametros("aDataVencimento", entrada.DataVencimento);
+                //acessoMySql.AdicionarParametros("aQtde", entrada.Qtde);
+                return acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_EntradaNovo").ToString();
             }
             catch (Exception ex)
             {
@@ -34,11 +34,11 @@ namespace Negocio
         {
             try
             {
-                acessoMySql.AdicionarParametros("aCodigo", entrada.Codigo);
-                acessoMySql.AdicionarParametros("aDataEntrada", entrada.DataEntrada);
-                acessoMySql.AdicionarParametros("aDataVencimento", entrada.DataVencimento);
-                acessoMySql.AdicionarParametros("aQtde", entrada.Qtde);
-                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_EntradaAlterar");
+                //acessoMySql.AdicionarParametros("aCodigo", entrada.Codigo);
+                //acessoMySql.AdicionarParametros("aDataEntrada", entrada.DataEntrada);
+                //acessoMySql.AdicionarParametros("aDataVencimento", entrada.DataVencimento);
+                //acessoMySql.AdicionarParametros("aQtde", entrada.Qtde);
+                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_EntradaAlterar");
                 return "Entrada alterado com sucesso!.";
             }
             catch (Exception ex)
@@ -51,9 +51,9 @@ namespace Negocio
         {
             try
             {
-                acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aCodigo", entrada.Codigo);
-                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_EntradaExcluir");
+                //acessoMySql.LimparParametros();
+                //acessoMySql.AdicionarParametros("aCodigo", entrada.Codigo);
+                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_EntradaExcluir");
                 return "Entrada excluído com Sucesso!";
             }
             catch (Exception ex)
@@ -68,9 +68,9 @@ namespace Negocio
             {
                 List<Entrada> entradas = new List<Entrada>();
 
-                acessoMySql.LimparParametros();
+                //acessoSqlServer.LimparParametros();
 
-                DataTable dataTableClientesAluguel = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_produto, dataEntrada, dataVencimento, qtde FROM entrada WHERE cod_produto = " + produto.Codigo + " ORDER BY dataEntrada DESC", false);
+                DataTable dataTableClientesAluguel = acessoSqlServer.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_produto, dataEntrada, dataVencimento, qtde FROM entrada WHERE cod_produto = " + produto.Codigo + " ORDER BY dataEntrada DESC");
 
                 foreach (DataRow linha in dataTableClientesAluguel.Rows)
                 {

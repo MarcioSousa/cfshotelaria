@@ -11,18 +11,18 @@ namespace Negocio
 {
     public class ProdutoNegocio
     {
-        AcessoMySql acessoMySql = new AcessoMySql();
+        AcessoSqlServer acessoSqlServer = new AcessoSqlServer();
 
         public string Inserir(Produto produto)
         {
             try
             {
-                acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aCodigo", produto.Codigo);
-                acessoMySql.AdicionarParametros("aNome", produto.Nome);
-                acessoMySql.AdicionarParametros("aValor", produto.Valor);
-                acessoMySql.AdicionarParametros("aQtdeAtual", produto.Qtdeatual);
-                return acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_ProdutoNovo").ToString();
+                //acessoMySql.LimparParametros();
+                //acessoMySql.AdicionarParametros("aCodigo", produto.Codigo);
+                //acessoMySql.AdicionarParametros("aNome", produto.Nome);
+                //acessoMySql.AdicionarParametros("aValor", produto.Valor);
+                //acessoMySql.AdicionarParametros("aQtdeAtual", produto.Qtdeatual);
+                return acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_ProdutoNovo").ToString();
             }
             catch (Exception ex)
             {
@@ -34,11 +34,11 @@ namespace Negocio
         {
             try
             {
-                acessoMySql.AdicionarParametros("aCodigo", produto.Codigo);
-                acessoMySql.AdicionarParametros("aNome", produto.Nome);
-                acessoMySql.AdicionarParametros("aValor", produto.Valor);
-                acessoMySql.AdicionarParametros("aQtdeAtual", produto.Qtdeatual);
-                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_ProdutoAlterar");
+                //acessoMySql.AdicionarParametros("aCodigo", produto.Codigo);
+                //acessoMySql.AdicionarParametros("aNome", produto.Nome);
+                //acessoMySql.AdicionarParametros("aValor", produto.Valor);
+                //acessoMySql.AdicionarParametros("aQtdeAtual", produto.Qtdeatual);
+                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_ProdutoAlterar");
                 return "Produto alterado com sucesso!.";
             }
             catch (Exception ex)
@@ -51,9 +51,9 @@ namespace Negocio
         {
             try
             {
-                acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aCodigo", produto.Codigo);
-                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_ProdutoExcluir");
+                //acessoMySql.LimparParametros();
+                //acessoMySql.AdicionarParametros("aCodigo", produto.Codigo);
+                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_ProdutoExcluir");
                 return "Produto excluído com Sucesso!";
             }
             catch (Exception ex)
@@ -66,7 +66,7 @@ namespace Negocio
         {
             try
             {
-                DataTable dataTableProduto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, nome, valor, qtdeAtual FROM produto WHERE codigo = " + produto.Codigo, false);
+                DataTable dataTableProduto = acessoSqlServer.ExecutarConsulta(CommandType.Text, "SELECT codigo, nome, valor, qtdeAtual FROM produto WHERE codigo = " + produto.Codigo);
 
                 foreach (DataRow linha in dataTableProduto.Rows)
                 {
@@ -97,7 +97,7 @@ namespace Negocio
             {
                 List<Produto> produtos = new List<Produto>();
                 
-                DataTable dataTableProduto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, nome, valor, qtdeAtual FROM produto ORDER BY codigo", false);
+                DataTable dataTableProduto = acessoSqlServer.ExecutarConsulta(CommandType.Text, "SELECT codigo, nome, valor, qtdeAtual FROM produto ORDER BY codigo");
 
                 foreach (DataRow linha in dataTableProduto.Rows)
                 {
@@ -130,7 +130,7 @@ namespace Negocio
             {
                 List<Produto> produtos = new List<Produto>();
 
-                DataTable dataTableProduto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, nome, valor, qtdeAtual FROM produto WHERE qtdeAtual IS NOT NULL ORDER BY codigo", false);
+                DataTable dataTableProduto = acessoSqlServer.ExecutarConsulta(CommandType.Text, "SELECT codigo, nome, valor, qtdeAtual FROM produto WHERE qtdeAtual IS NOT NULL ORDER BY codigo");
 
                 foreach (DataRow linha in dataTableProduto.Rows)
                 {

@@ -11,16 +11,14 @@ namespace Negocio
 {
     public class LimpezaNegocio
     {
-        AcessoMySql acessoMySql = new AcessoMySql();
+        AcessoSqlServer acessoSqlServer = new AcessoSqlServer();
 
+        //MANIPULAÇÃO
         public string Inserir(Limpeza limpeza)
         {
             try
             {
-                acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aCodQuarto", limpeza.Quarto.Numero);
-                acessoMySql.AdicionarParametros("aDataLimpeza", limpeza.DataLimpeza);
-                limpeza.Codigo = Convert.ToInt32(acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_LimpezaNovo"));
+                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "INSERT INTO limpeza(cod_quarto, datalimpeza) VALUES(" + limpeza.Quarto.Numero+ ", " + limpeza.DataLimpeza + ")");
                 return "Salvo com sucesso!";
             }
             catch (Exception ex)
@@ -28,15 +26,11 @@ namespace Negocio
                 return ex.Message;
             }
         }
-
         public string Alterar(Limpeza limpeza)
         {
             try
             {
-                acessoMySql.AdicionarParametros("aCodigo", limpeza.Codigo);
-                acessoMySql.AdicionarParametros("aCodQuarto", limpeza.Quarto.Numero);
-                acessoMySql.AdicionarParametros("aDataLimpeza", limpeza.DataLimpeza);
-                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_LimpezaAlterar");
+                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "UPDATE limpeza SET cod_quarto = " + limpeza.Quarto.Numero + ", datalimpeza = " + limpeza.DataLimpeza + " WHERE codigo = " + limpeza.Codigo);
                 return "Limpeza alterado com sucesso!.";
             }
             catch (Exception ex)
@@ -44,15 +38,11 @@ namespace Negocio
                 return ex.Message;
             }
         }
-
         public string Excluir(Limpeza limpeza)
         {
             try
             {
-                acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aCodigo", limpeza.Codigo);
-                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_LimpezaExcluir");
-                
+                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "DELETE FROM limpeza WHERE codigo = " + limpeza.Codigo);
                 return "Limpeza excluído com Sucesso!";
             }
             catch (Exception ex)
@@ -61,13 +51,14 @@ namespace Negocio
             }
         }
 
+        //SELÊÇÃO
         public List<Limpeza> Limpezas(Quarto quarto)
         {
             try
             {
                 List<Limpeza> limpezas  = new List<Limpeza>();
 
-                DataTable dataTableQuarto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, datalimpeza FROM limpeza WHERE cod_quarto = " + quarto.Numero + " ORDER BY datalimpeza DESC LIMIT 0,10", false);
+                DataTable dataTableQuarto = acessoSqlServer.ExecutarConsulta(CommandType.Text, "SELECT codigo, datalimpeza FROM limpeza WHERE cod_quarto = " + quarto.Numero + " ORDER BY datalimpeza DESC LIMIT 0,10");
 
                 foreach (DataRow linha in dataTableQuarto.Rows)
                 {
@@ -82,6 +73,7 @@ namespace Negocio
                 throw new Exception("Não foi possível carregar as Limpezas.\nDetalhes: " + ex.Message);
             }
         }
+
 
     }
 }

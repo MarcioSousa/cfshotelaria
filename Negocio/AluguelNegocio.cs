@@ -11,17 +11,17 @@ namespace Negocio
 {
     public class AluguelNegocio
     {
-        AcessoMySql acessoMySql = new AcessoMySql();
+        AcessoSqlServer acessoSqlServer = new AcessoSqlServer();
 
         public string Inserir(Aluguel aluguel)
         {
             try
             {
-                acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aCodQuarto", aluguel.NumeroQuarto);
-                acessoMySql.AdicionarParametros("aValor", aluguel.Valor);
-                acessoMySql.AdicionarParametros("aDataChegada", aluguel.DataChegada);
-                aluguel.Codigo = Convert.ToInt32(acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_AluguelNovo"));
+                //acessoMySql.LimparParametros();
+                //acessoMySql.AdicionarParametros("aCodQuarto", aluguel.NumeroQuarto);
+                //acessoMySql.AdicionarParametros("aValor", aluguel.Valor);
+                //acessoMySql.AdicionarParametros("aDataChegada", aluguel.DataChegada);
+                aluguel.Codigo = Convert.ToInt32(acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_AluguelNovo"));
                 return aluguel.Codigo.ToString();
             }
             catch (Exception ex)
@@ -34,12 +34,12 @@ namespace Negocio
         {
             try
             {
-                acessoMySql.AdicionarParametros("aCodigo", aluguel.Codigo);
-                acessoMySql.AdicionarParametros("aCodQuarto", aluguel.NumeroQuarto);
-                acessoMySql.AdicionarParametros("aValor", aluguel.Valor);
-                acessoMySql.AdicionarParametros("aDataChegada", aluguel.DataChegada);
-                acessoMySql.AdicionarParametros("aDataSaida", aluguel.DataSaida);
-                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_AluguelAlterar");
+                //acessoMySql.AdicionarParametros("aCodigo", aluguel.Codigo);
+                //acessoMySql.AdicionarParametros("aCodQuarto", aluguel.NumeroQuarto);
+                //acessoMySql.AdicionarParametros("aValor", aluguel.Valor);
+                //acessoMySql.AdicionarParametros("aDataChegada", aluguel.DataChegada);
+                //acessoMySql.AdicionarParametros("aDataSaida", aluguel.DataSaida);
+                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_AluguelAlterar");
                 return "Aluguel alterado com sucesso!.";
             }
             catch (Exception ex)
@@ -52,9 +52,9 @@ namespace Negocio
         {
             try
             {
-                acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aCodigo", aluguel.Codigo);
-                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_AluguelExcluir");
+                //acessoMySql.LimparParametros();
+                //acessoMySql.AdicionarParametros("aCodigo", aluguel.Codigo);
+                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_AluguelExcluir");
                 return "Aluguel excluído com Sucesso!";
             }
             catch (Exception ex)
@@ -69,8 +69,8 @@ namespace Negocio
             {
                 Aluguel aluguel = new Aluguel();
 
-                acessoMySql.LimparParametros();
-                DataTable dataTableAluguelQuarto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, dataChegada, valor FROM aluguel WHERE cod_quarto = " + quarto.Numero + " AND dataSaida IS NULL", false);
+                //acessoMySql.LimparParametros();
+                DataTable dataTableAluguelQuarto = acessoSqlServer.ExecutarConsulta(CommandType.Text, "SELECT codigo, dataChegada, valor FROM aluguel WHERE cod_quarto = " + quarto.Numero + " AND dataSaida IS NULL");
 
                 foreach (DataRow linha in dataTableAluguelQuarto.Rows)
                 {

@@ -67,11 +67,11 @@
     <Compile Include="FrmEstoque.Designer.cs">
       <DependentUpon>FrmEstoque.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmQuarto.cs">
+    <Compile Include="frmQuarto.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmQuarto.Designer.cs">
-      <DependentUpon>FrmQuarto.cs</DependentUpon>
+    <Compile Include="frmQuarto.Designer.cs">
+      <DependentUpon>frmQuarto.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmCliente.cs">
       <SubType>Form</SubType>
@@ -120,8 +120,8 @@
     <EmbeddedResource Include="FrmEstoque.resx">
       <DependentUpon>FrmEstoque.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmQuarto.resx">
-      <DependentUpon>FrmQuarto.cs</DependentUpon>
+    <EmbeddedResource Include="frmQuarto.resx">
+      <DependentUpon>frmQuarto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmCliente.resx">
       <DependentUpon>FrmCliente.cs</DependentUpon>
@@ -151,6 +151,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

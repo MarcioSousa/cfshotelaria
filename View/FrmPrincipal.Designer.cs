@@ -67,6 +67,7 @@
             this.btnQuarto.TabIndex = 2;
             this.btnQuarto.Text = "Quarto";
             this.btnQuarto.UseVisualStyleBackColor = true;
+            this.btnQuarto.Click += new System.EventHandler(this.BtnQuarto_Click);
             // 
             // btnAluguel
             // 

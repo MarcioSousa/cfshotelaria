@@ -10,13 +10,13 @@ using System.Data.SqlClient;
 namespace Control
 {
     public class AcessoSqlServer
-    {
+    { 
+        private readonly SqlParameterCollection sqlParameterCollection = new SqlCommand().Parameters;
+      
         private SqlConnection CriarConexao()
         {
             return new SqlConnection(Settings.Default.stringConexaoHotelaria);
         }
-        private readonly SqlParameterCollection sqlParameterCollection = new SqlCommand().Parameters;
-
         public void LimparParametros()
         {
             sqlParameterCollection.Clear();
@@ -58,7 +58,6 @@ namespace Control
         {
             try
             {
-
                 SqlConnection sqlConnection = CriarConexao();
                 sqlConnection.Open();
 
@@ -85,6 +84,8 @@ namespace Control
                 throw new Exception(ex.Message);
             }
         }
+
+
 
     }
 }

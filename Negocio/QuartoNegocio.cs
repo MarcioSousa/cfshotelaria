@@ -11,17 +11,13 @@ namespace Negocio
 {
     public class QuartoNegocio
     {
-        AcessoMySql acessoMySql = new AcessoMySql();
+        AcessoSqlServer acessoSqlServer = new AcessoSqlServer();
 
         public string Inserir(Quarto quarto)
         {
             try
             {
-                acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aNumero", quarto.Numero);
-                acessoMySql.AdicionarParametros("aValorDiaria", quarto.ValorDiaria);
-                acessoMySql.AdicionarParametros("aLocalidade", quarto.Localidade);
-                return acessoMySql.ExecutarManipulacao(CommandType.Text, "INSERT INTO quarto(numero, valorDiaria, localidade) VALUES(" + + quarto.Numero + ", " + quarto.ValorDiaria + ", " + quarto.Localidade + ")").ToString();
+                return acessoSqlServer.ExecutarManipulacao(CommandType.Text, "INSERT INTO quarto(numero, valorDiaria, localidade) VALUES(" + + quarto.Numero + ", " + quarto.ValorDiaria + ", '" + quarto.Localidade + "')").ToString();
             }
             catch (Exception ex)
             {
@@ -33,12 +29,8 @@ namespace Negocio
         {
             try
             {
-                acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aNumero", quarto.Numero);
-                acessoMySql.AdicionarParametros("aValorDiaria", quarto.ValorDiaria);
-                acessoMySql.AdicionarParametros("aLocalidade", quarto.Localidade);
-                acessoMySql.ExecutarManipulacao(CommandType.Text, "");
-                return "Quarto " + quarto.Numero + " alterado com Sucesso!";
+                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "UPDATE quarto SET numero = " + quarto.Numero + ", valorDiaria = " + quarto.ValorDiaria + ", localidade = '" + quarto.Localidade + "' WHERE numero = " + quarto.Numero);
+                return "Quarto " + quarto.Numero + " Alterado com Sucesso!";
             }
             catch (Exception ex)
             {
@@ -50,10 +42,8 @@ namespace Negocio
         {
             try
             {
-                acessoMySql.LimparParametros();
-                acessoMySql.AdicionarParametros("aNumero", quarto.Numero);
-                acessoMySql.ExecutarManipulacao(CommandType.Text, "");
-                return "Quarto " + quarto.Numero + " excluído com Sucesso!";
+                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "DELETE FROM quarto WHERE numero = " + quarto.Numero);
+                return "Quarto " + quarto.Numero + " Excluído com Sucesso!";
             }
             catch (Exception ex)
             {
@@ -68,7 +58,7 @@ namespace Negocio
             {
                 List<Quarto> quartos = new List<Quarto>();
 
-                DataTable dataTableQuarto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT numero, valorDiaria, localidade FROM quarto ORDER BY numero", false);
+                DataTable dataTableQuarto = acessoSqlServer.ExecutarConsulta(CommandType.Text, "SELECT numero, valorDiaria, localidade FROM quarto ORDER BY numero");
 
                 foreach (DataRow linha in dataTableQuarto.Rows)
                 {

@@ -14,12 +14,12 @@ namespace View
 {
     public partial class FrmQuarto : Form
     {
+
         public FrmQuarto()
         {
             InitializeComponent();
             DgvQuarto.AutoGenerateColumns = false;
         }
-
         private void FrmQuarto_Load(object sender, EventArgs e)
         {
             CarregaQuartos();
@@ -35,12 +35,11 @@ namespace View
                 BtnEditar.Enabled = true;
             }
         }
-
         private void BtnAdicionar_Click(object sender, EventArgs e)
         {
             try
             {
-                if (TxtNumero.Text != "" && TxtValorDiaria.Text != "")
+                if (TxtNumero.TextLength != 0 && TxtValorDiaria.TextLength != 0)
                 {
                     if (TxtNumero.Enabled == true)
                     {
@@ -69,19 +68,6 @@ namespace View
                                 LimpaCampos();
                                 TxtNumero.Focus();
                             }
-
-
-                            //if (DgvQuarto.Rows.Count == 0)
-                            //{
-                            //    BtnExcluir.Enabled = false;
-                            //    BtnEditar.Enabled = false;
-                            //}
-                            //else
-                            //{
-                            //    BtnExcluir.Enabled = true;
-                            //    BtnEditar.Enabled = true;
-                            //}
-
                         }
                         else
                         {
@@ -109,7 +95,7 @@ namespace View
                 {
                     MessageBox.Show("Prencha os campos com o Número do quarto e o Valor de sua diária.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -120,7 +106,7 @@ namespace View
         {
             if (TxtNumero.Enabled == true)
             {
-                if (TxtNumero.Text != "")
+                if (TxtNumero.TextLength != 0)
                 {
                     if (Convert.ToInt32(TxtNumero.Text) > 0)
                     {
@@ -128,7 +114,7 @@ namespace View
                         {
                             if (Convert.ToInt32(DgvQuarto.Rows[t].Cells[0].Value) == Convert.ToInt32(TxtNumero.Text))
                             {
-                                Ep.SetError(TxtNumero, "Número já existe!");
+                                ep.SetError(TxtNumero, "Número já existe!");
                                 TxtNumero.Focus();
                                 return;
                             }
@@ -136,12 +122,12 @@ namespace View
                     }
                     else
                     {
-                        Ep.SetError(TxtNumero, "Digite um número maior que zero!");
+                        ep.SetError(TxtNumero, "Digite um número maior que zero!");
                         TxtNumero.Focus();
                         return;
                     }
                 }
-                Ep.Clear();
+                ep.Clear();
             }
         }
         private void TxtValorDiaria_KeyPress(object sender, KeyPressEventArgs e)
@@ -181,7 +167,6 @@ namespace View
                 MessageBox.Show("Não foi possível carregar os campos com o item selecionado!\nAviso: " + ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-
         private void BtnNovo_Click(object sender, EventArgs e)
         {
             AbreCampos();
@@ -216,38 +201,15 @@ namespace View
             }
         }
         private void BtnEncerrar_Click(object sender, EventArgs e)
-        {
+        { 
             this.Close();
-        }
-        private void BtnFinalizar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                FechaCampos();
-                CarregaCampos();
-
-                if (DgvQuarto.Rows.Count == 0)
-                {
-                    BtnExcluir.Enabled = false;
-                    BtnEditar.Enabled = false;
-                }
-                else
-                {
-                    BtnExcluir.Enabled = true;
-                    BtnEditar.Enabled = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Não foi possível fechar os campos.\nAviso: " + ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
         }
         private void BtnCancelar_Click(object sender, EventArgs e)
         {
             try
             {
                 FechaCampos();
-                Ep.Clear();
+                ep.Clear();
                 CarregaCampos();
             }
             catch (Exception ex)
@@ -255,6 +217,7 @@ namespace View
                 MessageBox.Show("Não foi possível fazer o cancelamento.\nAviso: " + ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
 
         private void CarregaQuartos()
         {
@@ -280,7 +243,6 @@ namespace View
             TxtLocalidade.Enabled = true;
             BtnAdicionar.Enabled = true;
             BtnCancelar.Enabled = true;
-            BtnFinalizar.Enabled = true;
 
             BtnExcluir.Enabled = false;
             BtnNovo.Enabled = false;
@@ -300,7 +262,6 @@ namespace View
             TxtLocalidade.Enabled = false;
             BtnAdicionar.Enabled = false;
             BtnCancelar.Enabled = false;
-            BtnFinalizar.Enabled = false;
 
             BtnExcluir.Enabled = true;
             BtnNovo.Enabled = true;
@@ -331,4 +292,4 @@ namespace View
         }
 
     }
-}
+}     
