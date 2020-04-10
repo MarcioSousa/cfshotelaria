@@ -7,7 +7,6 @@ using Control.Properties;
 using System.Data;
 using MySql.Data.MySqlClient;
 
-
 namespace Control
 {
     public class AcessoMySql
