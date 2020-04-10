@@ -21,7 +21,7 @@ namespace Negocio
                 acessoMySql.AdicionarParametros("aCodQuarto", aluguel.NumeroQuarto);
                 acessoMySql.AdicionarParametros("aValor", aluguel.Valor);
                 acessoMySql.AdicionarParametros("aDataChegada", aluguel.DataChegada);
-                aluguel.Codigo = Convert.ToInt32(acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_AluguelNovo"));
+                aluguel.Codigo = Convert.ToInt32(acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_AluguelNovo"));
                 return aluguel.Codigo.ToString();
             }
             catch (Exception ex)
@@ -39,7 +39,7 @@ namespace Negocio
                 acessoMySql.AdicionarParametros("aValor", aluguel.Valor);
                 acessoMySql.AdicionarParametros("aDataChegada", aluguel.DataChegada);
                 acessoMySql.AdicionarParametros("aDataSaida", aluguel.DataSaida);
-                acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_AluguelAlterar");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_AluguelAlterar");
                 return "Aluguel alterado com sucesso!.";
             }
             catch (Exception ex)
@@ -54,7 +54,7 @@ namespace Negocio
             {
                 acessoMySql.LimparParametros();
                 acessoMySql.AdicionarParametros("aCodigo", aluguel.Codigo);
-                acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_AluguelExcluir");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_AluguelExcluir");
                 return "Aluguel excluído com Sucesso!";
             }
             catch (Exception ex)

@@ -20,7 +20,7 @@ namespace Negocio
                 acessoMySql.LimparParametros();
                 acessoMySql.AdicionarParametros("aCodQuarto", limpeza.Quarto.Numero);
                 acessoMySql.AdicionarParametros("aDataLimpeza", limpeza.DataLimpeza);
-                limpeza.Codigo = Convert.ToInt32(acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_LimpezaNovo"));
+                limpeza.Codigo = Convert.ToInt32(acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_LimpezaNovo"));
                 return "Salvo com sucesso!";
             }
             catch (Exception ex)
@@ -36,7 +36,7 @@ namespace Negocio
                 acessoMySql.AdicionarParametros("aCodigo", limpeza.Codigo);
                 acessoMySql.AdicionarParametros("aCodQuarto", limpeza.Quarto.Numero);
                 acessoMySql.AdicionarParametros("aDataLimpeza", limpeza.DataLimpeza);
-                acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_LimpezaAlterar");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_LimpezaAlterar");
                 return "Limpeza alterado com sucesso!.";
             }
             catch (Exception ex)
@@ -51,7 +51,7 @@ namespace Negocio
             {
                 acessoMySql.LimparParametros();
                 acessoMySql.AdicionarParametros("aCodigo", limpeza.Codigo);
-                acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_LimpezaExcluir");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_LimpezaExcluir");
                 
                 return "Limpeza excluído com Sucesso!";
             }

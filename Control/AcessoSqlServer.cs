@@ -13,7 +13,7 @@ namespace Control
     {
         private SqlConnection CriarConexao()
         {
-            return new SqlConnection(Settings.Default.connectionstringhotelaria);
+            return new SqlConnection(Settings.Default.stringConexaoHotelaria);
         }
         private readonly SqlParameterCollection sqlParameterCollection = new SqlCommand().Parameters;
 

@@ -43,7 +43,6 @@
     <Compile Include="Aluguel.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="Entrada.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Limpeza.cs" />
     <Compile Include="Pagamento.cs" />
     <Compile Include="Pedido.cs" />

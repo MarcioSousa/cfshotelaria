@@ -22,7 +22,7 @@ namespace Negocio
                 acessoMySql.AdicionarParametros("aTipo", pagamento.Tipo);
                 acessoMySql.AdicionarParametros("aDataPagamento", pagamento.DataPagamento);
                 acessoMySql.AdicionarParametros("aValor", pagamento.Valor);
-                pagamento.Codigo = Convert.ToInt32(acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_PagamentoNovo"));
+                pagamento.Codigo = Convert.ToInt32(acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_PagamentoNovo"));
                 return "Pagamento adicionado com sucesso!";
             }
             catch (Exception ex)
@@ -41,7 +41,7 @@ namespace Negocio
                 acessoMySql.AdicionarParametros("aTipo", pagamento.Tipo);
                 acessoMySql.AdicionarParametros("aDataPagamento", pagamento.DataPagamento);
                 acessoMySql.AdicionarParametros("aValor", pagamento.Valor);
-                acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_PagamentoAlterar");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_PagamentoAlterar");
                 return "Pagamento alterado com sucesso!.";
             }
             catch (Exception ex)
@@ -56,7 +56,7 @@ namespace Negocio
             {
                 acessoMySql.LimparParametros();
                 acessoMySql.AdicionarParametros("aCodigo", pagamento.Codigo);
-                acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_PagamentoExcluir");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_PagamentoExcluir");
                 return "Pagamento excluído com Sucesso!";
             }
             catch (Exception ex)

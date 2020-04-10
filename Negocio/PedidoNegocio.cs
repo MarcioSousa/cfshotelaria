@@ -23,7 +23,7 @@ namespace Negocio
                 acessoMySql.AdicionarParametros("aDataPedido", pedido.DataPedido);
                 acessoMySql.AdicionarParametros("aQtde", pedido.Qtde);
                 acessoMySql.AdicionarParametros("aValor", pedido.Valor);
-                pedido.Codigo = Convert.ToInt32(acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_PedidoNovo"));
+                pedido.Codigo = Convert.ToInt32(acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_PedidoNovo"));
                 return "Pedido adicionado com sucesso!";
             }
             catch (Exception ex)
@@ -42,7 +42,7 @@ namespace Negocio
                 acessoMySql.AdicionarParametros("aDataPedido", pedido.DataPedido);
                  acessoMySql.AdicionarParametros("aQtde", pedido.Qtde);
                 acessoMySql.AdicionarParametros("aValor", pedido.Valor);
-                acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_PedidoAlterar");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_PedidoAlterar");
                 return "Pedido alterado com sucesso!.";
             }
             catch (Exception ex)
@@ -57,7 +57,7 @@ namespace Negocio
             {
                 acessoMySql.LimparParametros();
                 acessoMySql.AdicionarParametros("aCodigo", pedido.Codigo);
-                acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_PedidoExcluir");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_PedidoExcluir");
                 return "Pedido excluído com Sucesso!";
             }
             catch (Exception ex)

@@ -22,7 +22,7 @@ namespace Negocio
                 acessoMySql.AdicionarParametros("aNome", produto.Nome);
                 acessoMySql.AdicionarParametros("aValor", produto.Valor);
                 acessoMySql.AdicionarParametros("aQtdeAtual", produto.Qtdeatual);
-                return acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_ProdutoNovo").ToString();
+                return acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_ProdutoNovo").ToString();
             }
             catch (Exception ex)
             {
@@ -38,7 +38,7 @@ namespace Negocio
                 acessoMySql.AdicionarParametros("aNome", produto.Nome);
                 acessoMySql.AdicionarParametros("aValor", produto.Valor);
                 acessoMySql.AdicionarParametros("aQtdeAtual", produto.Qtdeatual);
-                acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_ProdutoAlterar");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_ProdutoAlterar");
                 return "Produto alterado com sucesso!.";
             }
             catch (Exception ex)
@@ -53,7 +53,7 @@ namespace Negocio
             {
                 acessoMySql.LimparParametros();
                 acessoMySql.AdicionarParametros("aCodigo", produto.Codigo);
-                acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_ProdutoExcluir");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_ProdutoExcluir");
                 return "Produto excluído com Sucesso!";
             }
             catch (Exception ex)

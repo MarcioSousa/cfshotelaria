@@ -23,7 +23,7 @@ namespace Negocio
                 acessoMySql.AdicionarParametros("aRg", cliente.Rg);
                 acessoMySql.AdicionarParametros("aCpf", cliente.Cpf);
                 acessoMySql.AdicionarParametros("aContato", cliente.Contato);
-                cliente.Codigo = Convert.ToInt32(acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_ClienteNovo"));
+                cliente.Codigo = Convert.ToInt32(acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_ClienteNovo"));
                 return "Cliente Cadastrado!";
             }
             catch (Exception ex)
@@ -42,7 +42,7 @@ namespace Negocio
                 acessoMySql.AdicionarParametros("aRg", cliente.Rg);
                 acessoMySql.AdicionarParametros("aCpf", cliente.Cpf);
                 acessoMySql.AdicionarParametros("aContato", cliente.Contato);
-                acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_ClienteAlterar");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_ClienteAlterar");
                 return "Cliente alterado com sucesso!.";
             }
             catch (Exception ex)
@@ -57,7 +57,7 @@ namespace Negocio
             {
                 acessoMySql.LimparParametros();
                 acessoMySql.AdicionarParametros("aCodigo", cliente.Codigo);
-                acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_ClienteExcluir");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_ClienteExcluir");
                 return "Cliente excluído com Sucesso!";
             }
             catch (Exception ex)

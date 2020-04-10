@@ -21,7 +21,7 @@ namespace Negocio
                 acessoMySql.AdicionarParametros("aNumero", quarto.Numero);
                 acessoMySql.AdicionarParametros("aValorDiaria", quarto.ValorDiaria);
                 acessoMySql.AdicionarParametros("aLocalidade", quarto.Localidade);
-                return acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_QuartoNovo").ToString();
+                return acessoMySql.ExecutarManipulacao(CommandType.Text, "INSERT INTO quarto(numero, valorDiaria, localidade) VALUES(" + + quarto.Numero + ", " + quarto.ValorDiaria + ", " + quarto.Localidade + ")").ToString();
             }
             catch (Exception ex)
             {
@@ -37,7 +37,7 @@ namespace Negocio
                 acessoMySql.AdicionarParametros("aNumero", quarto.Numero);
                 acessoMySql.AdicionarParametros("aValorDiaria", quarto.ValorDiaria);
                 acessoMySql.AdicionarParametros("aLocalidade", quarto.Localidade);
-                acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_QuartoAlterar");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "");
                 return "Quarto " + quarto.Numero + " alterado com Sucesso!";
             }
             catch (Exception ex)
@@ -52,7 +52,7 @@ namespace Negocio
             {
                 acessoMySql.LimparParametros();
                 acessoMySql.AdicionarParametros("aNumero", quarto.Numero);
-                acessoMySql.ExecutarManipulacao(CommandType.StoredProcedure, "usp_QuartoExcluir");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "");
                 return "Quarto " + quarto.Numero + " excluído com Sucesso!";
             }
             catch (Exception ex)
