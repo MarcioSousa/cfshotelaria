@@ -333,3 +333,4 @@ ASALocalRun/
 
 
 Control/Properties/
+Control/AcessoMySql.cs
