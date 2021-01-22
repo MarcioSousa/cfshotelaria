@@ -95,6 +95,11 @@ namespace View
             FrmQuarto frmQuarto = new FrmQuarto();
             frmQuarto.ShowDialog();
         }
+
+        private void btnAluguel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

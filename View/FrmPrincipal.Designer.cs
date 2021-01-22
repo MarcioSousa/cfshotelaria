@@ -52,7 +52,7 @@
             // 
             // btnProduto
             // 
-            this.btnProduto.Location = new System.Drawing.Point(68, 283);
+            this.btnProduto.Location = new System.Drawing.Point(461, 288);
             this.btnProduto.Name = "btnProduto";
             this.btnProduto.Size = new System.Drawing.Size(75, 23);
             this.btnProduto.TabIndex = 1;
@@ -61,7 +61,7 @@
             // 
             // btnQuarto
             // 
-            this.btnQuarto.Location = new System.Drawing.Point(68, 186);
+            this.btnQuarto.Location = new System.Drawing.Point(461, 191);
             this.btnQuarto.Name = "btnQuarto";
             this.btnQuarto.Size = new System.Drawing.Size(75, 23);
             this.btnQuarto.TabIndex = 2;
@@ -71,16 +71,17 @@
             // 
             // btnAluguel
             // 
-            this.btnAluguel.Location = new System.Drawing.Point(236, 186);
+            this.btnAluguel.Location = new System.Drawing.Point(629, 191);
             this.btnAluguel.Name = "btnAluguel";
             this.btnAluguel.Size = new System.Drawing.Size(75, 23);
             this.btnAluguel.TabIndex = 3;
             this.btnAluguel.Text = "Aluguel";
             this.btnAluguel.UseVisualStyleBackColor = true;
+            this.btnAluguel.Click += new System.EventHandler(this.btnAluguel_Click);
             // 
             // btnLimpeza
             // 
-            this.btnLimpeza.Location = new System.Drawing.Point(68, 118);
+            this.btnLimpeza.Location = new System.Drawing.Point(461, 123);
             this.btnLimpeza.Name = "btnLimpeza";
             this.btnLimpeza.Size = new System.Drawing.Size(75, 23);
             this.btnLimpeza.TabIndex = 4;
@@ -89,7 +90,7 @@
             // 
             // btnPagamento
             // 
-            this.btnPagamento.Location = new System.Drawing.Point(408, 118);
+            this.btnPagamento.Location = new System.Drawing.Point(801, 123);
             this.btnPagamento.Name = "btnPagamento";
             this.btnPagamento.Size = new System.Drawing.Size(75, 23);
             this.btnPagamento.TabIndex = 5;
@@ -98,7 +99,7 @@
             // 
             // btnEntrada
             // 
-            this.btnEntrada.Location = new System.Drawing.Point(63, 359);
+            this.btnEntrada.Location = new System.Drawing.Point(456, 364);
             this.btnEntrada.Name = "btnEntrada";
             this.btnEntrada.Size = new System.Drawing.Size(75, 23);
             this.btnEntrada.TabIndex = 6;
@@ -107,7 +108,7 @@
             // 
             // btnPedido
             // 
-            this.btnPedido.Location = new System.Drawing.Point(236, 283);
+            this.btnPedido.Location = new System.Drawing.Point(629, 288);
             this.btnPedido.Name = "btnPedido";
             this.btnPedido.Size = new System.Drawing.Size(75, 23);
             this.btnPedido.TabIndex = 7;
@@ -116,7 +117,7 @@
             // 
             // btnCliente
             // 
-            this.btnCliente.Location = new System.Drawing.Point(408, 186);
+            this.btnCliente.Location = new System.Drawing.Point(801, 191);
             this.btnCliente.Name = "btnCliente";
             this.btnCliente.Size = new System.Drawing.Size(75, 23);
             this.btnCliente.TabIndex = 9;
@@ -125,7 +126,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(100, 147);
+            this.textBox1.Location = new System.Drawing.Point(493, 152);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(12, 33);
@@ -133,7 +134,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(440, 147);
+            this.textBox2.Location = new System.Drawing.Point(833, 152);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(12, 33);
@@ -141,7 +142,7 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(149, 192);
+            this.textBox3.Location = new System.Drawing.Point(542, 197);
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(81, 10);
@@ -149,7 +150,7 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(321, 192);
+            this.textBox4.Location = new System.Drawing.Point(714, 197);
             this.textBox4.Multiline = true;
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(81, 10);
@@ -157,7 +158,7 @@
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(268, 215);
+            this.textBox5.Location = new System.Drawing.Point(661, 220);
             this.textBox5.Multiline = true;
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(12, 62);
@@ -165,7 +166,7 @@
             // 
             // textBox6
             // 
-            this.textBox6.Location = new System.Drawing.Point(149, 289);
+            this.textBox6.Location = new System.Drawing.Point(542, 294);
             this.textBox6.Multiline = true;
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(81, 10);
@@ -173,7 +174,7 @@
             // 
             // textBox8
             // 
-            this.textBox8.Location = new System.Drawing.Point(100, 312);
+            this.textBox8.Location = new System.Drawing.Point(493, 317);
             this.textBox8.Multiline = true;
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(12, 41);
@@ -182,7 +183,7 @@
             // PicQuarto
             // 
             this.PicQuarto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PicQuarto.Location = new System.Drawing.Point(77, 24);
+            this.PicQuarto.Location = new System.Drawing.Point(470, 29);
             this.PicQuarto.Name = "PicQuarto";
             this.PicQuarto.Size = new System.Drawing.Size(61, 50);
             this.PicQuarto.TabIndex = 18;
@@ -192,7 +193,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(74, 77);
+            this.label1.Location = new System.Drawing.Point(467, 82);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 13);
             this.label1.TabIndex = 19;
@@ -201,7 +202,7 @@
             // PicEstoque
             // 
             this.PicEstoque.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PicEstoque.Location = new System.Drawing.Point(238, 24);
+            this.PicEstoque.Location = new System.Drawing.Point(631, 29);
             this.PicEstoque.Name = "PicEstoque";
             this.PicEstoque.Size = new System.Drawing.Size(61, 50);
             this.PicEstoque.TabIndex = 20;
@@ -211,7 +212,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(235, 77);
+            this.label2.Location = new System.Drawing.Point(628, 82);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(83, 13);
             this.label2.TabIndex = 21;
@@ -220,7 +221,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(388, 77);
+            this.label3.Location = new System.Drawing.Point(781, 82);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(97, 13);
             this.label3.TabIndex = 23;
@@ -229,7 +230,7 @@
             // PicEstatistica
             // 
             this.PicEstatistica.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PicEstatistica.Location = new System.Drawing.Point(391, 24);
+            this.PicEstatistica.Location = new System.Drawing.Point(784, 29);
             this.PicEstatistica.Name = "PicEstatistica";
             this.PicEstatistica.Size = new System.Drawing.Size(61, 50);
             this.PicEstatistica.TabIndex = 22;
@@ -240,7 +241,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(570, 426);
+            this.ClientSize = new System.Drawing.Size(905, 434);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.PicEstatistica);
             this.Controls.Add(this.label2);
