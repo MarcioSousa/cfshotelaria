@@ -12,9 +12,9 @@ namespace Model
         private DateTime dataLimpeza;
         private Quarto quarto;
 
-        public int? Codigo { get => codigo; set => codigo = value; }
-        public DateTime DataLimpeza { get => dataLimpeza; set => dataLimpeza = value; }
-        public Quarto Quarto { get => quarto; set => quarto = value; }
+        public int? Codigo { get { return codigo; } set { codigo = value; } }
+        public DateTime DataLimpeza { get { return dataLimpeza; } set { dataLimpeza = value; } }
+        public Quarto Quarto { get { return quarto; } set { quarto = value; } }
 
         public Limpeza(int? codigo)
         {

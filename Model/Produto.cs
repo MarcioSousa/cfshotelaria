@@ -15,10 +15,10 @@ namespace Model
         //private List<Entrada> entradas = new List<Entrada>();
         //private List<Pedido> pedidos = new List<Pedido>();
 
-        public int? Codigo { get => codigo; set => codigo = value; }
-        public string Nome { get => nome; set => nome = value; }
-        public double Valor { get => valor; set => valor = value; }
-        public int? Qtdeatual { get => qtdeatual; set => qtdeatual = value; }
+        public int? Codigo { get { return codigo; } set { codigo = value; } }
+        public string Nome { get { return nome; } set { nome = value; } }
+        public double Valor { get { return valor; } set { valor = value; } }
+        public int? Qtdeatual { get { return qtdeatual; } set { qtdeatual = value; } }
         //public List<Entrada> Entradas { get => entradas; set => entradas = value; }
         //public List<Pedido> Pedidos { get => pedidos; set => pedidos = value; }
 

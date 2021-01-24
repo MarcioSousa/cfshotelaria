@@ -14,11 +14,11 @@ namespace Model
         private DateTime dataPagamento;
         private double valor;
 
-        public int? Codigo { get => codigo; set => codigo = value; }
-        public int CodigoAluguel { get => codigoAluguel; set => codigoAluguel = value; }
-        public string Tipo { get => tipo; set => tipo = value; }
-        public DateTime DataPagamento { get => dataPagamento; set => dataPagamento = value; }
-        public double Valor { get => valor; set => valor = value; }
+        public int? Codigo { get { return codigo; } set { codigo = value; } }
+        public int CodigoAluguel { get { return codigoAluguel; } set { codigoAluguel = value; } }
+        public string Tipo { get { return tipo; } set { tipo = value; } }
+        public DateTime DataPagamento { get { return dataPagamento; } set { dataPagamento = value; } }
+        public double Valor { get { return valor; } set { valor = value; } }
 
         public Pagamento(int? codigo)
         {

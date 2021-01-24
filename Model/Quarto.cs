@@ -12,9 +12,9 @@ namespace Model
         private double valorDiaria;
         private string localidade;
 
-        public int Numero { get => numero; set => numero = value; }
-        public double ValorDiaria { get => valorDiaria; set => valorDiaria = value; }
-        public string Localidade { get => localidade; set => localidade = value; }
+        public int Numero { get { return numero; } set { numero = value; } }
+        public double ValorDiaria { get { return valorDiaria; } set { valorDiaria = value; } }
+        public string Localidade { get { return localidade; } set { localidade = value; } }
 
         public Quarto(int numero)
         {

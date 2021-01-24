@@ -18,12 +18,13 @@ namespace Model
         //private List<Pedido> pedidos = new List<Pedido>();
         //private List<Pagamento> pagamentos = new List<Pagamento>();
 
+        
+        public int Codigo { get { return codigo; } set { codigo = value; } }
+        public int NumeroQuarto { get { return numeroQuarto; } set { numeroQuarto = value; } }
+        public double Valor { get { return valor; } set { valor = value; } }
+        public DateTime DataChegada { get {return dataChegada; } set { dataChegada = value; } }
+        public DateTime? DataSaida { get {return dataSaida; } set { dataSaida = value; } }
 
-        public int Codigo { get => codigo; set => codigo = value; }
-        public int NumeroQuarto { get => numeroQuarto; set => numeroQuarto = value; }
-        public double Valor { get => valor; set => valor = value; }
-        public DateTime DataChegada { get => dataChegada; set => dataChegada = value; }
-        public DateTime? DataSaida { get => dataSaida; set => dataSaida = value; }
         //public List<Cliente> Clientes { get => clientes; set => clientes = value; }
         //public List<Pedido> Pedidos { get => pedidos; set => pedidos = value; }
         //public List<Pagamento> Pagamentos { get => pagamentos; set => pagamentos = value; }

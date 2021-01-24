@@ -16,13 +16,13 @@ namespace Model
         private double valor;
         private int qtde;
        
-        public int? Codigo { get => codigo; set => codigo = value; }
-        public DateTime DataPedido { get => dataPedido; set => dataPedido = value; }
-        public int CodigoAluguel { get => codigoAluguel; set => codigoAluguel = value; }
-        public int CodigoProduto { get => codigoProduto; set => codigoProduto = value; }
-        public double Valor { get => valor; set => valor = value; }
-        public int Qtde { get => qtde; set => qtde = value; }
-        public string NomeProduto { get => nomeProduto; set => nomeProduto = value; }
+        public int? Codigo { get { return codigo; } set { codigo = value; } }
+        public DateTime DataPedido { get { return dataPedido; } set { dataPedido = value; } }
+        public int CodigoAluguel { get { return codigoAluguel; } set { codigoAluguel = value; } }
+        public int CodigoProduto { get { return codigoProduto; } set { codigoProduto = value; } }
+        public double Valor { get { return valor; } set { valor = value; } }
+        public int Qtde { get { return qtde; } set { qtde = value; } }
+        public string NomeProduto { get { return nomeProduto; } set { nomeProduto = value; } }
 
         public Pedido(int? codigo)
         {

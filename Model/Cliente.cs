@@ -15,12 +15,12 @@ namespace Model
         private string cpf;
         private string contato;
 
-        public int? Codigo { get => codigo; set => codigo = value; }
-        public int CodigoAluguel { get => codigoAluguel; set => codigoAluguel = value; }
-        public string Nome { get => nome; set => nome = value; }
-        public string Rg { get => rg; set => rg = value; }
-        public string Cpf { get => cpf; set => cpf = value; }
-        public string Contato { get => contato; set => contato = value; }
+        public int? Codigo { get { return codigo; } set { codigo = value; } }
+        public int CodigoAluguel { get { return codigoAluguel; } set { codigoAluguel = value; } }
+        public string Nome { get { return nome; } set { nome = value; } }
+        public string Rg { get { return rg; } set { rg = value; } }
+        public string Cpf { get { return cpf; } set { cpf = value; } }
+        public string Contato { get { return contato; } set { contato = value; } }
 
         public Cliente(int codigo)
         {

@@ -32,5 +32,14 @@ namespace Control.Properties {
                 return ((string)(this["stringConexaoHotelaria"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        public string stringcon {
+            get {
+                return ((string)(this["stringcon"]));
+            }
+        }
     }
 }

@@ -15,11 +15,11 @@ namespace Model
         private int qtde;
         //private Produto produto;
 
-        public int? Codigo { get => codigo; set => codigo = value; }
-        public int CodigoProduto { get => codigoProduto; set => codigoProduto = value; }
-        public DateTime DataEntrada { get => dataEntrada; set => dataEntrada = value; }
-        public DateTime DataVencimento { get => dataVencimento; set => dataVencimento = value; }
-        public int Qtde { get => qtde; set => qtde = value; }
+        public int? Codigo { get { return codigo; } set { codigo = value; } }
+        public int CodigoProduto { get { return codigoProduto; } set { codigoProduto = value; } }
+        public DateTime DataEntrada { get { return dataEntrada; } set { dataEntrada = value; } }
+        public DateTime DataVencimento { get { return dataVencimento; } set { dataVencimento = value; } }
+        public int Qtde { get { return qtde; } set { qtde = value; } }
 
 
         //public Produto Produto { get => produto; set => produto = value; }
