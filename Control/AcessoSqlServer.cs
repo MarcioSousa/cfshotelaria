@@ -9,13 +9,13 @@ using System.Data.SqlClient;
 
 namespace Control
 {
-    public class AcessoSqlServer
+    class AcessoSqlServer
     { 
         private readonly SqlParameterCollection sqlParameterCollection = new SqlCommand().Parameters;
       
         private SqlConnection CriarConexao()
         {
-            return new SqlConnection(Settings.Default.stringConexaoHotelaria);
+            return new SqlConnection(Settings.Default.stringConexaoMdf);
         }
         public void LimparParametros()
         {

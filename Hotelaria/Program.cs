@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Hotelaria
-{
+{ 
     static class Program
     {
         /// <summary>

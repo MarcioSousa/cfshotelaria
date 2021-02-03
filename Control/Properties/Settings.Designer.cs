@@ -12,7 +12,7 @@ namespace Control.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.7.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "14.0.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -26,19 +26,23 @@ namespace Control.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLEXPRESS;Initial Catalog=cfshotelaria;Integrated Security=True")]
-        public string stringConexaoHotelaria {
+        [global::System.Configuration.DefaultSettingValueAttribute("server=162.241.203.28;user id=cadfac20;password=Kxl09Jm5n6;database=cadfac20_cfsm" +
+            "hotel;persistsecurityinfo=True")]
+        public string stringConexaoHotelariaMysql {
             get {
-                return ((string)(this["stringConexaoHotelaria"]));
+                return ((string)(this["stringConexaoHotelariaMysql"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        public string stringcon {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\Marcio Sousa\\source" +
+            "\\repos\\cfshotelaria\\Hotelaria\\bdhotel.mdf\";Integrated Security=True;Connect Time" +
+            "out=30")]
+        public string stringConexaoMdf {
             get {
-                return ((string)(this["stringcon"]));
+                return ((string)(this["stringConexaoMdf"]));
             }
         }
     }

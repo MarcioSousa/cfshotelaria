@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Model;
+using Control;
 
 namespace Hotelaria
 {
@@ -16,5 +18,18 @@ namespace Hotelaria
         {
             InitializeComponent();
         }
+
+        private void FrmPrincipal_Load(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void btnQuarto_Click(object sender, EventArgs e)
+        {
+            FrmQuarto frmQuarto = new FrmQuarto();
+            frmQuarto.ShowDialog();
+        }
+
     }
 }

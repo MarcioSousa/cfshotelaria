@@ -21,6 +21,11 @@ namespace Model
             this.Numero = numero;
         }
 
+        public Quarto()
+        {
+
+        }
+
         public Quarto(int numero, double valorDiaria, string localidade)
         {
             this.numero = numero;
