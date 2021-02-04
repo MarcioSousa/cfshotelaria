@@ -16,7 +16,7 @@ namespace Control
         {
             try
             {
-                return acessoSqlServer.ExecutarManipulacao(CommandType.Text, "INSERT INTO quarto(numero, valorDiaria, localidade) VALUES(" + +quarto.Numero + ", " + quarto.ValorDiaria + ", '" + quarto.Localidade + "')").ToString();
+                return acessoSqlServer.ExecutarManipulacao(CommandType.Text, "INSERT INTO quarto(numero, valorDiaria, localidade) VALUES(" + quarto.Numero + ", " + quarto.ValorDiaria.ToString().Replace(",", ".") + ", '" + quarto.Localidade + "')").ToString();
             }
             catch (Exception ex)
             {
