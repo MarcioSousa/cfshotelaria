@@ -10,7 +10,8 @@ namespace Control
 {
     public class DQL
     {
-        AcessoSqlServer acessoSqlServer = new AcessoSqlServer();
+        //acessoMySql acessoMySql = new acessoMySql();
+        AcessoMySql acessoMySql = new AcessoMySql();
 
         public List<Quarto> Quartos ()
         {
@@ -18,7 +19,7 @@ namespace Control
             {
                 List<Quarto> quartos = new List<Quarto>();
 
-                DataTable dataTableQuarto = acessoSqlServer.ExecutarConsulta(CommandType.Text, "SELECT numero, valorDiaria, localidade FROM quarto ORDER BY numero");
+                DataTable dataTableQuarto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT numero, valorDiaria, localidade FROM quarto ORDER BY numero");
 
                 foreach (DataRow linha in dataTableQuarto.Rows)
                 {
@@ -40,7 +41,7 @@ namespace Control
                 Aluguel aluguel = new Aluguel();
 
                 //acessoMySql.LimparParametros();
-                DataTable dataTableAluguelQuarto = acessoSqlServer.ExecutarConsulta(CommandType.Text, "SELECT codigo, dataChegada, valor FROM aluguel WHERE cod_quarto = " + quarto.Numero + " AND dataSaida IS NULL");
+                DataTable dataTableAluguelQuarto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, dataChegada, valor FROM aluguel WHERE cod_quarto = " + quarto.Numero + " AND dataSaida IS NULL");
 
                 foreach (DataRow linha in dataTableAluguelQuarto.Rows)
                 {
@@ -62,8 +63,8 @@ namespace Control
             {
                 List<Cliente> clientes = new List<Cliente>();
 
-                //acessoSqlServer.LimparParametros();
-                DataTable dataTableClientesAluguel = acessoSqlServer.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_aluguel, nome, rg, cpf, contato FROM cliente WHERE cod_aluguel = " + aluguel.Codigo);
+                //acessoMySql.LimparParametros();
+                DataTable dataTableClientesAluguel = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_aluguel, nome, rg, cpf, contato FROM cliente WHERE cod_aluguel = " + aluguel.Codigo);
 
                 foreach (DataRow linha in dataTableClientesAluguel.Rows)
                 {
@@ -84,9 +85,9 @@ namespace Control
             {
                 List<Entrada> entradas = new List<Entrada>();
 
-                //acessoSqlServer.LimparParametros();
+                //acessoMySql.LimparParametros();
 
-                DataTable dataTableClientesAluguel = acessoSqlServer.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_produto, dataEntrada, dataVencimento, qtde FROM entrada WHERE cod_produto = " + produto.Codigo + " ORDER BY dataEntrada DESC");
+                DataTable dataTableClientesAluguel = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_produto, dataEntrada, dataVencimento, qtde FROM entrada WHERE cod_produto = " + produto.Codigo + " ORDER BY dataEntrada DESC");
 
                 foreach (DataRow linha in dataTableClientesAluguel.Rows)
                 {
@@ -107,7 +108,7 @@ namespace Control
             {
                 List<Limpeza> limpezas = new List<Limpeza>();
 
-                DataTable dataTableQuarto = acessoSqlServer.ExecutarConsulta(CommandType.Text, "SELECT codigo, datalimpeza FROM limpeza WHERE cod_quarto = " + quarto.Numero + " ORDER BY datalimpeza DESC LIMIT 0,10");
+                DataTable dataTableQuarto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, datalimpeza FROM limpeza WHERE cod_quarto = " + quarto.Numero + " ORDER BY datalimpeza DESC LIMIT 0,10");
 
                 foreach (DataRow linha in dataTableQuarto.Rows)
                 {
@@ -129,8 +130,8 @@ namespace Control
                 //Aluguel aluguel = new Aluguel();
                 List<Pagamento> pagamentos = new List<Pagamento>();
 
-                //acessoSqlServer.LimparParametros();
-                DataTable dataTablePagamentos = acessoSqlServer.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_aluguel, tipo, dataPagamento, valor FROM pagamento WHERE cod_aluguel = " + aluguel.Codigo);
+                //acessoMySql.LimparParametros();
+                DataTable dataTablePagamentos = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_aluguel, tipo, dataPagamento, valor FROM pagamento WHERE cod_aluguel = " + aluguel.Codigo);
 
                 foreach (DataRow linha in dataTablePagamentos.Rows)
                 {
@@ -152,7 +153,7 @@ namespace Control
                 List<Pedido> pedidos = new List<Pedido>();
 
                 //acessoMySql.LimparParametros();
-                DataTable dataTablePedidos = acessoSqlServer.ExecutarConsulta(CommandType.Text, "SELECT E.codigo, E.datapedido, E.qtde, E.valor, R.codigo, R.nome FROM pedido E INNER JOIN produto R ON E.cod_produto = R.codigo WHERE E.cod_aluguel = " + aluguel.Codigo);
+                DataTable dataTablePedidos = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT E.codigo, E.datapedido, E.qtde, E.valor, R.codigo, R.nome FROM pedido E INNER JOIN produto R ON E.cod_produto = R.codigo WHERE E.cod_aluguel = " + aluguel.Codigo);
 
                 foreach (DataRow linha in dataTablePedidos.Rows)
                 {
@@ -177,7 +178,7 @@ namespace Control
 
                 //acessoMySql.LimparParametros();
 
-                DataTable dataTableSaidasProduto = acessoSqlServer.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_aluguel, cod_produto, datapedido, qtde, valor FROM pedido WHERE cod_produto = " + produto.Codigo + " ORDER BY datapedido DESC");
+                DataTable dataTableSaidasProduto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, cod_aluguel, cod_produto, datapedido, qtde, valor FROM pedido WHERE cod_produto = " + produto.Codigo + " ORDER BY datapedido DESC");
 
                 foreach (DataRow linha in dataTableSaidasProduto.Rows)
                 {
@@ -196,7 +197,7 @@ namespace Control
         {
             try
             {
-                DataTable dataTableProduto = acessoSqlServer.ExecutarConsulta(CommandType.Text, "SELECT codigo, nome, valor, qtdeAtual FROM produto WHERE codigo = " + produto.Codigo);
+                DataTable dataTableProduto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, nome, valor, qtdeAtual FROM produto WHERE codigo = " + produto.Codigo);
 
                 foreach (DataRow linha in dataTableProduto.Rows)
                 {
@@ -226,7 +227,7 @@ namespace Control
             {
                 List<Produto> produtos = new List<Produto>();
 
-                DataTable dataTableProduto = acessoSqlServer.ExecutarConsulta(CommandType.Text, "SELECT codigo, nome, valor, qtdeAtual FROM produto ORDER BY codigo");
+                DataTable dataTableProduto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, nome, valor, qtdeAtual FROM produto ORDER BY codigo");
 
                 foreach (DataRow linha in dataTableProduto.Rows)
                 {
@@ -258,7 +259,7 @@ namespace Control
             {
                 List<Produto> produtos = new List<Produto>();
 
-                DataTable dataTableProduto = acessoSqlServer.ExecutarConsulta(CommandType.Text, "SELECT codigo, nome, valor, qtdeAtual FROM produto WHERE qtdeAtual IS NOT NULL ORDER BY codigo");
+                DataTable dataTableProduto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, nome, valor, qtdeAtual FROM produto WHERE qtdeAtual IS NOT NULL ORDER BY codigo");
 
                 foreach (DataRow linha in dataTableProduto.Rows)
                 {

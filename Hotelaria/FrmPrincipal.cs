@@ -21,8 +21,7 @@ namespace Hotelaria
 
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
-            FrmQuarto frmQuarto = new FrmQuarto();
-            frmQuarto.ShowDialog();
+
         }
 
         private void btnQuarto_Click(object sender, EventArgs e)

@@ -34,9 +34,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmQuarto));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvQuarto = new System.Windows.Forms.DataGridView();
-            this.NUMERO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ValorDiaria = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LOCALIDADE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnCadastrar = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -45,9 +42,12 @@
             this.txtValorDiaria = new System.Windows.Forms.TextBox();
             this.txtNumero = new System.Windows.Forms.TextBox();
             this.gbxDados = new System.Windows.Forms.GroupBox();
-            this.btnAlterar = new System.Windows.Forms.Button();
             this.btnExcluir = new System.Windows.Forms.Button();
+            this.btnAlterar = new System.Windows.Forms.Button();
             this.epNumero = new System.Windows.Forms.ErrorProvider(this.components);
+            this.NUMERO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ValorDiaria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LOCALIDADE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuarto)).BeginInit();
             this.gbxDados.SuspendLayout();
@@ -82,36 +82,6 @@
             this.dgvQuarto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvQuarto.Size = new System.Drawing.Size(430, 384);
             this.dgvQuarto.TabIndex = 0;
-            // 
-            // NUMERO
-            // 
-            this.NUMERO.DataPropertyName = "numero";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Red;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            this.NUMERO.DefaultCellStyle = dataGridViewCellStyle1;
-            this.NUMERO.HeaderText = "Número";
-            this.NUMERO.Name = "NUMERO";
-            this.NUMERO.ReadOnly = true;
-            // 
-            // ValorDiaria
-            // 
-            this.ValorDiaria.DataPropertyName = "valordiaria";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopRight;
-            dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.ValorDiaria.DefaultCellStyle = dataGridViewCellStyle2;
-            this.ValorDiaria.HeaderText = "Valor Diária";
-            this.ValorDiaria.Name = "ValorDiaria";
-            this.ValorDiaria.ReadOnly = true;
-            // 
-            // LOCALIDADE
-            // 
-            this.LOCALIDADE.DataPropertyName = "localidade";
-            this.LOCALIDADE.HeaderText = "Localidade";
-            this.LOCALIDADE.Name = "LOCALIDADE";
-            this.LOCALIDADE.ReadOnly = true;
-            this.LOCALIDADE.Width = 200;
             // 
             // btnCadastrar
             // 
@@ -203,18 +173,6 @@
             this.gbxDados.TabIndex = 0;
             this.gbxDados.TabStop = false;
             // 
-            // btnAlterar
-            // 
-            this.btnAlterar.AutoSize = true;
-            this.btnAlterar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAlterar.Location = new System.Drawing.Point(21, 57);
-            this.btnAlterar.Name = "btnAlterar";
-            this.btnAlterar.Size = new System.Drawing.Size(76, 23);
-            this.btnAlterar.TabIndex = 4;
-            this.btnAlterar.Text = "Alterar";
-            this.btnAlterar.UseVisualStyleBackColor = true;
-            this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
-            // 
             // btnExcluir
             // 
             this.btnExcluir.AutoSize = true;
@@ -227,9 +185,51 @@
             this.btnExcluir.UseVisualStyleBackColor = true;
             this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
+            // btnAlterar
+            // 
+            this.btnAlterar.AutoSize = true;
+            this.btnAlterar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAlterar.Location = new System.Drawing.Point(21, 57);
+            this.btnAlterar.Name = "btnAlterar";
+            this.btnAlterar.Size = new System.Drawing.Size(76, 23);
+            this.btnAlterar.TabIndex = 4;
+            this.btnAlterar.Text = "Alterar";
+            this.btnAlterar.UseVisualStyleBackColor = true;
+            this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
+            // 
             // epNumero
             // 
             this.epNumero.ContainerControl = this;
+            // 
+            // NUMERO
+            // 
+            this.NUMERO.DataPropertyName = "numero";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Red;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
+            this.NUMERO.DefaultCellStyle = dataGridViewCellStyle1;
+            this.NUMERO.HeaderText = "Número";
+            this.NUMERO.Name = "NUMERO";
+            this.NUMERO.ReadOnly = true;
+            // 
+            // ValorDiaria
+            // 
+            this.ValorDiaria.DataPropertyName = "valordiaria";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.ValorDiaria.DefaultCellStyle = dataGridViewCellStyle2;
+            this.ValorDiaria.HeaderText = "Valor Diária";
+            this.ValorDiaria.Name = "ValorDiaria";
+            this.ValorDiaria.ReadOnly = true;
+            // 
+            // LOCALIDADE
+            // 
+            this.LOCALIDADE.DataPropertyName = "localidade";
+            this.LOCALIDADE.HeaderText = "Localidade";
+            this.LOCALIDADE.Name = "LOCALIDADE";
+            this.LOCALIDADE.ReadOnly = true;
+            this.LOCALIDADE.Width = 200;
             // 
             // FrmQuarto
             // 
@@ -259,9 +259,6 @@
 
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dgvQuarto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NUMERO;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ValorDiaria;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LOCALIDADE;
         private System.Windows.Forms.Button btnCadastrar;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
@@ -273,5 +270,8 @@
         private System.Windows.Forms.Button btnExcluir;
         private System.Windows.Forms.Button btnAlterar;
         private System.Windows.Forms.ErrorProvider epNumero;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NUMERO;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ValorDiaria;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LOCALIDADE;
     }
 }

@@ -106,13 +106,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bdhotel.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="bdhotel_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>bdhotel.mdf</DependentUpon>
-    </Content>
     <None Include="Resources\logo cadfacil.png" />
   </ItemGroup>
   <ItemGroup>

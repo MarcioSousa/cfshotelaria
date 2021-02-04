@@ -15,7 +15,7 @@ namespace Control
       
         private SqlConnection CriarConexao()
         {
-            return new SqlConnection(Settings.Default.stringConexaoMdf);
+            return new SqlConnection("Minah string de conexão: Exemplo: Settings.Default.stringConexaoMdf");
         }
         public void LimparParametros()
         {

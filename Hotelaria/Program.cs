@@ -16,7 +16,7 @@ namespace Hotelaria
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmQuarto());
+            Application.Run(new FrmPrincipal());
         }
     }
 }

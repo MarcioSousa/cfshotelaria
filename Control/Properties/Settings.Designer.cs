@@ -33,17 +33,5 @@ namespace Control.Properties {
                 return ((string)(this["stringConexaoHotelariaMysql"]));
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\Marcio Sousa\\source" +
-            "\\repos\\cfshotelaria\\Hotelaria\\bdhotel.mdf\";Integrated Security=True;Connect Time" +
-            "out=30")]
-        public string stringConexaoMdf {
-            get {
-                return ((string)(this["stringConexaoMdf"]));
-            }
-        }
     }
 }

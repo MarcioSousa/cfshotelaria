@@ -10,13 +10,5 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">server=162.241.203.28;user id=cadfac20;password=Kxl09Jm5n6;database=cadfac20_cfsmhotel;persistsecurityinfo=True</Value>
     </Setting>
-    <Setting Name="stringConexaoMdf" Type="(Connection string)" Scope="Application">
-      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="C:\Users\Marcio Sousa\source\repos\cfshotelaria\Hotelaria\bdhotel.mdf";Integrated Security=True;Connect Timeout=30&lt;/ConnectionString&gt;
-  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
-&lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="C:\Users\Marcio Sousa\source\repos\cfshotelaria\Hotelaria\bdhotel.mdf";Integrated Security=True;Connect Timeout=30</Value>
-    </Setting>
   </Settings>
 </SettingsFile>

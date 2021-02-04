@@ -10,25 +10,25 @@ namespace Control
 {
     public class DML
     {
-        AcessoSqlServer acessoSqlServer = new AcessoSqlServer();
+        AcessoMySql acessoMySql = new AcessoMySql();
 
         public string QuartoInserir(Quarto quarto)
         {
             try
             {
-                return acessoSqlServer.ExecutarManipulacao(CommandType.Text, "INSERT INTO quarto(numero, valorDiaria, localidade) VALUES(" + quarto.Numero + ", " + quarto.ValorDiaria.ToString().Replace(",", ".") + ", '" + quarto.Localidade + "')").ToString();
+                return acessoMySql.ExecutarManipulacao(CommandType.Text, "INSERT INTO quarto(numero, valorDiaria, localidade) VALUES(" + quarto.Numero + ", " + quarto.ValorDiaria.ToString().Replace(",", ".") + ", '" + quarto.Localidade + "')").ToString();
             }
             catch (Exception ex)
             {
                 return ex.Message;
             }
         }
-        public string QuartoAlterar(Quarto quarto)
+        public string QuartoAlterar(Quarto quarto, int numeroAntigo)
         {
             try
             {
-                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "UPDATE quarto SET numero = " + quarto.Numero + ", valorDiaria = " + quarto.ValorDiaria + ", localidade = '" + quarto.Localidade + "' WHERE numero = " + quarto.Numero);
-                return "Quarto " + quarto.Numero + " Alterado com Sucesso!";
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "UPDATE quarto SET numero = " + quarto.Numero + ", valorDiaria = " + quarto.ValorDiaria + ", localidade = '" + quarto.Localidade + "' WHERE numero = " + numeroAntigo);
+                return "Quarto " + numeroAntigo + " foi Alterado com Sucesso para " + quarto.Numero;
             }
             catch (Exception ex)
             {
@@ -39,7 +39,7 @@ namespace Control
         {
             try
             {
-                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "DELETE FROM quarto WHERE numero = " + quarto.Numero);
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "DELETE FROM quarto WHERE numero = " + quarto.Numero);
                 return "Quarto " + quarto.Numero + " Excluído com Sucesso!";
             }
             catch (Exception ex)
@@ -57,7 +57,7 @@ namespace Control
                 //acessoMySql.AdicionarParametros("aCodQuarto", aluguel.NumeroQuarto);
                 //acessoMySql.AdicionarParametros("aValor", aluguel.Valor);
                 //acessoMySql.AdicionarParametros("aDataChegada", aluguel.DataChegada);
-                aluguel.Codigo = Convert.ToInt32(acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_AluguelNovo"));
+                aluguel.Codigo = Convert.ToInt32(acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_AluguelNovo"));
                 return aluguel.Codigo.ToString();
             }
             catch (Exception ex)
@@ -74,7 +74,7 @@ namespace Control
                 //acessoMySql.AdicionarParametros("aValor", aluguel.Valor);
                 //acessoMySql.AdicionarParametros("aDataChegada", aluguel.DataChegada);
                 //acessoMySql.AdicionarParametros("aDataSaida", aluguel.DataSaida);
-                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_AluguelAlterar");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_AluguelAlterar");
                 return "Aluguel alterado com sucesso!.";
             }
             catch (Exception ex)
@@ -88,7 +88,7 @@ namespace Control
             {
                 //acessoMySql.LimparParametros();
                 //acessoMySql.AdicionarParametros("aCodigo", aluguel.Codigo);
-                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_AluguelExcluir");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_AluguelExcluir");
                 return "Aluguel excluído com Sucesso!";
             }
             catch (Exception ex)
@@ -107,7 +107,7 @@ namespace Control
                 //acessoMySql.AdicionarParametros("aRg", cliente.Rg);
                 //acessoMySql.AdicionarParametros("aCpf", cliente.Cpf);
                 //acessoMySql.AdicionarParametros("aContato", cliente.Contato);
-                cliente.Codigo = Convert.ToInt32(acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_ClienteNovo"));
+                cliente.Codigo = Convert.ToInt32(acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_ClienteNovo"));
                 return "Cliente Cadastrado!";
             }
             catch (Exception ex)
@@ -125,7 +125,7 @@ namespace Control
                 //acessoMySql.AdicionarParametros("aRg", cliente.Rg);
                 //acessoMySql.AdicionarParametros("aCpf", cliente.Cpf);
                 //acessoMySql.AdicionarParametros("aContato", cliente.Contato);
-                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_ClienteAlterar");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_ClienteAlterar");
                 return "Cliente alterado com sucesso!.";
             }
             catch (Exception ex)
@@ -139,7 +139,7 @@ namespace Control
             {
                 //acessoMySql.LimparParametros();
                 //acessoMySql.AdicionarParametros("aCodigo", cliente.Codigo);
-                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_ClienteExcluir");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_ClienteExcluir");
                 return "Cliente excluído com Sucesso!";
             }
             catch (Exception ex)
@@ -157,7 +157,7 @@ namespace Control
                 //acessoMySql.AdicionarParametros("aDataEntrada", entrada.DataEntrada);
                 //acessoMySql.AdicionarParametros("aDataVencimento", entrada.DataVencimento);
                 //acessoMySql.AdicionarParametros("aQtde", entrada.Qtde);
-                return acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_EntradaNovo").ToString();
+                return acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_EntradaNovo").ToString();
             }
             catch (Exception ex)
             {
@@ -172,7 +172,7 @@ namespace Control
                 //acessoMySql.AdicionarParametros("aDataEntrada", entrada.DataEntrada);
                 //acessoMySql.AdicionarParametros("aDataVencimento", entrada.DataVencimento);
                 //acessoMySql.AdicionarParametros("aQtde", entrada.Qtde);
-                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_EntradaAlterar");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_EntradaAlterar");
                 return "Entrada alterado com sucesso!.";
             }
             catch (Exception ex)
@@ -186,7 +186,7 @@ namespace Control
             {
                 //acessoMySql.LimparParametros();
                 //acessoMySql.AdicionarParametros("aCodigo", entrada.Codigo);
-                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_EntradaExcluir");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_EntradaExcluir");
                 return "Entrada excluído com Sucesso!";
             }
             catch (Exception ex)
@@ -199,7 +199,7 @@ namespace Control
         {
             try
             {
-                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "INSERT INTO limpeza(cod_quarto, datalimpeza) VALUES(" + limpeza.Quarto.Numero + ", " + limpeza.DataLimpeza + ")");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "INSERT INTO limpeza(cod_quarto, datalimpeza) VALUES(" + limpeza.Quarto.Numero + ", " + limpeza.DataLimpeza + ")");
                 return "Salvo com sucesso!";
             }
             catch (Exception ex)
@@ -211,7 +211,7 @@ namespace Control
         {
             try
             {
-                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "UPDATE limpeza SET cod_quarto = " + limpeza.Quarto.Numero + ", datalimpeza = " + limpeza.DataLimpeza + " WHERE codigo = " + limpeza.Codigo);
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "UPDATE limpeza SET cod_quarto = " + limpeza.Quarto.Numero + ", datalimpeza = " + limpeza.DataLimpeza + " WHERE codigo = " + limpeza.Codigo);
                 return "Limpeza alterado com sucesso!.";
             }
             catch (Exception ex)
@@ -223,7 +223,7 @@ namespace Control
         {
             try
             {
-                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "DELETE FROM limpeza WHERE codigo = " + limpeza.Codigo);
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "DELETE FROM limpeza WHERE codigo = " + limpeza.Codigo);
                 return "Limpeza excluído com Sucesso!";
             }
             catch (Exception ex)
@@ -241,7 +241,7 @@ namespace Control
                 //acessoMySql.AdicionarParametros("aTipo", pagamento.Tipo);
                 //acessoMySql.AdicionarParametros("aDataPagamento", pagamento.DataPagamento);
                 //acessoMySql.AdicionarParametros("aValor", pagamento.Valor);
-                pagamento.Codigo = Convert.ToInt32(acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_PagamentoNovo"));
+                pagamento.Codigo = Convert.ToInt32(acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_PagamentoNovo"));
                 return "Pagamento adicionado com sucesso!";
             }
             catch (Exception ex)
@@ -259,7 +259,7 @@ namespace Control
                 //acessoMySql.AdicionarParametros("aTipo", pagamento.Tipo);
                 //acessoMySql.AdicionarParametros("aDataPagamento", pagamento.DataPagamento);
                 //acessoMySql.AdicionarParametros("aValor", pagamento.Valor);
-                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_PagamentoAlterar");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_PagamentoAlterar");
                 return "Pagamento alterado com sucesso!.";
             }
             catch (Exception ex)
@@ -273,7 +273,7 @@ namespace Control
             {
                 //acessoMySql.LimparParametros();
                 //acessoMySql.AdicionarParametros("aCodigo", pagamento.Codigo);
-                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_PagamentoExcluir");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_PagamentoExcluir");
                 return "Pagamento excluído com Sucesso!";
             }
             catch (Exception ex)
@@ -292,7 +292,7 @@ namespace Control
                 //acessoMySql.AdicionarParametros("aDataPedido", pedido.DataPedido);
                 //acessoMySql.AdicionarParametros("aQtde", pedido.Qtde);
                 //acessoMySql.AdicionarParametros("aValor", pedido.Valor);
-                pedido.Codigo = Convert.ToInt32(acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_PedidoNovo"));
+                pedido.Codigo = Convert.ToInt32(acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_PedidoNovo"));
                 return "Pedido adicionado com sucesso!";
             }
             catch (Exception ex)
@@ -310,7 +310,7 @@ namespace Control
                 //acessoMySql.AdicionarParametros("aDataPedido", pedido.DataPedido);
                 // acessoMySql.AdicionarParametros("aQtde", pedido.Qtde);
                 //acessoMySql.AdicionarParametros("aValor", pedido.Valor);
-                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_PedidoAlterar");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_PedidoAlterar");
                 return "Pedido alterado com sucesso!.";
             }
             catch (Exception ex)
@@ -324,7 +324,7 @@ namespace Control
             {
                 //acessoMySql.LimparParametros();
                 //acessoMySql.AdicionarParametros("aCodigo", pedido.Codigo);
-                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_PedidoExcluir");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_PedidoExcluir");
                 return "Pedido excluído com Sucesso!";
             }
             catch (Exception ex)
@@ -342,7 +342,7 @@ namespace Control
                 //acessoMySql.AdicionarParametros("aNome", produto.Nome);
                 //acessoMySql.AdicionarParametros("aValor", produto.Valor);
                 //acessoMySql.AdicionarParametros("aQtdeAtual", produto.Qtdeatual);
-                return acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_ProdutoNovo").ToString();
+                return acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_ProdutoNovo").ToString();
             }
             catch (Exception ex)
             {
@@ -357,7 +357,7 @@ namespace Control
                 //acessoMySql.AdicionarParametros("aNome", produto.Nome);
                 //acessoMySql.AdicionarParametros("aValor", produto.Valor);
                 //acessoMySql.AdicionarParametros("aQtdeAtual", produto.Qtdeatual);
-                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_ProdutoAlterar");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_ProdutoAlterar");
                 return "Produto alterado com sucesso!.";
             }
             catch (Exception ex)
@@ -371,7 +371,7 @@ namespace Control
             {
                 //acessoMySql.LimparParametros();
                 //acessoMySql.AdicionarParametros("aCodigo", produto.Codigo);
-                acessoSqlServer.ExecutarManipulacao(CommandType.Text, "usp_ProdutoExcluir");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_ProdutoExcluir");
                 return "Produto excluído com Sucesso!";
             }
             catch (Exception ex)
