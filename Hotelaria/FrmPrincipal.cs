@@ -30,5 +30,10 @@ namespace Hotelaria
             frmQuarto.ShowDialog();
         }
 
+        private void btnProduto_Click(object sender, EventArgs e)
+        {
+            FrmProduto frmProduto = new FrmProduto();
+            frmProduto.ShowDialog();
+        }
     }
 }

@@ -227,7 +227,7 @@ namespace Control
             {
                 List<Produto> produtos = new List<Produto>();
 
-                DataTable dataTableProduto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, nome, valor, qtdeAtual FROM produto ORDER BY codigo");
+                DataTable dataTableProduto = acessoMySql.ExecutarConsulta(CommandType.Text, "SELECT codigo, nome, valor FROM produto ORDER BY codigo");
 
                 foreach (DataRow linha in dataTableProduto.Rows)
                 {
@@ -236,16 +236,9 @@ namespace Control
                     produto.Nome = linha["nome"].ToString();
                     produto.Valor = Convert.ToDouble(linha["valor"]);
 
-                    if (linha["qtdeAtual"] is DBNull)
-                    {
-                        produto.Qtdeatual = null;
-                    }
-                    else
-                    {
-                        produto.Qtdeatual = Convert.ToInt32(linha["qtdeAtual"]);
-                    }
                     produtos.Add(produto);
                 }
+
                 return produtos;
             }
             catch (Exception ex)

@@ -34,14 +34,15 @@
             this.visualStyler1 = new SkinSoft.VisualStyler.VisualStyler(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnLogin = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnProduto = new System.Windows.Forms.Button();
             this.btnQuarto = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.visualStyler1)).BeginInit();
             this.groupBox1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -84,22 +85,46 @@
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.pictureBox1.Image = global::Hotelaria.Properties.Resources.logo_cadfacil;
+            this.pictureBox1.Location = new System.Drawing.Point(6, 10);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(90, 90);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            // 
             // groupBox2
             // 
             this.groupBox2.Location = new System.Drawing.Point(316, 113);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(936, 601);
+            this.groupBox2.Size = new System.Drawing.Size(936, 310);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.btnProduto);
             this.groupBox3.Controls.Add(this.btnQuarto);
             this.groupBox3.Location = new System.Drawing.Point(12, 113);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(298, 601);
+            this.groupBox3.Size = new System.Drawing.Size(298, 310);
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
+            // 
+            // btnProduto
+            // 
+            this.btnProduto.AutoSize = true;
+            this.btnProduto.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProduto.Location = new System.Drawing.Point(6, 72);
+            this.btnProduto.Name = "btnProduto";
+            this.btnProduto.Size = new System.Drawing.Size(286, 47);
+            this.btnProduto.TabIndex = 1;
+            this.btnProduto.Text = "Produto";
+            this.btnProduto.UseVisualStyleBackColor = true;
+            this.btnProduto.Click += new System.EventHandler(this.btnProduto_Click);
             // 
             // btnQuarto
             // 
@@ -113,23 +138,12 @@
             this.btnQuarto.UseVisualStyleBackColor = true;
             this.btnQuarto.Click += new System.EventHandler(this.btnQuarto_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.pictureBox1.Image = global::Hotelaria.Properties.Resources.logo_cadfacil;
-            this.pictureBox1.Location = new System.Drawing.Point(6, 10);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(90, 90);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
-            // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.ClientSize = new System.Drawing.Size(1264, 729);
+            this.ClientSize = new System.Drawing.Size(1264, 440);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -145,9 +159,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.visualStyler1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -161,5 +175,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Button btnQuarto;
+        private System.Windows.Forms.Button btnProduto;
     }
 }

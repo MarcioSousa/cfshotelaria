@@ -122,10 +122,6 @@ namespace Hotelaria
                 MessageBox.Show("Verifique os valores cadastrados!\n" + ex.Message, "Não Registrado!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void btnInserir_Click(object sender, EventArgs e)
-        {
-            iniciarcadastro();
-        }
         private void btnAlterar_Click(object sender, EventArgs e)
         {
 
@@ -144,10 +140,6 @@ namespace Hotelaria
             btnAlterar.Visible = false;
             btnExcluir.Visible = false;
             dgvQuarto.Enabled = false;
-        }
-        private void btnFechar_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
         private void txtNumero_TextChanged(object sender, EventArgs e)
         {

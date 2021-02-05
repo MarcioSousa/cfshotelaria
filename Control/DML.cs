@@ -337,27 +337,18 @@ namespace Control
         {
             try
             {
-                //acessoMySql.LimparParametros();
-                //acessoMySql.AdicionarParametros("aCodigo", produto.Codigo);
-                //acessoMySql.AdicionarParametros("aNome", produto.Nome);
-                //acessoMySql.AdicionarParametros("aValor", produto.Valor);
-                //acessoMySql.AdicionarParametros("aQtdeAtual", produto.Qtdeatual);
-                return acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_ProdutoNovo").ToString();
+                return acessoMySql.ExecutarManipulacao(CommandType.Text, "INSERT INTO produto(codigo, nome, valor) VALUES (" + produto.Codigo + " ,'" + produto.Nome + "' , " + produto.Valor.ToString().Replace(",", ".") + ")").ToString();
             }
             catch (Exception ex)
             {
                 return ex.Message;
             }
         }
-        public string ProdutoAlterar(Produto produto)
+        public string ProdutoAlterar(Produto produto, int codigoAntigo)
         {
             try
             {
-                //acessoMySql.AdicionarParametros("aCodigo", produto.Codigo);
-                //acessoMySql.AdicionarParametros("aNome", produto.Nome);
-                //acessoMySql.AdicionarParametros("aValor", produto.Valor);
-                //acessoMySql.AdicionarParametros("aQtdeAtual", produto.Qtdeatual);
-                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_ProdutoAlterar");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "UPDATE produto SET codigo = " + produto.Codigo + ", nome = '" + produto.Nome + "', valor = '" + produto.Valor + "' WHERE codigo = " + codigoAntigo);
                 return "Produto alterado com sucesso!.";
             }
             catch (Exception ex)
@@ -369,9 +360,7 @@ namespace Control
         {
             try
             {
-                //acessoMySql.LimparParametros();
-                //acessoMySql.AdicionarParametros("aCodigo", produto.Codigo);
-                acessoMySql.ExecutarManipulacao(CommandType.Text, "usp_ProdutoExcluir");
+                acessoMySql.ExecutarManipulacao(CommandType.Text, "DELETE FROM produto WHERE codigo = " + produto.Codigo);
                 return "Produto excluído com Sucesso!";
             }
             catch (Exception ex)
